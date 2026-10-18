@@ -25,7 +25,7 @@ export class CharacterSelect {
       },
       nata: {
         themeClass: 'theme-nata',
-        styleTag: 'DANÇARINA FLAMEJANTE',
+        styleTag: 'DEV DE GUITARRA',
         color: '#ff0077',
         spriteSrc: 'assets/images/sprites/characters/nata_idle.png'
       },

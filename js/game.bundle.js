@@ -4790,11 +4790,38 @@
 
   // js/ui/characterSelect.js
   var CharacterSelect = class {
-    constructor(onSelectCallback) {
+    constructor(onSelectCallback, onBackCallback) {
       this.onSelect = onSelectCallback;
+      this.onBack = onBackCallback;
       this.charKeys = ["andrey", "emerson", "nata", "unicao"];
       this.selectedIndex = 0;
       this.keyboardBound = false;
+      this.charThemes = {
+        andrey: {
+          themeClass: "theme-andrey",
+          styleTag: "CIBERN\xC9TICO & PLASMA",
+          color: "#00f0ff",
+          spriteSrc: "assets/images/sprites/characters/andrey_idle.png"
+        },
+        emerson: {
+          themeClass: "theme-emerson",
+          styleTag: "TIT\xC3 DA SUPER FOR\xC7A",
+          color: "#ffb700",
+          spriteSrc: "assets/images/sprites/characters/emerson_idle.png"
+        },
+        nata: {
+          themeClass: "theme-nata",
+          styleTag: "DAN\xC7ARINA FLAMEJANTE",
+          color: "#ff0077",
+          spriteSrc: "assets/images/sprites/characters/nata_idle.png"
+        },
+        unicao: {
+          themeClass: "theme-unicao",
+          styleTag: "LENDA CANINA DAS 4 PATAS",
+          color: "#00ffaa",
+          spriteSrc: "assets/images/sprites/characters/dog_idle.png"
+        }
+      };
     }
     setupDOM() {
       const container = document.getElementById("char-select-grid");
@@ -4802,38 +4829,72 @@
       container.innerHTML = "";
       this.charKeys.forEach((key, index) => {
         const char = PLAYABLE_CHARACTERS[key];
+        const theme = this.charThemes[key] || {
+          themeClass: "theme-default",
+          styleTag: "LUTADOR",
+          color: "#00f0ff",
+          spriteSrc: ""
+        };
         const card = document.createElement("div");
-        card.className = `char-card ${index === this.selectedIndex ? "selected" : ""}`;
+        card.className = `char-card ${theme.themeClass} ${index === this.selectedIndex ? "selected" : ""}`;
         card.id = `card-${key}`;
         card.innerHTML = `
         <div class="card-glow"></div>
-        <div class="nav-cursor-badge">\u25C0 [A / W] SELECIONADO [S / D] \u25B6</div>
-        <div class="card-portrait-wrapper">
-          <img src="${char.portrait}" alt="${char.name}" class="char-portrait-img">
-          <span class="char-badge">${char.title}</span>
+        <div class="card-1p-badge">
+          <span class="p1-icon">\u2605 1P</span>
+          <span class="p1-text">ESCOLHIDO</span>
         </div>
+
+        <div class="card-media-combo">
+          <div class="card-portrait-wrapper">
+            <img src="${char.portrait}" alt="${char.name}" class="char-portrait-img">
+            <div class="portrait-overlay"></div>
+          </div>
+          <div class="card-sprite-preview">
+            <img src="${theme.spriteSrc}" alt="${char.name} sprite" class="fighter-idle-sprite">
+          </div>
+          <span class="char-archetype-tag" style="border-color: ${theme.color}; color: ${theme.color};">${theme.styleTag}</span>
+        </div>
+
         <div class="card-info">
-          <h3 class="char-name">${char.name}</h3>
+          <div class="card-header-row">
+            <h3 class="char-name" style="color: ${theme.color};">${char.name}</h3>
+            <span class="char-title-small">${char.title}</span>
+          </div>
+
           <p class="char-desc">${char.description}</p>
+
+          <div class="char-special-box">
+            <span class="sp-icon">\u26A1</span>
+            <span class="sp-name" title="${char.specialName}">${char.specialName}</span>
+          </div>
+
           <div class="stat-bars">
             <div class="stat-row">
-              <span>FOR\xC7A</span>
-              <div class="bar-bg"><div class="bar-fill" style="width: ${char.stats.power}%;"></div></div>
+              <span class="stat-lbl">FOR\xC7A</span>
+              <div class="bar-bg"><div class="bar-fill bar-power" style="width: ${char.stats.power}%;"></div></div>
+              <span class="stat-val">${char.stats.power}</span>
             </div>
             <div class="stat-row">
-              <span>AGILIDADE</span>
-              <div class="bar-bg"><div class="bar-fill" style="width: ${char.stats.speed}%;"></div></div>
+              <span class="stat-lbl">AGILIDADE</span>
+              <div class="bar-bg"><div class="bar-fill bar-speed" style="width: ${char.stats.speed}%;"></div></div>
+              <span class="stat-val">${char.stats.speed}</span>
             </div>
             <div class="stat-row">
-              <span>DEFESA</span>
-              <div class="bar-bg"><div class="bar-fill" style="width: ${char.stats.defense}%;"></div></div>
+              <span class="stat-lbl">DEFESA</span>
+              <div class="bar-bg"><div class="bar-fill bar-defense" style="width: ${char.stats.defense}%;"></div></div>
+              <span class="stat-val">${char.stats.defense}</span>
             </div>
             <div class="stat-row">
-              <span>ESPECIAL</span>
-              <div class="bar-bg"><div class="bar-fill sp-fill" style="width: ${char.stats.special}%;"></div></div>
+              <span class="stat-lbl">ESPECIAL</span>
+              <div class="bar-bg"><div class="bar-fill bar-special" style="width: ${char.stats.special}%;"></div></div>
+              <span class="stat-val">${char.stats.special}</span>
             </div>
           </div>
-          <button type="button" class="select-btn">JOGAR COM ${char.name} \u2794</button>
+
+          <button type="button" class="select-btn">
+            ESCOLHER ${char.name} \u2794
+          </button>
         </div>
       `;
         const btn = card.querySelector(".select-btn");
@@ -4860,6 +4921,13 @@
       if (startBtn) {
         startBtn.onclick = () => this.confirmSelection();
       }
+      const backBtn = document.getElementById("btn-back-to-title");
+      if (backBtn) {
+        backBtn.onclick = () => {
+          Sound.playTone(260, 180, 0.08, "sawtooth", 0.2);
+          if (this.onBack) this.onBack();
+        };
+      }
       this.selectIndex(this.selectedIndex);
       if (!this.keyboardBound) {
         this.keyboardBound = true;
@@ -4868,7 +4936,13 @@
           if (selectScreen && !selectScreen.classList.contains("hidden")) {
             const key = (e.key || "").toLowerCase();
             const code = e.code || "";
-            if (key === "a" || code === "KeyA" || key === "arrowleft" || code === "ArrowLeft") {
+            if (key === "escape" || code === "Escape") {
+              e.preventDefault();
+              if (this.onBack) {
+                Sound.playTone(260, 180, 0.08, "sawtooth", 0.2);
+                this.onBack();
+              }
+            } else if (key === "a" || code === "KeyA" || key === "arrowleft" || code === "ArrowLeft") {
               e.preventDefault();
               this.navigate(-1);
             } else if (key === "d" || code === "KeyD" || key === "arrowright" || code === "ArrowRight") {
@@ -4896,7 +4970,8 @@
       const startBtn = document.getElementById("btn-confirm-char");
       if (startBtn) {
         const char = PLAYABLE_CHARACTERS[this.charKeys[this.selectedIndex]];
-        startBtn.innerHTML = `JOGAR COM <strong>${char.name}</strong> \u2794 [ENTER / J]`;
+        const theme = this.charThemes[this.charKeys[this.selectedIndex]];
+        startBtn.innerHTML = `<span class="btn-shine"></span>JOGAR COM <strong style="color: ${theme ? theme.color : "#00f0ff"};">${char.name}</strong> \u2794 [ENTER / J]`;
       }
     }
     navigate(dir) {
@@ -4934,10 +5009,16 @@
       this.lastTime = performance.now();
       this.continueTimer = 9.99;
       this.lastCountdownSec = 10;
-      this.characterSelectUI = new CharacterSelect((charKey) => {
-        this.selectedCharKey = charKey;
-        this.startStage(0);
-      });
+      this.characterSelectUI = new CharacterSelect(
+        (charKey) => {
+          this.selectedCharKey = charKey;
+          this.startStage(0);
+        },
+        () => {
+          this.switchScreen("title-screen");
+          this.state = "title";
+        }
+      );
       this.initViewportScale();
       this.init();
     }
