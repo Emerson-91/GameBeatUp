@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <title>Street Brawlers: 9 Realms - Beat 'Em Up</title>
+  <link rel="stylesheet" href="css/style.css?v=4">
+</head>
+<body>
+
+  <!-- Responsive Game Container - Guaranteed 16:9 Aspect Ratio Without Overflow -->
+  <div id="game-container">
+    <!-- Sound Toggle Button -->
+    <button id="btn-toggle-sound" class="audio-toggle-btn" title="Ativar/Desativar Som">🔊 SOM</button>
+
+    <!-- Main Game Canvas -->
+    <canvas id="gameCanvas" width="960" height="540"></canvas>
+
+    <!-- Loading Screen Layer -->
+    <div id="loading-screen" class="screen-layer">
+      <div class="loading-logo-box">
+        <h1 class="game-main-title">STREET BRAWLERS</h1>
+        <p class="game-sub-title">OS 9 REINOS &bull; BEAT 'EM UP</p>
+      </div>
+      <div class="loading-bar-wrapper">
+        <div id="loading-bar-fill"></div>
+      </div>
+      <p style="font-size: 11px; color: #6b79a8; margin-top: 10px;">CARREGANDO SPRITES & FASES...</p>
+    </div>
+
+    <!-- Title Screen Layer -->
+    <div id="title-screen" class="screen-layer hidden">
+      <div class="title-card">
+        <span class="arcade-badge">ARCADE EDITION &bull; 9 FASES</span>
+        <h1 class="game-main-title">STREET BRAWLERS</h1>
+        <p class="game-sub-title">A BATALHA PELOS 9 REINOS</p>
+
+        <div class="title-instruction-box">
+          <p><strong>COMO JOGAR:</strong></p>
+          <p>Avance pelas ruas durante <strong>1 minuto</strong> derrotando ondas de inimigos e pegue o <strong>frango assado</strong> no chão para recuperar vida! Ao fim da rua, entre na <strong>porta do covil</strong> para enfrentar o Boss de cada fase!</p>
+          <div class="instruction-keys">
+            <span><span class="key-pill">W</span> <span class="key-pill">A</span> <span class="key-pill">S</span> <span class="key-pill">D</span> / <span class="key-pill">SETAS</span> Mover Lutador & Menus</span>
+            <span><span class="key-pill">J</span> / <span class="key-pill">Z</span> Soco (Combo 1, 2, 3) & Confirmar</span>
+            <span><span class="key-pill">K</span> / <span class="key-pill">X</span> Chute (Combo 1, 2, 3)</span>
+            <span><span class="key-pill">ESPAÇO</span> Pulo / Voadora</span>
+            <span><span class="key-pill">L</span> / <span class="key-pill">C</span> Especial</span>
+            <span><span class="key-pill">P</span> / <span class="key-pill">ESC</span> Pausar Jogo</span>
+          </div>
+        </div>
+
+        <button id="btn-play-game" class="primary-btn" style="cursor: pointer;">INICIAR JOGO ➔ [W A S D / ENTER]</button>
+      </div>
+    </div>
+
+    <!-- Character Selection Screen Layer -->
+    <div id="char-select-screen" class="screen-layer hidden">
+      <div class="select-screen-header">
+        <h2 class="select-title">ESCOLHA SEU LUTADOR</h2>
+        <p class="select-subtitle">USE <strong>[W] [A] [S] [D]</strong> OU <strong>[SETAS]</strong> PARA NAVEGAR &bull; <strong>[ENTER]</strong> OU <strong>[J]</strong> PARA JOGAR</p>
+      </div>
+      <div id="char-select-grid" class="char-select-grid"></div>
+      <button id="btn-confirm-char" class="primary-btn" style="margin-top: 14px; cursor: pointer;">JOGAR COM O LUTADOR SELECIONADO ➔ [ENTER / J]</button>
+    </div>
+
+    <!-- HUD Overlay for touch controls -->
+    <div id="hud-overlay" class="screen-layer hidden" style="pointer-events: none;">
+      <!-- Mobile / On-screen Touch Controls -->
+      <div class="touch-controls">
+        <div class="dpad">
+          <button id="btn-up" class="touch-btn">▲</button>
+          <button id="btn-down" class="touch-btn">▼</button>
+          <button id="btn-left" class="touch-btn">◄</button>
+          <button id="btn-right" class="touch-btn">►</button>
+        </div>
+        <div class="action-pad">
+          <button id="btn-punch" class="touch-btn act-btn punch-btn">SOCO<br>[J]</button>
+          <button id="btn-kick" class="touch-btn act-btn kick-btn">CHUTE<br>[K]</button>
+          <button id="btn-jump" class="touch-btn act-btn jump-btn">PULO<br>[ESP]</button>
+          <button id="btn-special" class="touch-btn act-btn special-btn">ESPECIAL<br>[L]</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pause Menu Screen Layer -->
+    <div id="pause-screen" class="screen-layer hidden">
+      <div class="pause-card">
+        <h2 class="pause-heading">⏸ JOGO PAUSADO</h2>
+        <p class="pause-subtitle">USE [W] / [S] PARA NAVEGAR &bull; [ENTER / J] CONFIRMAR &bull; [ESC / P] RETOMAR</p>
+        <div class="pause-options">
+          <button id="pause-opt-resume" class="pause-btn selected" data-action="resume">CONTINUAR JOGO ➔ [W / S / ENTER]</button>
+          <button id="pause-opt-restart" class="pause-btn" data-action="restart">REINICIAR FASE ↺</button>
+          <button id="pause-opt-title" class="pause-btn" data-action="title">MENU PRINCIPAL ✕</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stage Clear Screen Layer -->
+    <div id="stage-clear-screen" class="screen-layer hidden">
+      <div class="victory-card">
+        <h2 id="clear-stage-title" class="clear-heading">FASE CONCLUÍDA!</h2>
+        <p id="clear-boss-defeated" class="clear-subtitle">O Chefe foi derrotado com honra!</p>
+        <p style="font-size: 15px; color: #ffd700; margin-bottom: 24px; font-weight: 800;">
+          PONTUAÇÃO ATUAL: <span id="clear-score-val">0</span>
+        </p>
+        <button id="btn-next-stage" class="primary-btn">AVANÇAR PARA PRÓXIMA FASE ➔ [W A S D / ENTER]</button>
+      </div>
+    </div>
+
+    <!-- Continue Countdown Screen Layer -->
+    <div id="continue-screen" class="screen-layer hidden">
+      <div class="continue-card">
+        <h2 class="continue-heading">CONTINUE?</h2>
+        <div id="continue-countdown-number" class="continue-countdown">9</div>
+        <p class="continue-subtitle">PRESSIONE QUALQUER TECLA OU CLIQUE PARA CONTINUAR COM 3 VIDAS</p>
+        <div class="continue-buttons">
+          <button id="btn-do-continue" class="primary-btn continue-btn">CONTINUAR [W A S D / ENTER]</button>
+          <button id="btn-give-up" class="giveup-btn">DESISTIR ✕</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Game Over Screen Layer -->
+    <div id="game-over-screen" class="screen-layer hidden">
+      <div class="game-over-card">
+        <h2 class="game-over-heading">FIM DE JOGO</h2>
+        <p class="clear-subtitle">Suas vidas se esgotaram nas ruas sombrias...</p>
+        <button id="btn-retry-game" class="primary-btn" style="background: linear-gradient(135deg, #ff0055, #ff5500);">TENTAR NOVAMENTE ➔ [W A S D / ENTER]</button>
+      </div>
+    </div>
+
+    <!-- Final Game Victory Screen Layer (Stage 9 Cleared) -->
+    <div id="victory-screen" class="screen-layer hidden">
+      <div class="victory-card" style="border-color: #ffd700; box-shadow: 0 0 45px rgba(255, 215, 0, 0.6);">
+        <h2 class="clear-heading" style="color: #ffd700;">★ CAMPEÃO DOS 9 REINOS ★</h2>
+        <p class="clear-subtitle">Você derrotou todos os 9 grandes chefes e salvou a cidade!</p>
+        <p style="font-size: 14px; color: #00ffc4; margin-bottom: 24px; font-weight: 700;">
+          O Dragão Cósmico caiu perante sua força incomparável!
+        </p>
+        <button id="btn-victory-restart" class="primary-btn">JOGAR NOVAMENTE ➔ [W A S D / ENTER]</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Game Script Entry (Compatible with direct file:// double-click and http:// servers) -->
+  <script src="js/game.bundle.js?v=6"></script>
+</body>
+</html>

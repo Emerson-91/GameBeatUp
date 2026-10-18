@@ -1,0 +1,170 @@
+{
+  "enemy_goblin": {
+    "idle": {
+      "w": 221,
+      "h": 240,
+      "ax": 0.5,
+      "src": "assets/images/sprites/enemies/stage2/enemy_goblin_idle.png"
+    },
+    "walk1": {
+      "w": 217,
+      "h": 240,
+      "ax": 0.5,
+      "src": "assets/images/sprites/enemies/stage2/enemy_goblin_walk1.png"
+    },
+    "punch": {
+      "w": 195,
+      "h": 240,
+      "ax": 0.5,
+      "src": "assets/images/sprites/enemies/stage2/enemy_goblin_punch.png"
+    },
+    "kick": {
+      "w": 313,
+      "h": 240,
+      "ax": 0.5,
+      "src": "assets/images/sprites/enemies/stage2/enemy_goblin_kick.png"
+    },
+    "fall": {
+      "w": 181,
+      "h": 150,
+      "ax": 0.5,
+      "src": "assets/images/sprites/enemies/stage2/enemy_goblin_fall.png"
+    },
+    "walk2": {
+      "w": 217,
+      "h": 240,
+      "ax": 0.5,
+      "src": "assets/images/sprites/enemies/stage2/enemy_goblin_walk1.png"
+    },
+    "knockdown": {
+      "w": 181,
+      "h": 150,
+      "ax": 0.5,
+      "src": "assets/images/sprites/enemies/stage2/enemy_goblin_fall.png"
+    },
+    "idle2": {
+      "w": 221,
+      "h": 240,
+      "ax": 0.5,
+      "src": "assets/images/sprites/enemies/stage2/enemy_goblin_idle.png"
+    },
+    "crouch": {
+      "w": 221,
+      "h": 240,
+      "ax": 0.5,
+      "src": "assets/images/sprites/enemies/stage2/enemy_goblin_idle.png"
+    }
+  },
+  "enemy_elf": {
+    "idle": {
+      "w": 206,
+      "h": 270,
+      "ax": 0.5,
+      "src": "assets/images/sprites/enemies/stage2/enemy_elf_idle.png"
+    },
+    "walk1": {
+      "w": 285,
+      "h": 270,
+      "ax": 0.5,
+      "src": "assets/images/sprites/enemies/stage2/enemy_elf_walk1.png"
+    },
+    "crouch": {
+      "w": 195,
+      "h": 270,
+      "ax": 0.5,
+      "src": "assets/images/sprites/enemies/stage2/enemy_elf_crouch.png"
+    },
+    "punch": {
+      "w": 290,
+      "h": 270,
+      "ax": 0.5,
+      "src": "assets/images/sprites/enemies/stage2/enemy_elf_punch.png"
+    },
+    "fall": {
+      "w": 145,
+      "h": 170,
+      "ax": 0.5,
+      "src": "assets/images/sprites/enemies/stage2/enemy_elf_fall.png"
+    },
+    "walk2": {
+      "w": 285,
+      "h": 270,
+      "ax": 0.5,
+      "src": "assets/images/sprites/enemies/stage2/enemy_elf_walk1.png"
+    },
+    "knockdown": {
+      "w": 145,
+      "h": 170,
+      "ax": 0.5,
+      "src": "assets/images/sprites/enemies/stage2/enemy_elf_fall.png"
+    },
+    "idle2": {
+      "w": 206,
+      "h": 270,
+      "ax": 0.5,
+      "src": "assets/images/sprites/enemies/stage2/enemy_elf_idle.png"
+    },
+    "kick": {
+      "w": 290,
+      "h": 270,
+      "ax": 0.5,
+      "src": "assets/images/sprites/enemies/stage2/enemy_elf_punch.png"
+    }
+  },
+  "enemy_walrus": {
+    "idle": {
+      "w": 291,
+      "h": 290,
+      "ax": 0.5,
+      "src": "assets/images/sprites/enemies/stage2/enemy_walrus_idle.png"
+    },
+    "walk1": {
+      "w": 271,
+      "h": 290,
+      "ax": 0.5,
+      "src": "assets/images/sprites/enemies/stage2/enemy_walrus_walk1.png"
+    },
+    "crouch": {
+      "w": 260,
+      "h": 290,
+      "ax": 0.5,
+      "src": "assets/images/sprites/enemies/stage2/enemy_walrus_crouch.png"
+    },
+    "punch": {
+      "w": 340,
+      "h": 290,
+      "ax": 0.5,
+      "src": "assets/images/sprites/enemies/stage2/enemy_walrus_punch.png"
+    },
+    "fall": {
+      "w": 232,
+      "h": 180,
+      "ax": 0.5,
+      "src": "assets/images/sprites/enemies/stage2/enemy_walrus_fall.png"
+    },
+    "walk2": {
+      "w": 271,
+      "h": 290,
+      "ax": 0.5,
+      "src": "assets/images/sprites/enemies/stage2/enemy_walrus_walk1.png"
+    },
+    "knockdown": {
+      "w": 232,
+      "h": 180,
+      "ax": 0.5,
+      "src": "assets/images/sprites/enemies/stage2/enemy_walrus_fall.png"
+    },
+    "idle2": {
+      "w": 291,
+      "h": 290,
+      "ax": 0.5,
+      "src": "assets/images/sprites/enemies/stage2/enemy_walrus_idle.png"
+    },
+    "kick": {
+      "w": 340,
+      "h": 290,
+      "ax": 0.5,
+      "src": "assets/images/sprites/enemies/stage2/enemy_walrus_punch.png"
+    }
+  }
+}

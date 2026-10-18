@@ -1,0 +1,9 @@
+{
+  "name": "game-beat-up",
+  "version": "1.0.0",
+  "description": "Street Brawlers: 9 Realms - 2.5D Beat 'Em Up Arcade Game",
+  "scripts": {
+    "build": "npx -y esbuild js/main.js --bundle --outfile=js/game.bundle.js --format=iife",
+    "watch": "npx -y esbuild js/main.js --bundle --outfile=js/game.bundle.js --format=iife --watch"
+  }
+}

@@ -1,0 +1,170 @@
+{
+  "enemy_swamp": {
+    "idle": {
+      "w": 250,
+      "h": 270,
+      "ax": 0.5,
+      "src": "assets/images/sprites/enemies/stage1/enemy_swamp_idle.png"
+    },
+    "walk1": {
+      "w": 215,
+      "h": 270,
+      "ax": 0.5,
+      "src": "assets/images/sprites/enemies/stage1/enemy_swamp_walk1.png"
+    },
+    "punch": {
+      "w": 230,
+      "h": 270,
+      "ax": 0.5,
+      "src": "assets/images/sprites/enemies/stage1/enemy_swamp_punch.png"
+    },
+    "kick": {
+      "w": 337,
+      "h": 270,
+      "ax": 0.5,
+      "src": "assets/images/sprites/enemies/stage1/enemy_swamp_kick.png"
+    },
+    "fall": {
+      "w": 208,
+      "h": 170,
+      "ax": 0.5,
+      "src": "assets/images/sprites/enemies/stage1/enemy_swamp_fall.png"
+    },
+    "walk2": {
+      "w": 215,
+      "h": 270,
+      "ax": 0.5,
+      "src": "assets/images/sprites/enemies/stage1/enemy_swamp_walk1.png"
+    },
+    "knockdown": {
+      "w": 208,
+      "h": 170,
+      "ax": 0.5,
+      "src": "assets/images/sprites/enemies/stage1/enemy_swamp_fall.png"
+    },
+    "idle2": {
+      "w": 250,
+      "h": 270,
+      "ax": 0.5,
+      "src": "assets/images/sprites/enemies/stage1/enemy_swamp_idle.png"
+    },
+    "crouch": {
+      "w": 250,
+      "h": 270,
+      "ax": 0.5,
+      "src": "assets/images/sprites/enemies/stage1/enemy_swamp_idle.png"
+    }
+  },
+  "enemy_spear": {
+    "idle": {
+      "w": 283,
+      "h": 270,
+      "ax": 0.5,
+      "src": "assets/images/sprites/enemies/stage1/enemy_spear_idle.png"
+    },
+    "walk1": {
+      "w": 295,
+      "h": 270,
+      "ax": 0.5,
+      "src": "assets/images/sprites/enemies/stage1/enemy_spear_walk1.png"
+    },
+    "crouch": {
+      "w": 293,
+      "h": 270,
+      "ax": 0.5,
+      "src": "assets/images/sprites/enemies/stage1/enemy_spear_crouch.png"
+    },
+    "punch": {
+      "w": 440,
+      "h": 270,
+      "ax": 0.5,
+      "src": "assets/images/sprites/enemies/stage1/enemy_spear_punch.png"
+    },
+    "fall": {
+      "w": 194,
+      "h": 170,
+      "ax": 0.5,
+      "src": "assets/images/sprites/enemies/stage1/enemy_spear_fall.png"
+    },
+    "walk2": {
+      "w": 295,
+      "h": 270,
+      "ax": 0.5,
+      "src": "assets/images/sprites/enemies/stage1/enemy_spear_walk1.png"
+    },
+    "knockdown": {
+      "w": 194,
+      "h": 170,
+      "ax": 0.5,
+      "src": "assets/images/sprites/enemies/stage1/enemy_spear_fall.png"
+    },
+    "idle2": {
+      "w": 283,
+      "h": 270,
+      "ax": 0.5,
+      "src": "assets/images/sprites/enemies/stage1/enemy_spear_idle.png"
+    },
+    "kick": {
+      "w": 440,
+      "h": 270,
+      "ax": 0.5,
+      "src": "assets/images/sprites/enemies/stage1/enemy_spear_punch.png"
+    }
+  },
+  "enemy_fish": {
+    "idle": {
+      "w": 234,
+      "h": 270,
+      "ax": 0.5,
+      "src": "assets/images/sprites/enemies/stage1/enemy_fish_idle.png"
+    },
+    "walk1": {
+      "w": 246,
+      "h": 270,
+      "ax": 0.5,
+      "src": "assets/images/sprites/enemies/stage1/enemy_fish_walk1.png"
+    },
+    "crouch": {
+      "w": 250,
+      "h": 270,
+      "ax": 0.5,
+      "src": "assets/images/sprites/enemies/stage1/enemy_fish_crouch.png"
+    },
+    "punch": {
+      "w": 304,
+      "h": 270,
+      "ax": 0.5,
+      "src": "assets/images/sprites/enemies/stage1/enemy_fish_punch.png"
+    },
+    "fall": {
+      "w": 205,
+      "h": 170,
+      "ax": 0.5,
+      "src": "assets/images/sprites/enemies/stage1/enemy_fish_fall.png"
+    },
+    "walk2": {
+      "w": 246,
+      "h": 270,
+      "ax": 0.5,
+      "src": "assets/images/sprites/enemies/stage1/enemy_fish_walk1.png"
+    },
+    "knockdown": {
+      "w": 205,
+      "h": 170,
+      "ax": 0.5,
+      "src": "assets/images/sprites/enemies/stage1/enemy_fish_fall.png"
+    },
+    "idle2": {
+      "w": 234,
+      "h": 270,
+      "ax": 0.5,
+      "src": "assets/images/sprites/enemies/stage1/enemy_fish_idle.png"
+    },
+    "kick": {
+      "w": 304,
+      "h": 270,
+      "ax": 0.5,
+      "src": "assets/images/sprites/enemies/stage1/enemy_fish_punch.png"
+    }
+  }
+}

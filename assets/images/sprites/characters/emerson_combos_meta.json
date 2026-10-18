@@ -1,0 +1,50 @@
+{
+  "punch1": {
+    "w": 253,
+    "h": 300,
+    "ax": 0.356,
+    "src": "assets/images/sprites/characters/emerson_punch1.png"
+  },
+  "punch2": {
+    "w": 294,
+    "h": 300,
+    "ax": 0.388,
+    "src": "assets/images/sprites/characters/emerson_punch2.png"
+  },
+  "punch3": {
+    "w": 444,
+    "h": 300,
+    "ax": 0.347,
+    "src": "assets/images/sprites/characters/emerson_punch3.png"
+  },
+  "kick1": {
+    "w": 266,
+    "h": 300,
+    "ax": 0.331,
+    "src": "assets/images/sprites/characters/emerson_kick1.png"
+  },
+  "kick2": {
+    "w": 317,
+    "h": 300,
+    "ax": 0.319,
+    "src": "assets/images/sprites/characters/emerson_kick2.png"
+  },
+  "kick3": {
+    "w": 355,
+    "h": 300,
+    "ax": 0.251,
+    "src": "assets/images/sprites/characters/emerson_kick3.png"
+  },
+  "punch": {
+    "w": 253,
+    "h": 300,
+    "ax": 0.356,
+    "src": "assets/images/sprites/characters/emerson_punch1.png"
+  },
+  "kick": {
+    "w": 266,
+    "h": 300,
+    "ax": 0.331,
+    "src": "assets/images/sprites/characters/emerson_kick1.png"
+  }
+}
