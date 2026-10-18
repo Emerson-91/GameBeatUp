@@ -34,10 +34,16 @@ class Game {
     this.continueTimer = 9.99;
     this.lastCountdownSec = 10;
 
-    this.characterSelectUI = new CharacterSelect((charKey) => {
-      this.selectedCharKey = charKey;
-      this.startStage(0);
-    });
+    this.characterSelectUI = new CharacterSelect(
+      (charKey) => {
+        this.selectedCharKey = charKey;
+        this.startStage(0);
+      },
+      () => {
+        this.switchScreen('title-screen');
+        this.state = 'title';
+      }
+    );
 
     this.initViewportScale();
     this.init();

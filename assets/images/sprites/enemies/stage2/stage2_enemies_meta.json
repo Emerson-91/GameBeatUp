@@ -1,169 +1,169 @@
 {
   "enemy_goblin": {
     "idle": {
-      "w": 221,
-      "h": 240,
-      "ax": 0.5,
+      "w": 200,
+      "h": 220,
+      "ax": 0.3806,
       "src": "assets/images/sprites/enemies/stage2/enemy_goblin_idle.png"
     },
     "walk1": {
-      "w": 217,
-      "h": 240,
-      "ax": 0.5,
+      "w": 187,
+      "h": 211,
+      "ax": 0.4002,
       "src": "assets/images/sprites/enemies/stage2/enemy_goblin_walk1.png"
     },
     "punch": {
-      "w": 195,
-      "h": 240,
-      "ax": 0.5,
+      "w": 184,
+      "h": 226,
+      "ax": 0.5783,
       "src": "assets/images/sprites/enemies/stage2/enemy_goblin_punch.png"
     },
     "kick": {
-      "w": 313,
-      "h": 240,
-      "ax": 0.5,
+      "w": 282,
+      "h": 216,
+      "ax": 0.4698,
       "src": "assets/images/sprites/enemies/stage2/enemy_goblin_kick.png"
     },
     "fall": {
-      "w": 181,
-      "h": 150,
-      "ax": 0.5,
+      "w": 224,
+      "h": 185,
+      "ax": 0.5259,
       "src": "assets/images/sprites/enemies/stage2/enemy_goblin_fall.png"
     },
     "walk2": {
-      "w": 217,
-      "h": 240,
-      "ax": 0.5,
+      "w": 187,
+      "h": 211,
+      "ax": 0.4002,
       "src": "assets/images/sprites/enemies/stage2/enemy_goblin_walk1.png"
     },
     "knockdown": {
-      "w": 181,
-      "h": 150,
-      "ax": 0.5,
+      "w": 224,
+      "h": 185,
+      "ax": 0.5259,
       "src": "assets/images/sprites/enemies/stage2/enemy_goblin_fall.png"
     },
     "idle2": {
-      "w": 221,
-      "h": 240,
-      "ax": 0.5,
+      "w": 200,
+      "h": 220,
+      "ax": 0.3806,
       "src": "assets/images/sprites/enemies/stage2/enemy_goblin_idle.png"
     },
     "crouch": {
-      "w": 221,
-      "h": 240,
-      "ax": 0.5,
+      "w": 200,
+      "h": 220,
+      "ax": 0.3806,
       "src": "assets/images/sprites/enemies/stage2/enemy_goblin_idle.png"
     }
   },
   "enemy_elf": {
     "idle": {
-      "w": 206,
-      "h": 270,
-      "ax": 0.5,
+      "w": 220,
+      "h": 250,
+      "ax": 0.4655,
       "src": "assets/images/sprites/enemies/stage2/enemy_elf_idle.png"
     },
     "walk1": {
-      "w": 285,
-      "h": 270,
-      "ax": 0.5,
+      "w": 207,
+      "h": 220,
+      "ax": 0.4578,
       "src": "assets/images/sprites/enemies/stage2/enemy_elf_walk1.png"
     },
     "crouch": {
-      "w": 195,
-      "h": 270,
-      "ax": 0.5,
+      "w": 225,
+      "h": 243,
+      "ax": 0.4859,
       "src": "assets/images/sprites/enemies/stage2/enemy_elf_crouch.png"
     },
     "punch": {
-      "w": 290,
-      "h": 270,
-      "ax": 0.5,
+      "w": 337,
+      "h": 245,
+      "ax": 0.3353,
       "src": "assets/images/sprites/enemies/stage2/enemy_elf_punch.png"
     },
     "fall": {
-      "w": 145,
-      "h": 170,
-      "ax": 0.5,
+      "w": 250,
+      "h": 232,
+      "ax": 0.5475,
       "src": "assets/images/sprites/enemies/stage2/enemy_elf_fall.png"
     },
     "walk2": {
-      "w": 285,
-      "h": 270,
-      "ax": 0.5,
+      "w": 207,
+      "h": 220,
+      "ax": 0.4578,
       "src": "assets/images/sprites/enemies/stage2/enemy_elf_walk1.png"
     },
     "knockdown": {
-      "w": 145,
-      "h": 170,
-      "ax": 0.5,
+      "w": 250,
+      "h": 232,
+      "ax": 0.5475,
       "src": "assets/images/sprites/enemies/stage2/enemy_elf_fall.png"
     },
     "idle2": {
-      "w": 206,
-      "h": 270,
-      "ax": 0.5,
+      "w": 220,
+      "h": 250,
+      "ax": 0.4655,
       "src": "assets/images/sprites/enemies/stage2/enemy_elf_idle.png"
     },
     "kick": {
-      "w": 290,
-      "h": 270,
-      "ax": 0.5,
+      "w": 337,
+      "h": 245,
+      "ax": 0.3353,
       "src": "assets/images/sprites/enemies/stage2/enemy_elf_punch.png"
     }
   },
   "enemy_walrus": {
     "idle": {
-      "w": 291,
-      "h": 290,
-      "ax": 0.5,
+      "w": 266,
+      "h": 320,
+      "ax": 0.4711,
       "src": "assets/images/sprites/enemies/stage2/enemy_walrus_idle.png"
     },
     "walk1": {
-      "w": 271,
-      "h": 290,
-      "ax": 0.5,
+      "w": 245,
+      "h": 311,
+      "ax": 0.4613,
       "src": "assets/images/sprites/enemies/stage2/enemy_walrus_walk1.png"
     },
     "crouch": {
-      "w": 260,
-      "h": 290,
-      "ax": 0.5,
+      "w": 235,
+      "h": 308,
+      "ax": 0.4772,
       "src": "assets/images/sprites/enemies/stage2/enemy_walrus_crouch.png"
     },
     "punch": {
-      "w": 340,
+      "w": 306,
       "h": 290,
-      "ax": 0.5,
+      "ax": 0.3795,
       "src": "assets/images/sprites/enemies/stage2/enemy_walrus_punch.png"
     },
     "fall": {
-      "w": 232,
-      "h": 180,
-      "ax": 0.5,
+      "w": 341,
+      "h": 320,
+      "ax": 0.5123,
       "src": "assets/images/sprites/enemies/stage2/enemy_walrus_fall.png"
     },
     "walk2": {
-      "w": 271,
-      "h": 290,
-      "ax": 0.5,
+      "w": 245,
+      "h": 311,
+      "ax": 0.4613,
       "src": "assets/images/sprites/enemies/stage2/enemy_walrus_walk1.png"
     },
     "knockdown": {
-      "w": 232,
-      "h": 180,
-      "ax": 0.5,
+      "w": 341,
+      "h": 320,
+      "ax": 0.5123,
       "src": "assets/images/sprites/enemies/stage2/enemy_walrus_fall.png"
     },
     "idle2": {
-      "w": 291,
-      "h": 290,
-      "ax": 0.5,
+      "w": 266,
+      "h": 320,
+      "ax": 0.4711,
       "src": "assets/images/sprites/enemies/stage2/enemy_walrus_idle.png"
     },
     "kick": {
-      "w": 340,
+      "w": 306,
       "h": 290,
-      "ax": 0.5,
+      "ax": 0.3795,
       "src": "assets/images/sprites/enemies/stage2/enemy_walrus_punch.png"
     }
   }
