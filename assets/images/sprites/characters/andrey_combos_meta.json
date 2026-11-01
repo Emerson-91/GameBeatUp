@@ -1,0 +1,50 @@
+{
+  "punch1": {
+    "w": 268,
+    "h": 313,
+    "ax": 0.3729,
+    "src": "assets/images/sprites/characters/andrey_punch1.png"
+  },
+  "punch2": {
+    "w": 288,
+    "h": 280,
+    "ax": 0.3177,
+    "src": "assets/images/sprites/characters/andrey_punch2.png"
+  },
+  "punch3": {
+    "w": 381,
+    "h": 304,
+    "ax": 0.2224,
+    "src": "assets/images/sprites/characters/andrey_punch3.png"
+  },
+  "kick1": {
+    "w": 271,
+    "h": 320,
+    "ax": 0.4184,
+    "src": "assets/images/sprites/characters/andrey_kick1.png"
+  },
+  "kick2": {
+    "w": 279,
+    "h": 305,
+    "ax": 0.3886,
+    "src": "assets/images/sprites/characters/andrey_kick2.png"
+  },
+  "kick3": {
+    "w": 283,
+    "h": 310,
+    "ax": 0.4738,
+    "src": "assets/images/sprites/characters/andrey_kick3.png"
+  },
+  "punch": {
+    "w": 268,
+    "h": 313,
+    "ax": 0.3729,
+    "src": "assets/images/sprites/characters/andrey_punch1.png"
+  },
+  "kick": {
+    "w": 271,
+    "h": 320,
+    "ax": 0.4184,
+    "src": "assets/images/sprites/characters/andrey_kick1.png"
+  }
+}

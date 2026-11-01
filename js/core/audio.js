@@ -119,6 +119,46 @@ class SoundSystem {
     this.playNoise(0.3, 0.3, 2000);
   }
 
+  // Emerson Seismic Ground Pound & Screen Tremor SFX
+  playSeismicImpact() {
+    if (this.isMuted) return;
+    this.init();
+    // Deep earthquake bass sub-thud
+    this.playTone(90, 25, 0.65, 'sawtooth', 0.55);
+    this.playTone(70, 20, 0.8, 'sine', 0.65);
+    this.playNoise(0.55, 0.55, 350); // Low frequency rumble
+    // Electric ground crackle
+    setTimeout(() => {
+      this.playTone(550, 100, 0.3, 'sawtooth', 0.3);
+      this.playNoise(0.25, 0.4, 2800);
+    }, 80);
+  }
+
+  // AndreyBot Aerial Summon & Laser SFX
+  playBotSummon() {
+    if (this.isMuted) return;
+    this.init();
+    // High-tech radio uplink chirps
+    [520, 780, 1040, 1300].forEach((freq, i) => {
+      setTimeout(() => {
+        this.playTone(freq, freq * 1.15, 0.08, 'sawtooth', 0.22);
+      }, i * 55);
+    });
+  }
+
+  playLaserDrop() {
+    if (this.isMuted) return;
+    this.init();
+    this.playTone(980, 240, 0.12, 'sawtooth', 0.16);
+  }
+
+  playLaserHit() {
+    if (this.isMuted) return;
+    this.init();
+    this.playTone(380, 90, 0.14, 'square', 0.22);
+    this.playNoise(0.12, 0.25, 1400);
+  }
+
   // Chicken Heal SFX (Magic arcade recovery arpeggio)
   playChickenHeal() {
     if (this.isMuted) return;

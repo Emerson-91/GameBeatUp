@@ -7,6 +7,7 @@ import { StageRenderer } from './stages/stageRenderer.js';
 import { StageManager } from './stages/stageManager.js';
 import { HUD } from './ui/hud.js';
 import { CharacterSelect } from './ui/characterSelect.js';
+import { StoryIntro } from './ui/storyIntro.js';
 
 class Game {
   constructor() {
@@ -34,10 +35,21 @@ class Game {
     this.continueTimer = 9.99;
     this.lastCountdownSec = 10;
 
+    this.storyIntroUI = new StoryIntro();
+
     this.characterSelectUI = new CharacterSelect(
       (charKey) => {
         this.selectedCharKey = charKey;
-        this.startStage(0);
+        this.state = 'story';
+        this.switchScreen('story-intro-screen');
+        this.storyIntroUI.show(
+          () => {
+            this.startStage(0);
+          },
+          () => {
+            this.startStage(0);
+          }
+        );
       },
       () => {
         this.switchScreen('title-screen');
@@ -127,6 +139,51 @@ class Game {
       };
     }
 
+    const chooseFighterBtn = document.getElementById('btn-choose-fighter');
+    if (chooseFighterBtn) {
+      chooseFighterBtn.onclick = () => {
+        Sound.init();
+        Sound.playPunch();
+        this.switchScreen('char-select-screen');
+        this.state = 'select';
+      };
+    }
+
+    const storyBtn = document.getElementById('btn-story-intro');
+    if (storyBtn) {
+      storyBtn.onclick = () => {
+        Sound.init();
+        Sound.playSpecial();
+        this.state = 'story';
+        this.switchScreen('story-intro-screen');
+        this.storyIntroUI.show(
+          () => {
+            this.switchScreen('char-select-screen');
+            this.state = 'select';
+          },
+          () => {
+            this.switchScreen('title-screen');
+            this.state = 'title';
+          }
+        );
+      };
+    }
+
+    // Hero chips interactive selection
+    document.querySelectorAll('.hero-chip').forEach((chip) => {
+      chip.style.cursor = 'pointer';
+      chip.onclick = () => {
+        const charKey = chip.getAttribute('data-char');
+        Sound.init();
+        Sound.playSpecial();
+        if (charKey && this.characterSelectUI) {
+          this.characterSelectUI.selectKey(charKey);
+        }
+        this.switchScreen('char-select-screen');
+        this.state = 'select';
+      };
+    });
+
     // Pause Menu DOM Buttons
     const btnResume = document.getElementById('pause-opt-resume');
     if (btnResume) btnResume.onclick = () => this.resumeGame();
@@ -158,7 +215,10 @@ class Game {
       const isConfirm = key === 'enter' || key === ' ' || key === 'j' || key === 'z' || code === 'KeyJ' || code === 'KeyZ' || code === 'Space' || code === 'Enter';
 
       if (this.state === 'title') {
-        if (isConfirm || key === 'w' || key === 'a' || key === 's' || key === 'd') {
+        if (key === 'h' || code === 'KeyH') {
+          const storyBtn = document.getElementById('btn-story-intro');
+          if (storyBtn) storyBtn.click();
+        } else if (isConfirm || key === 'c' || code === 'KeyC') {
           if (startBtn) startBtn.click();
         }
       } else if (this.state === 'continue') {
@@ -348,6 +408,7 @@ class Game {
     const screens = [
       'loading-screen',
       'title-screen',
+      'story-intro-screen',
       'char-select-screen',
       'hud-overlay',
       'pause-screen',
@@ -410,7 +471,7 @@ class Game {
     // 1. Player input & physics
     if (this.player) {
       this.player.handleInput(Input);
-      this.player.update(dt, this.stageManager.stageLimits, this.camera);
+      this.player.update(dt, this.stageManager.stageLimits, this.camera, this.stageManager.particles);
 
       // Handle player respawn or death
       if (this.player.isDead && this.player.y === 0) {
@@ -454,6 +515,138 @@ class Game {
     const player = this.player;
     if (!player || player.isDead) return;
 
+    // --- Emerson Seismic Ground Pound (Full-Screen Special) ---
+    if (player.state === 'special' && player.charKey === 'emerson') {
+      if (player.specialPhase >= 2 && !player.specialImpactTriggered) {
+        player.specialImpactTriggered = true;
+
+        // Violent screen tremor
+        this.camera.shake(18, 0.75);
+        Sound.playSeismicImpact();
+
+        // Shockwaves & Ground Impact Visuals
+        if (this.stageManager && this.stageManager.particles) {
+          this.stageManager.particles.addShockwave(player.x, player.z, 160, '#00e5ff');
+          this.stageManager.particles.addHitSparks(player.x, 15, player.z, '#00e5ff', 30);
+          this.stageManager.particles.addFloatingText('💥 IMPACTO SÍSMICO!', player.x, player.y + 110, player.z, '#00ffff');
+        }
+
+        // Damage ALL active regular enemies on screen: 50% HP!
+        for (const enemy of this.stageManager.enemies) {
+          if (!enemy.isDead) {
+            const damage = Math.max(1, Math.floor(enemy.maxHp * 0.50));
+            const tookDamage = enemy.takeDamage(
+              damage,
+              (enemy.x >= player.x ? 1 : -1) * 9.5,
+              8.5
+            );
+            if (tookDamage) {
+              this.stageManager.particles.addHitSparks(enemy.x, enemy.y + 40, enemy.z, '#00e5ff', 16);
+              this.stageManager.particles.addFloatingText(`-${damage} (50%)`, enemy.x, enemy.y + 70, enemy.z, '#00ffff');
+              player.addScore(250);
+            }
+          }
+        }
+
+        // Damage Boss: 25% HP!
+        const boss = this.stageManager.boss;
+        if (boss && !boss.isDead) {
+          const bossDamage = Math.max(1, Math.floor(boss.maxHp * 0.25));
+          const tookDamage = boss.takeDamage(
+            bossDamage,
+            (boss.x >= player.x ? 1 : -1) * 7.5,
+            5.0
+          );
+          if (tookDamage) {
+            this.stageManager.particles.addHitSparks(boss.x, boss.y + 50, boss.z, '#00e5ff', 24);
+            this.stageManager.particles.addFloatingText(`-${bossDamage} (25%)`, boss.x, boss.y + 90, boss.z, '#00ffff');
+            player.addScore(500);
+            if (boss.barBroken) {
+              boss.barBroken = false;
+              this.stageManager.particles.addHitSparks(boss.x, boss.y + 60, boss.z, '#ffff00', 30);
+              this.stageManager.particles.addFloatingText(`⚡ BARRA QUEBRADA! [x${boss.currentBar}] ⚡`, boss.x, boss.y + 115, boss.z, '#ffd700');
+              Sound.playHeavyHit();
+              this.camera.shake(9, 0.25);
+            }
+          }
+        }
+      }
+
+      // During Phase 3 (fissures and lightning crackle), emit intermittent electric sparks
+      if (player.specialPhase === 3 && this.stageManager && this.stageManager.particles) {
+        if (Math.random() < 0.4) {
+          const rx = player.x + (Math.random() - 0.5) * 120;
+          const rz = player.z + (Math.random() - 0.5) * 40;
+          this.stageManager.particles.addHitSparks(rx, 8, rz, '#00e5ff', 4);
+        }
+      }
+    }
+
+    // --- AndreyBot Plasma Bomb Shots vs Enemies & Boss (5% HP damage per hit) ---
+    if (player.andreyShots && player.andreyShots.length > 0) {
+      for (const shot of player.andreyShots) {
+        if (shot.isDead) continue;
+
+        // Check vs Regular Enemies
+        for (const enemy of this.stageManager.enemies) {
+          if (!enemy.isDead && !shot.isDead) {
+            const dx = Math.abs(shot.x - enemy.x);
+            const dz = Math.abs(shot.z - enemy.z);
+            const dy = Math.abs(shot.y - enemy.y);
+            if (dx < 38 && dz < 28 && dy < 50) {
+              shot.isDead = true;
+              // Cada tiro tira 5% de vida
+              const damage = Math.max(1, Math.floor(enemy.maxHp * 0.05));
+              const tookDamage = enemy.takeDamage(
+                damage,
+                (shot.vx >= 0 ? 1 : -1) * 3.5,
+                2.5
+              );
+              if (tookDamage) {
+                this.stageManager.particles.addHitSparks(enemy.x, enemy.y + 35, enemy.z, '#00ff88', 12);
+                this.stageManager.particles.addFloatingText(`-${damage} (5%)`, enemy.x, enemy.y + 65, enemy.z, '#00ff88');
+                Sound.playLaserHit();
+                this.camera.shake(3.5, 0.1);
+                player.addScore(80);
+              }
+            }
+          }
+        }
+
+        // Check vs Boss
+        const boss = this.stageManager.boss;
+        if (boss && !boss.isDead && !shot.isDead) {
+          const dx = Math.abs(shot.x - boss.x);
+          const dz = Math.abs(shot.z - boss.z);
+          const dy = Math.abs(shot.y - boss.y);
+          if (dx < 48 && dz < 35 && dy < 60) {
+            shot.isDead = true;
+            // Cada tiro tira 5% de vida do chefe
+            const bossDamage = Math.max(1, Math.floor(boss.maxHp * 0.05));
+            const tookDamage = boss.takeDamage(
+              bossDamage,
+              (shot.vx >= 0 ? 1 : -1) * 2.5,
+              1.8
+            );
+            if (tookDamage) {
+              this.stageManager.particles.addHitSparks(boss.x, boss.y + 45, boss.z, '#00ff88', 16);
+              this.stageManager.particles.addFloatingText(`-${bossDamage} (5%)`, boss.x, boss.y + 85, boss.z, '#00ff88');
+              Sound.playLaserHit();
+              this.camera.shake(4.5, 0.12);
+              player.addScore(150);
+              if (boss.barBroken) {
+                boss.barBroken = false;
+                this.stageManager.particles.addHitSparks(boss.x, boss.y + 60, boss.z, '#ffff00', 30);
+                this.stageManager.particles.addFloatingText(`⚡ BARRA QUEBRADA! [x${boss.currentBar}] ⚡`, boss.x, boss.y + 115, boss.z, '#ffd700');
+                Sound.playHeavyHit();
+                this.camera.shake(9, 0.25);
+              }
+            }
+          }
+        }
+      }
+    }
+
     // --- Player Attack vs Enemies & Boss ---
     const playerHitbox = player.getAttackHitbox();
     if (playerHitbox) {
@@ -492,6 +685,13 @@ class Game {
             this.stageManager.particles.addFloatingText(`-${Math.floor(playerHitbox.damage)}`, boss.x, boss.y + 90, boss.z, '#ff3366');
             player.addScore(250);
             this.camera.shake(7, 0.2);
+            if (boss.barBroken) {
+              boss.barBroken = false;
+              this.stageManager.particles.addHitSparks(boss.x, boss.y + 60, boss.z, '#ffff00', 30);
+              this.stageManager.particles.addFloatingText(`⚡ BARRA QUEBRADA! [x${boss.currentBar}] ⚡`, boss.x, boss.y + 115, boss.z, '#ffd700');
+              Sound.playHeavyHit();
+              this.camera.shake(9, 0.25);
+            }
           }
         }
       }

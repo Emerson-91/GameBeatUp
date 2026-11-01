@@ -13,29 +13,44 @@ export class CharacterSelect {
     this.charThemes = {
       andrey: {
         themeClass: 'theme-andrey',
-        styleTag: 'CIBERNÉTICO & PLASMA',
+        styleTag: 'PLASMA & TECH',
+        rank: 'S',
         color: '#00f0ff',
-        spriteSrc: 'assets/images/sprites/characters/andrey_idle.png'
+        spriteSrc: 'assets/images/sprites/characters/andrey_idle.png',
+        sound: () => Sound.playTone(420, 680, 0.08, 'sine', 0.25)
       },
       emerson: {
         themeClass: 'theme-emerson',
-        styleTag: 'TITÃ DA SUPER FORÇA',
+        styleTag: 'FORÇA TITÂNICA',
+        rank: 'S',
         color: '#ffb700',
-        spriteSrc: 'assets/images/sprites/characters/emerson_idle.png'
+        spriteSrc: 'assets/images/sprites/characters/emerson_idle.png',
+        sound: () => Sound.playTone(130, 240, 0.12, 'sawtooth', 0.28)
       },
       nata: {
         themeClass: 'theme-nata',
-        styleTag: 'DEV DE GUITARRA',
+        styleTag: 'VELOCIDADE & ROCK',
+        rank: 'S',
         color: '#ff0077',
-        spriteSrc: 'assets/images/sprites/characters/nata_idle.png'
+        spriteSrc: 'assets/images/sprites/characters/nata_idle.png',
+        sound: () => Sound.playTone(340, 580, 0.09, 'triangle', 0.26)
       },
       unicao: {
         themeClass: 'theme-unicao',
-        styleTag: 'LENDA CANINA DAS 4 PATAS',
+        styleTag: 'LENDA CANINA',
+        rank: 'S',
         color: '#00ffaa',
-        spriteSrc: 'assets/images/sprites/characters/dog_idle.png'
+        spriteSrc: 'assets/images/sprites/characters/dog_idle.png',
+        sound: () => Sound.playTone(400, 720, 0.08, 'square', 0.2)
       }
     };
+  }
+
+  selectKey(key) {
+    const idx = this.charKeys.indexOf(key);
+    if (idx !== -1) {
+      this.selectIndex(idx);
+    }
   }
 
   setupDOM() {
@@ -48,8 +63,10 @@ export class CharacterSelect {
       const theme = this.charThemes[key] || {
         themeClass: 'theme-default',
         styleTag: 'LUTADOR',
+        rank: 'A',
         color: '#00f0ff',
-        spriteSrc: ''
+        spriteSrc: '',
+        sound: () => Sound.playTone(300, 500, 0.06, 'triangle', 0.2)
       };
 
       const card = document.createElement('div');
@@ -60,7 +77,7 @@ export class CharacterSelect {
         <div class="card-glow"></div>
         <div class="card-1p-badge">
           <span class="p1-icon">★ 1P</span>
-          <span class="p1-text">ESCOLHIDO</span>
+          <span class="p1-text">SELECIONADO</span>
         </div>
 
         <div class="card-media-combo">
@@ -70,8 +87,12 @@ export class CharacterSelect {
           </div>
           <div class="card-sprite-preview">
             <img src="${theme.spriteSrc}" alt="${char.name} sprite" class="fighter-idle-sprite">
+            <div class="fighter-ground-shadow"></div>
           </div>
-          <span class="char-archetype-tag" style="border-color: ${theme.color}; color: ${theme.color};">${theme.styleTag}</span>
+          <div class="card-top-tags">
+            <span class="char-archetype-tag" style="border-color: ${theme.color}; color: ${theme.color};">${theme.styleTag}</span>
+            <span class="char-rank-badge" style="background: ${theme.color};">RANK ${theme.rank}</span>
+          </div>
         </div>
 
         <div class="card-info">
@@ -82,9 +103,9 @@ export class CharacterSelect {
 
           <p class="char-desc">${char.description}</p>
 
-          <div class="char-special-box">
+          <div class="char-special-box" style="border-color: ${theme.color}66;">
             <span class="sp-icon">⚡</span>
-            <span class="sp-name" title="${char.specialName}">${char.specialName}</span>
+            <span class="sp-name" style="color: ${theme.color};" title="${char.specialName}">${char.specialName}</span>
           </div>
 
           <div class="stat-bars">
@@ -110,7 +131,7 @@ export class CharacterSelect {
             </div>
           </div>
 
-          <button type="button" class="select-btn">
+          <button type="button" class="select-btn" style="border-color: ${theme.color};">
             ESCOLHER ${char.name} ➔
           </button>
         </div>
@@ -133,7 +154,8 @@ export class CharacterSelect {
       card.addEventListener('mouseenter', () => {
         if (this.selectedIndex !== index) {
           this.selectIndex(index);
-          Sound.playTone(320, 520, 0.06, 'triangle', 0.2);
+          if (theme.sound) theme.sound();
+          else Sound.playTone(320, 520, 0.06, 'triangle', 0.2);
         }
       });
 
@@ -219,7 +241,9 @@ export class CharacterSelect {
   navigate(dir) {
     this.selectIndex(this.selectedIndex + dir);
     Sound.init();
-    Sound.playTone(320, 560, 0.07, 'triangle', 0.25);
+    const theme = this.charThemes[this.charKeys[this.selectedIndex]];
+    if (theme && theme.sound) theme.sound();
+    else Sound.playTone(320, 560, 0.07, 'triangle', 0.25);
   }
 
   confirmSelection() {

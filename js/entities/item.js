@@ -194,10 +194,33 @@ export class ParticleSystem {
     });
   }
 
+  addShockwave(x, z, maxRadius = 150, color = '#00e5ff') {
+    this.particles.push({
+      type: 'shockwave',
+      x: x,
+      y: 0,
+      z: z,
+      radius: 12,
+      maxRadius: maxRadius,
+      color: color,
+      life: 0.65,
+      maxLife: 0.65
+    });
+  }
+
   update(dt) {
-    // Update sparks
+    // Update sparks & shockwaves
     for (let i = this.particles.length - 1; i >= 0; i--) {
       const p = this.particles[i];
+      if (p.type === 'shockwave') {
+        p.radius += (p.maxRadius - p.radius) * dt * 9;
+        p.life -= dt;
+        if (p.life <= 0) {
+          this.particles.splice(i, 1);
+        }
+        continue;
+      }
+
       p.x += p.vx * dt * 60;
       p.y += p.vy * dt * 60;
       p.z += p.vz * dt * 60;
@@ -220,8 +243,25 @@ export class ParticleSystem {
   }
 
   draw(ctx, camera) {
-    // Draw sparks
+    // Draw sparks & shockwaves
     for (const p of this.particles) {
+      if (p.type === 'shockwave') {
+        const sx = camera.toScreenX(p.x);
+        const sy = camera.toScreenY(p.z);
+        const alpha = Math.max(0, p.life / p.maxLife);
+        ctx.save();
+        ctx.globalAlpha = alpha * 0.9;
+        ctx.strokeStyle = p.color;
+        ctx.lineWidth = Math.max(2, 6 * alpha);
+        ctx.shadowBlur = 18;
+        ctx.shadowColor = p.color;
+        ctx.beginPath();
+        ctx.ellipse(sx, sy, p.radius, p.radius * 0.36, 0, 0, Math.PI * 2);
+        ctx.stroke();
+        ctx.restore();
+        continue;
+      }
+
       const sx = camera.toScreenX(p.x);
       const sy = camera.toScreenY(p.z - p.y);
       const alpha = Math.max(0, p.life / p.maxLife);

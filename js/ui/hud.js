@@ -119,12 +119,22 @@ export class HUD {
     ctx.fillStyle = 'rgba(0, 0, 0, 0.75)';
     ctx.fillRect(hpX - 1, spY - 1, spW + 2, spH + 2);
 
-    ctx.fillStyle = spRatio >= 0.4 ? '#00e5ff' : '#0066aa';
+    const isReady = spRatio >= 1.0;
+    if (isReady) {
+      const pulse = 0.75 + Math.sin(Date.now() / 140) * 0.25;
+      ctx.fillStyle = `rgba(0, 240, 255, ${pulse})`;
+      ctx.shadowBlur = 10;
+      ctx.shadowColor = '#00f0ff';
+    } else {
+      ctx.fillStyle = '#0088cc';
+      ctx.shadowBlur = 0;
+    }
     ctx.fillRect(hpX, spY, spW * spRatio, spH);
+    ctx.shadowBlur = 0;
 
-    ctx.fillStyle = spRatio >= 0.4 ? '#00e5ff' : '#888888';
+    ctx.fillStyle = isReady ? '#00ffff' : '#888888';
     ctx.font = 'bold 9px sans-serif';
-    ctx.fillText(spRatio >= 0.4 ? 'ESPECIAL PRONTO [L/C]' : 'CARREGANDO SP', hpX + spW + 8, spY + 8);
+    ctx.fillText(isReady ? 'ESPECIAL 100% PRONTO [L/C]' : `SP: ${Math.floor(player.specialMeter)}%`, hpX + spW + 8, spY + 8);
 
     // Lives counter & Invincibility Badge
     ctx.font = 'bold 13px sans-serif';
@@ -197,60 +207,159 @@ export class HUD {
   }
 
   drawBossHealthBar(ctx, boss) {
+    const barsMax = boss.barsMax || 4;
+    const curBar = boss.currentBar;
+    if (curBar <= 0 && boss.hp <= 0) return;
+
+    // Palette of gradient colors per bar tier (1 is always the final critical red life)
+    const BOSS_PALETTES = {
+      4: [
+        null,
+        { primary: '#ff0055', secondary: '#990022', glow: '#ff0033', label: 'CRÍTICA' }, // 1 (Vermelho Sangue)
+        { primary: '#ff7700', secondary: '#cc4400', glow: '#ff6600', label: 'LARANJA' }, // 2 (Laranja Fogo)
+        { primary: '#ffd700', secondary: '#cc9900', glow: '#ffd700', label: 'DOURADA' }, // 3 (Ouro)
+        { primary: '#00e676', secondary: '#009944', glow: '#00ff88', label: 'VERDE' }     // 4 (Verde Neon)
+      ],
+      10: [
+        null,
+        { primary: '#ff0055', secondary: '#990022', glow: '#ff0033', label: 'CRÍTICA' }, // 1 (Vermelho)
+        { primary: '#ff3d00', secondary: '#bf360c', glow: '#ff3d00', label: 'LAVA' },    // 2 (Lava)
+        { primary: '#ff9100', secondary: '#e65100', glow: '#ff9100', label: 'ÂMBAR' },   // 3 (Âmbar)
+        { primary: '#ffd600', secondary: '#f57f17', glow: '#ffd600', label: 'SOLAR' },   // 4 (Ouro Solar)
+        { primary: '#76ff03', secondary: '#33691e', glow: '#76ff03', label: 'LIMA' },    // 5 (Lima)
+        { primary: '#00e676', secondary: '#004d40', glow: '#00ff88', label: 'VERDE' },   // 6 (Esmeralda)
+        { primary: '#00e5ff', secondary: '#006064', glow: '#00e5ff', label: 'CIANO' },   // 7 (Ciano)
+        { primary: '#2979ff', secondary: '#0d47a1', glow: '#2979ff', label: 'AZUL' },    // 8 (Cobalto)
+        { primary: '#ff1744', secondary: '#880e4f', glow: '#ff1744', label: 'MAGENTA' }, // 9 (Magenta)
+        { primary: '#d500f9', secondary: '#4a148c', glow: '#e040fb', label: 'CÓSMICA' }  // 10 (Cósmica)
+      ]
+    };
+
+    const palette = (barsMax === 10) ? BOSS_PALETTES[10] : BOSS_PALETTES[4];
+    const curColor = palette[curBar] || palette[1];
+    const underBar = curBar - 1;
+    const underColor = underBar >= 1 ? palette[underBar] : null;
+
+    const ratio = Math.max(0, Math.min(1, boss.currentBarRatio));
+
     const cx = 480;
-    const cy = 492; // Positioned cleanly at the bottom of the screen
-    // Exact double of the player's health bar width (player: 190px -> boss: 380px)
+    const cy = 492;
     const bw = 380;
     const bh = 18;
-    const ratio = Math.max(0, boss.hp / boss.maxHp);
 
     ctx.save();
 
-    // Backdrop Card at bottom of screen
-    ctx.fillStyle = 'rgba(10, 8, 22, 0.88)';
-    ctx.strokeStyle = '#ff2255';
+    // 1. Backdrop Card at bottom of screen
+    ctx.fillStyle = 'rgba(10, 8, 22, 0.92)';
+    ctx.strokeStyle = curColor.glow;
     ctx.lineWidth = 2;
-    ctx.shadowBlur = 15;
-    ctx.shadowColor = 'rgba(255, 34, 85, 0.5)';
-    ctx.strokeRect(cx - bw / 2 - 14, cy - 22, bw + 28, bh + 30);
-    ctx.fillRect(cx - bw / 2 - 14, cy - 22, bw + 28, bh + 30);
+    ctx.shadowBlur = 16;
+    ctx.shadowColor = curColor.glow;
+    ctx.strokeRect(cx - bw / 2 - 52, cy - 23, bw + 64, bh + 31);
+    ctx.fillRect(cx - bw / 2 - 52, cy - 23, bw + 64, bh + 31);
 
-    // Header Label above the bar
-    ctx.textAlign = 'center';
-    ctx.fillStyle = '#ff2255';
+    // 2. Boss Name and Title Header
+    ctx.textAlign = 'left';
+    ctx.fillStyle = curColor.primary;
     ctx.font = 'bold 13px sans-serif';
     ctx.shadowBlur = 10;
-    ctx.shadowColor = '#ff0033';
-    ctx.fillText(`☠ CHEFE: ${boss.name.toUpperCase()} - ${boss.title}`, cx, cy - 6);
+    ctx.shadowColor = curColor.glow;
+    ctx.fillText(`☠ CHEFE: ${boss.name.toUpperCase()} - ${boss.title}`, cx - bw / 2 - 46, cy - 7);
 
-    // HP Bar Outer Border
-    ctx.fillStyle = 'rgba(0, 0, 0, 0.9)';
-    ctx.strokeStyle = '#ff4477';
-    ctx.lineWidth = 1.5;
-    ctx.strokeRect(cx - bw / 2 - 1, cy - 1, bw + 2, bh + 2);
-    ctx.fillRect(cx - bw / 2, cy, bw, bh);
+    // 3. Mini Diamond / Pip Indicators for each life on the right of the header
+    ctx.textAlign = 'right';
+    let pipsStr = '';
+    for (let b = 1; b <= barsMax; b++) {
+      pipsStr += (b <= curBar ? '◆' : '◇');
+    }
+    ctx.font = '11px sans-serif';
+    ctx.fillStyle = (curBar === 1) ? '#ff2255' : curColor.primary;
+    ctx.fillText(pipsStr, cx + bw / 2 + 6, cy - 7);
 
-    // HP Fill (Gradient from crimson to fiery gold)
-    const bossGrad = ctx.createLinearGradient(cx - bw / 2, 0, cx + bw / 2, 0);
-    bossGrad.addColorStop(0, '#ff0055');
-    bossGrad.addColorStop(0.5, '#ff6600');
-    bossGrad.addColorStop(1, '#ffd700');
-    ctx.fillStyle = bossGrad;
-    ctx.shadowBlur = 12;
-    ctx.shadowColor = '#ff3300';
-    ctx.fillRect(cx - bw / 2, cy, bw * ratio, bh);
+    // 4. Arcade Life Multiplier Badge on the Left (e.g. [ x4 ], [ x10 ])
+    const badgeX = cx - bw / 2 - 48;
+    const badgeY = cy;
+    const badgeW = 42;
+    const badgeH = bh;
 
-    // Upper gloss shine
-    ctx.fillStyle = 'rgba(255, 255, 255, 0.22)';
-    ctx.fillRect(cx - bw / 2, cy, bw * ratio, bh / 2);
+    // Glowing badge box
+    const badgeGrad = ctx.createLinearGradient(badgeX, badgeY, badgeX + badgeW, badgeY + badgeH);
+    badgeGrad.addColorStop(0, curColor.primary);
+    badgeGrad.addColorStop(1, curColor.secondary);
+    ctx.fillStyle = badgeGrad;
+    ctx.shadowBlur = curBar === 1 ? (12 + Math.sin(Date.now() * 0.015) * 6) : 8;
+    ctx.shadowColor = curColor.glow;
+    ctx.fillRect(badgeX, badgeY, badgeW, badgeH);
 
-    // HP Numeric Readout
+    ctx.strokeStyle = '#ffffff';
+    ctx.lineWidth = 1;
+    ctx.strokeRect(badgeX, badgeY, badgeW, badgeH);
+
+    // Badge text: x4, x10
+    ctx.textAlign = 'center';
+    ctx.fillStyle = '#ffffff';
+    ctx.font = 'bold 12px sans-serif';
     ctx.shadowBlur = 4;
-    ctx.shadowColor = '#000';
+    ctx.shadowColor = '#000000';
+    ctx.fillText(`x${curBar}`, badgeX + badgeW / 2, badgeY + 13);
+
+    // 5. HP Gauge Outer Frame
+    const barX = cx - bw / 2;
+    const barY = cy;
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.95)';
+    ctx.strokeStyle = '#222233';
+    ctx.lineWidth = 1.5;
+    ctx.strokeRect(barX - 1, barY - 1, bw + 2, bh + 2);
+    ctx.fillRect(barX, barY, bw, bh);
+
+    // 6. Under-Layer: The Next Bar Waiting Underneath (Full Width)
+    if (underColor) {
+      const underGrad = ctx.createLinearGradient(barX, 0, barX + bw, 0);
+      underGrad.addColorStop(0, underColor.primary);
+      underGrad.addColorStop(1, underColor.secondary);
+      ctx.fillStyle = underGrad;
+      ctx.shadowBlur = 0;
+      ctx.fillRect(barX, barY, bw, bh);
+
+      // Subtle dim filter on under-bar so active top-bar pops out
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.25)';
+      ctx.fillRect(barX, barY, bw, bh);
+    } else {
+      // Empty gauge background (dark crimson hazard)
+      ctx.fillStyle = 'rgba(25, 4, 10, 0.95)';
+      ctx.fillRect(barX, barY, bw, bh);
+    }
+
+    // 7. Active Top-Layer: Current Bar Draining
+    if (ratio > 0) {
+      const fillW = bw * ratio;
+      const curGrad = ctx.createLinearGradient(barX, 0, barX + bw, 0);
+      curGrad.addColorStop(0, curColor.primary);
+      curGrad.addColorStop(1, curColor.secondary);
+      ctx.fillStyle = curGrad;
+      ctx.shadowBlur = 12;
+      ctx.shadowColor = curColor.glow;
+      ctx.fillRect(barX, barY, fillW, bh);
+
+      // Leading edge white flash spark / razor edge line
+      ctx.fillStyle = '#ffffff';
+      ctx.shadowBlur = 8;
+      ctx.shadowColor = '#ffffff';
+      ctx.fillRect(barX + fillW - 2, barY, 2, bh);
+
+      // Upper gloss shine
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.28)';
+      ctx.shadowBlur = 0;
+      ctx.fillRect(barX, barY, fillW, bh / 2);
+    }
+
+    // 8. HP Readout in center of the bar
+    ctx.shadowBlur = 4;
+    ctx.shadowColor = '#000000';
     ctx.fillStyle = '#ffffff';
     ctx.font = 'bold 11px sans-serif';
     ctx.textAlign = 'center';
-    ctx.fillText(`${Math.ceil(boss.hp)} / ${boss.maxHp}`, cx, cy + 13);
+    ctx.fillText(`VIDA ${curBar}/${barsMax} • ${Math.ceil(boss.hp)} / ${boss.maxHp}`, cx, cy + 13);
 
     ctx.restore();
   }

@@ -67,6 +67,11 @@ export class Entity {
       else s = 'idle';
     } else if (s === 'hurt') {
       s = meta['crouch'] ? 'crouch' : 'idle';
+    } else if (s === 'special') {
+      if (this.specialPhase && meta[`special${this.specialPhase}`]) {
+        return `special${this.specialPhase}`;
+      }
+      if (meta['special']) return 'special';
     }
 
     if (meta[s]) return s;

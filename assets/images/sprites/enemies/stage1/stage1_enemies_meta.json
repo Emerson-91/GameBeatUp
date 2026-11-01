@@ -3,25 +3,25 @@
     "idle": {
       "w": 250,
       "h": 270,
-      "ax": 0.5,
+      "ax": 0.3686,
       "src": "assets/images/sprites/enemies/stage1/enemy_swamp_idle.png"
     },
     "walk1": {
       "w": 215,
       "h": 270,
-      "ax": 0.5,
+      "ax": 0.3561,
       "src": "assets/images/sprites/enemies/stage1/enemy_swamp_walk1.png"
     },
     "punch": {
       "w": 230,
       "h": 270,
-      "ax": 0.5,
+      "ax": 0.3687,
       "src": "assets/images/sprites/enemies/stage1/enemy_swamp_punch.png"
     },
     "kick": {
       "w": 337,
       "h": 270,
-      "ax": 0.5,
+      "ax": 0.3052,
       "src": "assets/images/sprites/enemies/stage1/enemy_swamp_kick.png"
     },
     "fall": {
@@ -33,7 +33,7 @@
     "walk2": {
       "w": 215,
       "h": 270,
-      "ax": 0.5,
+      "ax": 0.3561,
       "src": "assets/images/sprites/enemies/stage1/enemy_swamp_walk1.png"
     },
     "knockdown": {
@@ -45,7 +45,7 @@
     "idle2": {
       "w": 250,
       "h": 270,
-      "ax": 0.5,
+      "ax": 0.3686,
       "src": "assets/images/sprites/enemies/stage1/enemy_swamp_idle.png"
     },
     "crouch": {
@@ -59,25 +59,25 @@
     "idle": {
       "w": 283,
       "h": 270,
-      "ax": 0.5,
+      "ax": 0.5503,
       "src": "assets/images/sprites/enemies/stage1/enemy_spear_idle.png"
     },
     "walk1": {
       "w": 295,
       "h": 270,
-      "ax": 0.5,
+      "ax": 0.6508,
       "src": "assets/images/sprites/enemies/stage1/enemy_spear_walk1.png"
     },
     "crouch": {
       "w": 293,
       "h": 270,
-      "ax": 0.5,
+      "ax": 0.4177,
       "src": "assets/images/sprites/enemies/stage1/enemy_spear_crouch.png"
     },
     "punch": {
       "w": 440,
       "h": 270,
-      "ax": 0.5,
+      "ax": 0.2922,
       "src": "assets/images/sprites/enemies/stage1/enemy_spear_punch.png"
     },
     "fall": {
@@ -89,7 +89,7 @@
     "walk2": {
       "w": 295,
       "h": 270,
-      "ax": 0.5,
+      "ax": 0.6508,
       "src": "assets/images/sprites/enemies/stage1/enemy_spear_walk1.png"
     },
     "knockdown": {
@@ -101,7 +101,7 @@
     "idle2": {
       "w": 283,
       "h": 270,
-      "ax": 0.5,
+      "ax": 0.5503,
       "src": "assets/images/sprites/enemies/stage1/enemy_spear_idle.png"
     },
     "kick": {
@@ -115,25 +115,25 @@
     "idle": {
       "w": 234,
       "h": 270,
-      "ax": 0.5,
+      "ax": 0.4771,
       "src": "assets/images/sprites/enemies/stage1/enemy_fish_idle.png"
     },
     "walk1": {
       "w": 246,
       "h": 270,
-      "ax": 0.5,
+      "ax": 0.3702,
       "src": "assets/images/sprites/enemies/stage1/enemy_fish_walk1.png"
     },
     "crouch": {
       "w": 250,
       "h": 270,
-      "ax": 0.5,
+      "ax": 0.4595,
       "src": "assets/images/sprites/enemies/stage1/enemy_fish_crouch.png"
     },
     "punch": {
       "w": 304,
       "h": 270,
-      "ax": 0.5,
+      "ax": 0.2954,
       "src": "assets/images/sprites/enemies/stage1/enemy_fish_punch.png"
     },
     "fall": {
@@ -145,7 +145,7 @@
     "walk2": {
       "w": 246,
       "h": 270,
-      "ax": 0.5,
+      "ax": 0.3702,
       "src": "assets/images/sprites/enemies/stage1/enemy_fish_walk1.png"
     },
     "knockdown": {
@@ -157,7 +157,7 @@
     "idle2": {
       "w": 234,
       "h": 270,
-      "ax": 0.5,
+      "ax": 0.4771,
       "src": "assets/images/sprites/enemies/stage1/enemy_fish_idle.png"
     },
     "kick": {

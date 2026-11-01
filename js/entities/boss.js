@@ -70,6 +70,8 @@ export class Boss extends Entity {
     this.stageNumber = stageNumber;
     this.name = config.name;
     this.title = config.title;
+    this.barsMax = config.bars || (stageNumber === 9 ? 10 : 4);
+    this.hpPerBar = config.hpPerBar || (config.maxHp / this.barsMax);
     this.maxHp = config.maxHp;
     this.hp = this.maxHp;
     this.speed = config.speed;
@@ -78,6 +80,8 @@ export class Boss extends Entity {
 
     this.player = playerTarget;
     this.projectiles = [];
+    this.barBroken = false;
+    this.lastBrokenBar = 0;
 
     // Boss Battle State
     this.superArmor = 50; // Takes multiple hits to flinch
@@ -92,13 +96,34 @@ export class Boss extends Entity {
     this.hitPlayerThisSwing = false;
   }
 
+  get currentBar() {
+    if (this.hp <= 0) return 0;
+    return Math.min(this.barsMax, Math.ceil(this.hp / this.hpPerBar));
+  }
+
+  get currentBarRatio() {
+    if (this.hp <= 0) return 0;
+    const cur = this.currentBar;
+    const barBaseHp = (cur - 1) * this.hpPerBar;
+    const rem = this.hp - barBaseHp;
+    return Math.max(0, Math.min(1, rem / this.hpPerBar));
+  }
+
   takeDamage(amount, knockbackX = 0, knockbackY = 0) {
     if (this.isInvincible || this.isDead) return false;
+
+    const prevBar = this.currentBar;
 
     this.hp -= amount;
     this.superArmor -= amount;
     this.isInvincible = true;
     this.invincibleTimer = 0.25;
+
+    const newBar = this.currentBar;
+    if (newBar < prevBar && newBar > 0) {
+      this.barBroken = true;
+      this.lastBrokenBar = prevBar;
+    }
 
     // Boss flinches only when super armor breaks or on heavy special
     if (this.hp <= 0) {

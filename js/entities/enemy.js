@@ -40,6 +40,19 @@ export class Enemy extends Entity {
 
     this.hitPlayer = false;
     this.scoreValue = 100;
+
+    if (config.scale) {
+      this.scale = config.scale;
+    }
+    if (config.shadowWidth) {
+      this.shadowWidth = config.shadowWidth;
+    }
+    if (config.width) {
+      this.width = config.width;
+    }
+    if (config.depth) {
+      this.depth = config.depth;
+    }
   }
 
   updateAI(dt, stageLimits) {

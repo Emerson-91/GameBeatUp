@@ -34,34 +34,41 @@
     <!-- Title Screen Layer -->
     <div id="title-screen" class="screen-layer hidden">
       <div class="title-arcade-backdrop"></div>
+      <div class="arcade-scanlines"></div>
       <div class="title-card">
         <div class="arcade-pill-badge">
           <span class="badge-dot"></span>
-          <span>FLIPERAMA ARCADE &bull; 9 REINOS &bull; 4 HERÓIS</span>
+          <span>FLIPERAMA ARCADE &bull; OS 9 REINOS &bull; 4 HERÓIS</span>
           <span class="badge-dot"></span>
         </div>
 
         <h1 class="game-main-title">STREET BRAWLERS</h1>
-        <p class="game-sub-title">A BATALHA PELOS 9 REINOS</p>
+        <p class="game-sub-title">A BATALHA PELOS 9 REINOS &bull; BEAT 'EM UP</p>
 
-        <!-- Dynamic Fighter Teaser Showcase -->
+        <!-- Dynamic Interactive Fighter Teaser Showcase -->
         <div class="title-heroes-showcase">
-          <div class="hero-chip chip-andrey"><span class="chip-avatar"></span> ANDREY</div>
-          <div class="hero-chip chip-emerson"><span class="chip-avatar"></span> EMERSON</div>
-          <div class="hero-chip chip-nata"><span class="chip-avatar"></span> NATA</div>
-          <div class="hero-chip chip-unicao"><span class="chip-avatar"></span> UNICÃO</div>
+          <div class="hero-chip chip-andrey" data-char="andrey" title="Ver Andrey na Seleção"><span class="chip-avatar"></span> ANDREY <span class="chip-sub">PLASMA</span></div>
+          <div class="hero-chip chip-emerson" data-char="emerson" title="Ver Emerson na Seleção"><span class="chip-avatar"></span> EMERSON <span class="chip-sub">FORÇA</span></div>
+          <div class="hero-chip chip-nata" data-char="nata" title="Ver Nata na Seleção"><span class="chip-avatar"></span> NATA <span class="chip-sub">VELOZ</span></div>
+          <div class="hero-chip chip-unicao" data-char="unicao" title="Ver Unicão na Seleção"><span class="chip-avatar"></span> UNICÃO <span class="chip-sub">CANINO</span></div>
         </div>
 
         <div class="title-dual-panel">
           <!-- Mission Panel -->
           <div class="title-panel-box mission-panel">
             <h3 class="panel-heading">🎯 MISSÃO NAS RUAS</h3>
-            <p class="panel-text">Avance pelas ruas durante <strong>1 minuto</strong> combatendo ondas de inimigos. Colete <strong>🍗 Frango Assado</strong> para curar vida e entre na <strong>🚪 Porta do Covil</strong> para o Chefe de cada Reino!</p>
+            <p class="panel-text">Avance combatendo ondas de inimigos durante <strong>1 minuto</strong>. Colete <strong>🍗 Frango Assado</strong> para restaurar 100% da vida e alcance a <strong>🚪 Porta do Covil</strong> para o Chefe de cada Reino!</p>
+            <div class="mission-tips-row">
+              <span class="mini-tip">⚡ Combo 1-2-3</span>
+              <span class="mini-tip">🍗 Frango (Início, Fim & 6 Kills)</span>
+              <span class="mini-tip">🍗 2x Frango no Boss</span>
+              <span class="mini-tip">🚪 Porta = Chefe</span>
+            </div>
           </div>
 
           <!-- Controls Panel -->
           <div class="title-panel-box controls-panel">
-            <h3 class="panel-heading">🎮 COMANDOS DE LUTA</h3>
+            <h3 class="panel-heading">🎮 COMANDOS DE COMBATE</h3>
             <div class="arcade-keys-grid">
               <div class="key-item"><span class="key-cap">W A S D / SETAS</span> Mover & Navegar</div>
               <div class="key-item"><span class="key-cap key-act">J / Z</span> Soco (Combo 1-2-3) & OK</div>
@@ -74,11 +81,20 @@
         </div>
 
         <div class="title-action-wrap">
-          <button id="btn-play-game" class="primary-btn title-start-btn" style="cursor: pointer;">
-            <span class="btn-shine"></span>
-            <span class="btn-icon">🥊</span> INICIAR JOGO &bull; PRESS ENTER
-          </button>
-          <div class="press-start-label">▶ PRESSIONE [ENTER], [ESPAÇO] OU [J] PARA COMEÇAR ◀</div>
+          <div class="title-buttons-row">
+            <button id="btn-play-game" class="primary-btn title-start-btn" style="cursor: pointer;" type="button">
+              <span class="btn-shine"></span>
+              <span class="btn-icon">🥊</span> INICIAR JOGO &bull; PRESS ENTER
+            </button>
+            <button id="btn-story-intro" class="secondary-btn title-story-btn" style="cursor: pointer;" type="button">
+              <span class="btn-icon">🎬</span> HISTÓRIA & INTRO [H]
+            </button>
+            <button id="btn-choose-fighter" class="secondary-btn title-roster-btn" style="cursor: pointer;" type="button">
+              <span class="btn-icon">👥</span> ESCOLHER LUTADOR [C]
+            </button>
+          </div>
+          <div class="press-start-label">▶ PRESSIONE [ENTER], [ESPAÇO] OU [J] PARA JOGAR ◀</div>
+          <div class="arcade-footer-meta">FREE PLAY &bull; 60 FPS ENGINE &bull; 9 CHEFES &bull; STREET BRAWLERS 1990s</div>
         </div>
       </div>
     </div>
@@ -87,10 +103,10 @@
     <div id="char-select-screen" class="screen-layer hidden">
       <div class="select-screen-header">
         <div class="select-badge-row">
-          <span class="arcade-select-badge">SELECT YOUR FIGHTER</span>
+          <span class="arcade-select-badge">★ SELECT YOUR FIGHTER &bull; 1P READY ★</span>
         </div>
         <h2 class="select-title">ESCOLHA SEU LUTADOR</h2>
-        <p class="select-subtitle">USE <strong>[W A S D]</strong> OU <strong>[SETAS]</strong> PARA NAVEGAR &bull; <strong>[ENTER]</strong> OU <strong>[J]</strong> PARA CONFIRMAR</p>
+        <p class="select-subtitle">USE <strong>[W A S D]</strong> OU <strong>[SETAS]</strong> PARA NAVEGAR &bull; <strong>[ENTER]</strong> OU <strong>[J]</strong> PARA CONFIRMAR &bull; <strong>[ESC]</strong> MENU</p>
       </div>
 
       <div id="char-select-grid" class="char-select-grid"></div>

@@ -27,7 +27,7 @@ export class ImageLoader {
     const heroKeys = ['andrey', 'emerson', 'nata', 'dog'];
     for (const hero of heroKeys) {
       if (SPRITE_META[hero]) {
-        ['idle', 'walk1', 'punch', 'kick'].forEach((a) => {
+        ['idle', 'walk1', 'punch', 'punch1', 'punch2', 'punch3', 'kick', 'kick1', 'kick2', 'kick3', 'special', 'special1', 'special2', 'special3', 'bot'].forEach((a) => {
           if (SPRITE_META[hero][a]) {
             essentialUrls.add(SPRITE_META[hero][a].src);
           }
@@ -35,8 +35,15 @@ export class ImageLoader {
       }
     }
 
-    // 5. Stage 1 & Stage 2 Enemies
-    const stageEnemies = ['enemy_swamp', 'enemy_spear', 'enemy_fish', 'enemy_goblin', 'enemy_elf', 'enemy_walrus'];
+    // 5. Stage 1 to 6 Enemies
+    const stageEnemies = [
+      'enemy_swamp', 'enemy_spear', 'enemy_fish',
+      'enemy_goblin', 'enemy_elf', 'enemy_walrus',
+      'enemy_reptile', 'enemy_oni', 'enemy_kitsune',
+      'enemy_rat', 'enemy_ninja', 'enemy_brute',
+      'enemy_cyber_wolf', 'enemy_cyber_elf', 'enemy_mecha_gorilla',
+      'enemy_swallow', 'enemy_toucan', 'enemy_crane'
+    ];
     for (const ek of stageEnemies) {
       if (SPRITE_META[ek]) {
         ['idle', 'walk1', 'punch', 'fall'].forEach((a) => {
@@ -47,8 +54,8 @@ export class ImageLoader {
       }
     }
 
-    // 6. Boss 1 (Alligator) & Boss 2 (Bear)
-    for (const bk of ['alligator', 'bear']) {
+    // 6. Bosses 1-6 (Alligator, Bear, Capybara, Cat, Gorilla, Owl)
+    for (const bk of ['alligator', 'bear', 'capybara', 'cat', 'gorilla', 'owl']) {
       if (SPRITE_META[bk]) {
         ['idle', 'walk1', 'punch', 'fall'].forEach((a) => {
           if (SPRITE_META[bk][a]) {

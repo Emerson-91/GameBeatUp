@@ -1,0 +1,170 @@
+{
+  "enemy_reptile": {
+    "idle": {
+      "w": 222,
+      "h": 237,
+      "ax": 0.6117,
+      "src": "assets/images/sprites/enemies/stage3/enemy_reptile_idle.png"
+    },
+    "walk1": {
+      "w": 231,
+      "h": 234,
+      "ax": 0.5802,
+      "src": "assets/images/sprites/enemies/stage3/enemy_reptile_walk1.png"
+    },
+    "crouch": {
+      "w": 246,
+      "h": 260,
+      "ax": 0.5132,
+      "src": "assets/images/sprites/enemies/stage3/enemy_reptile_crouch.png"
+    },
+    "punch": {
+      "w": 358,
+      "h": 214,
+      "ax": 0.4442,
+      "src": "assets/images/sprites/enemies/stage3/enemy_reptile_punch.png"
+    },
+    "fall": {
+      "w": 290,
+      "h": 196,
+      "ax": 0.5,
+      "src": "assets/images/sprites/enemies/stage3/enemy_reptile_fall.png"
+    },
+    "walk2": {
+      "w": 231,
+      "h": 234,
+      "ax": 0.5802,
+      "src": "assets/images/sprites/enemies/stage3/enemy_reptile_walk1.png"
+    },
+    "knockdown": {
+      "w": 290,
+      "h": 196,
+      "ax": 0.5,
+      "src": "assets/images/sprites/enemies/stage3/enemy_reptile_fall.png"
+    },
+    "idle2": {
+      "w": 222,
+      "h": 237,
+      "ax": 0.6117,
+      "src": "assets/images/sprites/enemies/stage3/enemy_reptile_idle.png"
+    },
+    "kick": {
+      "w": 358,
+      "h": 214,
+      "ax": 0.4316,
+      "src": "assets/images/sprites/enemies/stage3/enemy_reptile_punch.png"
+    }
+  },
+  "enemy_oni": {
+    "idle": {
+      "w": 212,
+      "h": 214,
+      "ax": 0.8005,
+      "src": "assets/images/sprites/enemies/stage3/enemy_oni_idle.png"
+    },
+    "walk1": {
+      "w": 222,
+      "h": 213,
+      "ax": 0.5624,
+      "src": "assets/images/sprites/enemies/stage3/enemy_oni_walk1.png"
+    },
+    "crouch": {
+      "w": 231,
+      "h": 219,
+      "ax": 0.3477,
+      "src": "assets/images/sprites/enemies/stage3/enemy_oni_crouch.png"
+    },
+    "punch": {
+      "w": 262,
+      "h": 202,
+      "ax": 0.3323,
+      "src": "assets/images/sprites/enemies/stage3/enemy_oni_punch.png"
+    },
+    "fall": {
+      "w": 249,
+      "h": 207,
+      "ax": 0.5,
+      "src": "assets/images/sprites/enemies/stage3/enemy_oni_fall.png"
+    },
+    "walk2": {
+      "w": 222,
+      "h": 213,
+      "ax": 0.5624,
+      "src": "assets/images/sprites/enemies/stage3/enemy_oni_walk1.png"
+    },
+    "knockdown": {
+      "w": 249,
+      "h": 207,
+      "ax": 0.5,
+      "src": "assets/images/sprites/enemies/stage3/enemy_oni_fall.png"
+    },
+    "idle2": {
+      "w": 212,
+      "h": 214,
+      "ax": 0.8005,
+      "src": "assets/images/sprites/enemies/stage3/enemy_oni_idle.png"
+    },
+    "kick": {
+      "w": 262,
+      "h": 202,
+      "ax": 0.4528,
+      "src": "assets/images/sprites/enemies/stage3/enemy_oni_punch.png"
+    }
+  },
+  "enemy_kitsune": {
+    "idle": {
+      "w": 250,
+      "h": 261,
+      "ax": 0.5821,
+      "src": "assets/images/sprites/enemies/stage3/enemy_kitsune_idle.png"
+    },
+    "walk1": {
+      "w": 272,
+      "h": 256,
+      "ax": 0.5954,
+      "src": "assets/images/sprites/enemies/stage3/enemy_kitsune_walk1.png"
+    },
+    "crouch": {
+      "w": 280,
+      "h": 261,
+      "ax": 0.4952,
+      "src": "assets/images/sprites/enemies/stage3/enemy_kitsune_crouch.png"
+    },
+    "punch": {
+      "w": 333,
+      "h": 232,
+      "ax": 0.3106,
+      "src": "assets/images/sprites/enemies/stage3/enemy_kitsune_punch.png"
+    },
+    "fall": {
+      "w": 261,
+      "h": 236,
+      "ax": 0.5,
+      "src": "assets/images/sprites/enemies/stage3/enemy_kitsune_fall.png"
+    },
+    "walk2": {
+      "w": 272,
+      "h": 256,
+      "ax": 0.5954,
+      "src": "assets/images/sprites/enemies/stage3/enemy_kitsune_walk1.png"
+    },
+    "knockdown": {
+      "w": 261,
+      "h": 236,
+      "ax": 0.5,
+      "src": "assets/images/sprites/enemies/stage3/enemy_kitsune_fall.png"
+    },
+    "idle2": {
+      "w": 250,
+      "h": 261,
+      "ax": 0.5821,
+      "src": "assets/images/sprites/enemies/stage3/enemy_kitsune_idle.png"
+    },
+    "kick": {
+      "w": 333,
+      "h": 232,
+      "ax": 0.3453,
+      "src": "assets/images/sprites/enemies/stage3/enemy_kitsune_punch.png"
+    }
+  }
+}

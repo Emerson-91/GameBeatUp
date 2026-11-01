@@ -27,9 +27,9 @@ export const STAGES_DATA = [
       glowColor: '#55ffdd'
     },
     enemyPool: [
-      { type: 'enemy_swamp', name: 'Monstro do Lodo', hp: 48, speed: 2.7, damage: 9, spriteKey: 'enemy_swamp' },
-      { type: 'enemy_spear', name: 'Guerreiro da Lança', hp: 40, speed: 3.3, damage: 10, spriteKey: 'enemy_spear' },
-      { type: 'enemy_fish', name: 'Peixe-Bagre Parrudo', hp: 60, speed: 2.5, damage: 13, spriteKey: 'enemy_fish' }
+      { type: 'enemy_swamp', name: 'Monstro do Lodo', hp: 48, speed: 2.7, damage: 9, spriteKey: 'enemy_swamp', scale: 1.0, shadowWidth: 48, width: 40 },
+      { type: 'enemy_spear', name: 'Guerreiro da Lança', hp: 40, speed: 3.3, damage: 10, spriteKey: 'enemy_spear', scale: 0.95, shadowWidth: 46, width: 38 },
+      { type: 'enemy_fish', name: 'Peixe-Bagre Parrudo', hp: 60, speed: 2.5, damage: 13, spriteKey: 'enemy_fish', scale: 1.1, shadowWidth: 60, width: 48 }
     ],
     chickenSpawns: [600, 1400, 2300, 2900]
   },
@@ -61,9 +61,9 @@ export const STAGES_DATA = [
       glowColor: '#a8ff78'
     },
     enemyPool: [
-      { type: 'enemy_goblin', name: 'Goblin da Picareta', hp: 44, speed: 3.4, damage: 10, spriteKey: 'enemy_goblin' },
-      { type: 'enemy_elf', name: 'Elfo das Adagas', hp: 48, speed: 3.8, damage: 11, spriteKey: 'enemy_elf' },
-      { type: 'enemy_walrus', name: 'Morsa Bárbaro', hp: 75, speed: 2.6, damage: 14, spriteKey: 'enemy_walrus' }
+      { type: 'enemy_goblin', name: 'Goblin da Picareta', hp: 44, speed: 3.4, damage: 10, spriteKey: 'enemy_goblin', scale: 0.9, shadowWidth: 42, width: 34 },
+      { type: 'enemy_elf', name: 'Elfo das Adagas', hp: 48, speed: 3.8, damage: 11, spriteKey: 'enemy_elf', scale: 1.0, shadowWidth: 48, width: 38 },
+      { type: 'enemy_walrus', name: 'Morsa Bárbaro', hp: 75, speed: 2.6, damage: 14, spriteKey: 'enemy_walrus', scale: 1.15, shadowWidth: 68, width: 52 }
     ],
     chickenSpawns: [700, 1500, 2400, 3100]
   },
@@ -95,9 +95,9 @@ export const STAGES_DATA = [
       glowColor: '#ffd000'
     },
     enemyPool: [
-      { type: 'thug_quick', name: 'Monge Renegado', hp: 48, speed: 3.6, damage: 10, spriteMod: 'nata_mod' },
-      { type: 'thug_medium', name: 'Guarda da Lagoa', hp: 60, speed: 2.8, damage: 12, spriteMod: 'dog_mod' },
-      { type: 'thug_heavy', name: 'Buda de Ferro', hp: 68, speed: 2.6, damage: 13, spriteMod: 'emerson_mod' }
+      { type: 'enemy_oni', name: 'Oni das Lâminas', hp: 48, speed: 3.7, damage: 11, spriteKey: 'enemy_oni', scale: 0.95, shadowWidth: 44, width: 36 },
+      { type: 'enemy_reptile', name: 'Ninja Réptil', hp: 56, speed: 3.3, damage: 12, spriteKey: 'enemy_reptile', scale: 1.0, shadowWidth: 48, width: 40 },
+      { type: 'enemy_kitsune', name: 'Lobo Shinobi', hp: 76, speed: 2.7, damage: 15, spriteKey: 'enemy_kitsune', scale: 1.15, shadowWidth: 66, width: 50 }
     ],
     chickenSpawns: [650, 1450, 2350, 3050]
   },
@@ -129,9 +129,9 @@ export const STAGES_DATA = [
       glowColor: '#ff66db'
     },
     enemyPool: [
-      { type: 'thug_quick', name: 'Ninja Cibernético', hp: 52, speed: 3.8, damage: 11, spriteMod: 'nata_mod' },
-      { type: 'thug_heavy', name: 'Ronin Blindado', hp: 72, speed: 2.6, damage: 14, spriteMod: 'andrey_mod' },
-      { type: 'thug_medium', name: 'Agente das Sombras', hp: 62, speed: 3.2, damage: 12, spriteMod: 'emerson_mod' }
+      { type: 'enemy_ninja', name: 'Garras da Noite', hp: 50, speed: 3.8, damage: 11, spriteKey: 'enemy_ninja', scale: 0.95, shadowWidth: 42, width: 36 },
+      { type: 'enemy_rat', name: 'Punk Roedor', hp: 60, speed: 3.4, damage: 12, spriteKey: 'enemy_rat', scale: 1.0, shadowWidth: 50, width: 42 },
+      { type: 'enemy_brute', name: 'Bruto Mutante', hp: 82, speed: 2.6, damage: 16, spriteKey: 'enemy_brute', scale: 1.15, shadowWidth: 68, width: 54 }
     ],
     chickenSpawns: [750, 1600, 2500, 3200]
   },
@@ -163,9 +163,9 @@ export const STAGES_DATA = [
       glowColor: '#ff7733'
     },
     enemyPool: [
-      { type: 'thug_heavy', name: 'Operário Enfurecido', hp: 76, speed: 2.7, damage: 15, spriteMod: 'andrey_mod' },
-      { type: 'thug_medium', name: 'Capataz de Ferro', hp: 66, speed: 3.1, damage: 13, spriteMod: 'dog_mod' },
-      { type: 'thug_quick', name: 'Soldador Louco', hp: 55, speed: 3.5, damage: 12, spriteMod: 'emerson_mod' }
+      { type: 'enemy_cyber_elf', name: 'Guerreiro de Plasma', hp: 56, speed: 3.9, damage: 12, spriteKey: 'enemy_cyber_elf', scale: 0.95, shadowWidth: 42, width: 36 },
+      { type: 'enemy_cyber_wolf', name: 'Lobo Biomecânico', hp: 68, speed: 3.5, damage: 14, spriteKey: 'enemy_cyber_wolf', scale: 1.05, shadowWidth: 54, width: 44 },
+      { type: 'enemy_mecha_gorilla', name: 'Mecha Símio a Vapor', hp: 92, speed: 2.6, damage: 18, spriteKey: 'enemy_mecha_gorilla', scale: 1.2, shadowWidth: 72, width: 58 }
     ],
     chickenSpawns: [800, 1650, 2550, 3250]
   },
@@ -197,9 +197,9 @@ export const STAGES_DATA = [
       glowColor: '#82e6ff'
     },
     enemyPool: [
-      { type: 'thug_quick', name: 'Cultista do Vento', hp: 58, speed: 3.9, damage: 13, spriteMod: 'emerson_mod' },
-      { type: 'thug_medium', name: 'Guardião Alado', hp: 70, speed: 3.2, damage: 14, spriteMod: 'nata_mod' },
-      { type: 'thug_heavy', name: 'Cruzado da Tempestade', hp: 80, speed: 2.8, damage: 16, spriteMod: 'andrey_mod' }
+      { type: 'enemy_swallow', name: 'Andorinha Veloz', hp: 54, speed: 4.1, damage: 12, spriteKey: 'enemy_swallow', scale: 0.95, shadowWidth: 40, width: 34 },
+      { type: 'enemy_toucan', name: 'Tucano Lutador', hp: 70, speed: 3.4, damage: 14, spriteKey: 'enemy_toucan', scale: 1.05, shadowWidth: 50, width: 42 },
+      { type: 'enemy_crane', name: 'Garça Tuiuiú', hp: 84, speed: 3.0, damage: 16, spriteKey: 'enemy_crane', scale: 1.12, shadowWidth: 56, width: 44 }
     ],
     chickenSpawns: [700, 1500, 2450, 3250]
   },

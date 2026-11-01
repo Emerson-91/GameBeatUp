@@ -1,0 +1,170 @@
+{
+  "enemy_rat": {
+    "idle": {
+      "w": 274,
+      "h": 273,
+      "ax": 0.4803,
+      "src": "assets/images/sprites/enemies/stage4/enemy_rat_idle.png"
+    },
+    "walk1": {
+      "w": 271,
+      "h": 270,
+      "ax": 0.4818,
+      "src": "assets/images/sprites/enemies/stage4/enemy_rat_walk1.png"
+    },
+    "crouch": {
+      "w": 259,
+      "h": 252,
+      "ax": 0.3793,
+      "src": "assets/images/sprites/enemies/stage4/enemy_rat_crouch.png"
+    },
+    "punch": {
+      "w": 266,
+      "h": 257,
+      "ax": 0.2973,
+      "src": "assets/images/sprites/enemies/stage4/enemy_rat_punch.png"
+    },
+    "fall": {
+      "w": 290,
+      "h": 227,
+      "ax": 0.5,
+      "src": "assets/images/sprites/enemies/stage4/enemy_rat_fall.png"
+    },
+    "walk2": {
+      "w": 271,
+      "h": 270,
+      "ax": 0.4818,
+      "src": "assets/images/sprites/enemies/stage4/enemy_rat_walk1.png"
+    },
+    "knockdown": {
+      "w": 290,
+      "h": 227,
+      "ax": 0.5,
+      "src": "assets/images/sprites/enemies/stage4/enemy_rat_fall.png"
+    },
+    "idle2": {
+      "w": 274,
+      "h": 273,
+      "ax": 0.4803,
+      "src": "assets/images/sprites/enemies/stage4/enemy_rat_idle.png"
+    },
+    "kick": {
+      "w": 266,
+      "h": 257,
+      "ax": 0.297,
+      "src": "assets/images/sprites/enemies/stage4/enemy_rat_punch.png"
+    }
+  },
+  "enemy_ninja": {
+    "idle": {
+      "w": 207,
+      "h": 220,
+      "ax": 0.3442,
+      "src": "assets/images/sprites/enemies/stage4/enemy_ninja_idle.png"
+    },
+    "walk1": {
+      "w": 193,
+      "h": 207,
+      "ax": 0.3542,
+      "src": "assets/images/sprites/enemies/stage4/enemy_ninja_walk1.png"
+    },
+    "crouch": {
+      "w": 161,
+      "h": 223,
+      "ax": 0.4654,
+      "src": "assets/images/sprites/enemies/stage4/enemy_ninja_crouch.png"
+    },
+    "punch": {
+      "w": 227,
+      "h": 217,
+      "ax": 0.3773,
+      "src": "assets/images/sprites/enemies/stage4/enemy_ninja_punch.png"
+    },
+    "fall": {
+      "w": 262,
+      "h": 221,
+      "ax": 0.5,
+      "src": "assets/images/sprites/enemies/stage4/enemy_ninja_fall.png"
+    },
+    "walk2": {
+      "w": 193,
+      "h": 207,
+      "ax": 0.3542,
+      "src": "assets/images/sprites/enemies/stage4/enemy_ninja_walk1.png"
+    },
+    "knockdown": {
+      "w": 262,
+      "h": 221,
+      "ax": 0.5,
+      "src": "assets/images/sprites/enemies/stage4/enemy_ninja_fall.png"
+    },
+    "idle2": {
+      "w": 207,
+      "h": 220,
+      "ax": 0.3442,
+      "src": "assets/images/sprites/enemies/stage4/enemy_ninja_idle.png"
+    },
+    "kick": {
+      "w": 227,
+      "h": 237,
+      "ax": 0.373,
+      "src": "assets/images/sprites/enemies/stage4/enemy_ninja_punch.png"
+    }
+  },
+  "enemy_brute": {
+    "idle": {
+      "w": 268,
+      "h": 297,
+      "ax": 0.4778,
+      "src": "assets/images/sprites/enemies/stage4/enemy_brute_idle.png"
+    },
+    "walk1": {
+      "w": 245,
+      "h": 291,
+      "ax": 0.4466,
+      "src": "assets/images/sprites/enemies/stage4/enemy_brute_walk1.png"
+    },
+    "crouch": {
+      "w": 205,
+      "h": 287,
+      "ax": 0.4233,
+      "src": "assets/images/sprites/enemies/stage4/enemy_brute_crouch.png"
+    },
+    "punch": {
+      "w": 268,
+      "h": 250,
+      "ax": 0.3344,
+      "src": "assets/images/sprites/enemies/stage4/enemy_brute_punch.png"
+    },
+    "fall": {
+      "w": 331,
+      "h": 249,
+      "ax": 0.5,
+      "src": "assets/images/sprites/enemies/stage4/enemy_brute_fall.png"
+    },
+    "walk2": {
+      "w": 245,
+      "h": 291,
+      "ax": 0.4466,
+      "src": "assets/images/sprites/enemies/stage4/enemy_brute_walk1.png"
+    },
+    "knockdown": {
+      "w": 331,
+      "h": 249,
+      "ax": 0.5,
+      "src": "assets/images/sprites/enemies/stage4/enemy_brute_fall.png"
+    },
+    "idle2": {
+      "w": 268,
+      "h": 297,
+      "ax": 0.4778,
+      "src": "assets/images/sprites/enemies/stage4/enemy_brute_idle.png"
+    },
+    "kick": {
+      "w": 268,
+      "h": 250,
+      "ax": 0.3391,
+      "src": "assets/images/sprites/enemies/stage4/enemy_brute_punch.png"
+    }
+  }
+}

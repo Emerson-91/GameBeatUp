@@ -1,0 +1,170 @@
+{
+  "enemy_cyber_wolf": {
+    "idle": {
+      "w": 258,
+      "h": 256,
+      "ax": 0.497,
+      "src": "assets/images/sprites/enemies/stage5/enemy_cyber_wolf_idle.png"
+    },
+    "walk1": {
+      "w": 257,
+      "h": 256,
+      "ax": 0.4905,
+      "src": "assets/images/sprites/enemies/stage5/enemy_cyber_wolf_walk1.png"
+    },
+    "crouch": {
+      "w": 267,
+      "h": 242,
+      "ax": 0.3766,
+      "src": "assets/images/sprites/enemies/stage5/enemy_cyber_wolf_crouch.png"
+    },
+    "punch": {
+      "w": 271,
+      "h": 243,
+      "ax": 0.3073,
+      "src": "assets/images/sprites/enemies/stage5/enemy_cyber_wolf_punch.png"
+    },
+    "fall": {
+      "w": 293,
+      "h": 233,
+      "ax": 0.5,
+      "src": "assets/images/sprites/enemies/stage5/enemy_cyber_wolf_fall.png"
+    },
+    "walk2": {
+      "w": 257,
+      "h": 256,
+      "ax": 0.4905,
+      "src": "assets/images/sprites/enemies/stage5/enemy_cyber_wolf_walk1.png"
+    },
+    "knockdown": {
+      "w": 293,
+      "h": 233,
+      "ax": 0.5,
+      "src": "assets/images/sprites/enemies/stage5/enemy_cyber_wolf_fall.png"
+    },
+    "idle2": {
+      "w": 258,
+      "h": 256,
+      "ax": 0.497,
+      "src": "assets/images/sprites/enemies/stage5/enemy_cyber_wolf_idle.png"
+    },
+    "kick": {
+      "w": 271,
+      "h": 243,
+      "ax": 0.3073,
+      "src": "assets/images/sprites/enemies/stage5/enemy_cyber_wolf_punch.png"
+    }
+  },
+  "enemy_cyber_elf": {
+    "idle": {
+      "w": 207,
+      "h": 202,
+      "ax": 0.3375,
+      "src": "assets/images/sprites/enemies/stage5/enemy_cyber_elf_idle.png"
+    },
+    "walk1": {
+      "w": 201,
+      "h": 201,
+      "ax": 0.3588,
+      "src": "assets/images/sprites/enemies/stage5/enemy_cyber_elf_walk1.png"
+    },
+    "crouch": {
+      "w": 167,
+      "h": 208,
+      "ax": 0.483,
+      "src": "assets/images/sprites/enemies/stage5/enemy_cyber_elf_crouch.png"
+    },
+    "punch": {
+      "w": 238,
+      "h": 199,
+      "ax": 0.3542,
+      "src": "assets/images/sprites/enemies/stage5/enemy_cyber_elf_punch.png"
+    },
+    "fall": {
+      "w": 258,
+      "h": 211,
+      "ax": 0.5,
+      "src": "assets/images/sprites/enemies/stage5/enemy_cyber_elf_fall.png"
+    },
+    "walk2": {
+      "w": 201,
+      "h": 201,
+      "ax": 0.3588,
+      "src": "assets/images/sprites/enemies/stage5/enemy_cyber_elf_walk1.png"
+    },
+    "knockdown": {
+      "w": 258,
+      "h": 211,
+      "ax": 0.5,
+      "src": "assets/images/sprites/enemies/stage5/enemy_cyber_elf_fall.png"
+    },
+    "idle2": {
+      "w": 207,
+      "h": 202,
+      "ax": 0.3375,
+      "src": "assets/images/sprites/enemies/stage5/enemy_cyber_elf_idle.png"
+    },
+    "kick": {
+      "w": 238,
+      "h": 199,
+      "ax": 0.3542,
+      "src": "assets/images/sprites/enemies/stage5/enemy_cyber_elf_punch.png"
+    }
+  },
+  "enemy_mecha_gorilla": {
+    "idle": {
+      "w": 281,
+      "h": 299,
+      "ax": 0.4473,
+      "src": "assets/images/sprites/enemies/stage5/enemy_mecha_gorilla_idle.png"
+    },
+    "walk1": {
+      "w": 278,
+      "h": 277,
+      "ax": 0.5167,
+      "src": "assets/images/sprites/enemies/stage5/enemy_mecha_gorilla_walk1.png"
+    },
+    "crouch": {
+      "w": 239,
+      "h": 299,
+      "ax": 0.4891,
+      "src": "assets/images/sprites/enemies/stage5/enemy_mecha_gorilla_crouch.png"
+    },
+    "punch": {
+      "w": 271,
+      "h": 239,
+      "ax": 0.3545,
+      "src": "assets/images/sprites/enemies/stage5/enemy_mecha_gorilla_punch.png"
+    },
+    "fall": {
+      "w": 328,
+      "h": 243,
+      "ax": 0.5,
+      "src": "assets/images/sprites/enemies/stage5/enemy_mecha_gorilla_fall.png"
+    },
+    "walk2": {
+      "w": 278,
+      "h": 277,
+      "ax": 0.5167,
+      "src": "assets/images/sprites/enemies/stage5/enemy_mecha_gorilla_walk1.png"
+    },
+    "knockdown": {
+      "w": 328,
+      "h": 243,
+      "ax": 0.5,
+      "src": "assets/images/sprites/enemies/stage5/enemy_mecha_gorilla_fall.png"
+    },
+    "idle2": {
+      "w": 281,
+      "h": 299,
+      "ax": 0.4473,
+      "src": "assets/images/sprites/enemies/stage5/enemy_mecha_gorilla_idle.png"
+    },
+    "kick": {
+      "w": 271,
+      "h": 239,
+      "ax": 0.3545,
+      "src": "assets/images/sprites/enemies/stage5/enemy_mecha_gorilla_punch.png"
+    }
+  }
+}

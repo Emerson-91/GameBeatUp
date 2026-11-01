@@ -304,6 +304,39 @@
       this.playTone(300, 150, 0.4, "sine", 0.2);
       this.playNoise(0.3, 0.3, 2e3);
     }
+    // Emerson Seismic Ground Pound & Screen Tremor SFX
+    playSeismicImpact() {
+      if (this.isMuted) return;
+      this.init();
+      this.playTone(90, 25, 0.65, "sawtooth", 0.55);
+      this.playTone(70, 20, 0.8, "sine", 0.65);
+      this.playNoise(0.55, 0.55, 350);
+      setTimeout(() => {
+        this.playTone(550, 100, 0.3, "sawtooth", 0.3);
+        this.playNoise(0.25, 0.4, 2800);
+      }, 80);
+    }
+    // AndreyBot Aerial Summon & Laser SFX
+    playBotSummon() {
+      if (this.isMuted) return;
+      this.init();
+      [520, 780, 1040, 1300].forEach((freq, i) => {
+        setTimeout(() => {
+          this.playTone(freq, freq * 1.15, 0.08, "sawtooth", 0.22);
+        }, i * 55);
+      });
+    }
+    playLaserDrop() {
+      if (this.isMuted) return;
+      this.init();
+      this.playTone(980, 240, 0.12, "sawtooth", 0.16);
+    }
+    playLaserHit() {
+      if (this.isMuted) return;
+      this.init();
+      this.playTone(380, 90, 0.14, "square", 0.22);
+      this.playNoise(0.12, 0.25, 1400);
+    }
     // Chicken Heal SFX (Magic arcade recovery arpeggio)
     playChickenHeal() {
       if (this.isMuted) return;
@@ -606,10 +639,28 @@
         "src": "assets/images/sprites/characters/emerson_kick1.png"
       },
       "special": {
-        "w": 464,
-        "h": 307,
-        "ax": 0.1652,
-        "src": "assets/images/sprites/characters/emerson_special.png"
+        "w": 227,
+        "h": 209,
+        "ax": 0.4894,
+        "src": "assets/images/sprites/characters/emerson_special2.png"
+      },
+      "special1": {
+        "w": 220,
+        "h": 286,
+        "ax": 0.3195,
+        "src": "assets/images/sprites/characters/emerson_special1.png"
+      },
+      "special2": {
+        "w": 227,
+        "h": 209,
+        "ax": 0.4894,
+        "src": "assets/images/sprites/characters/emerson_special2.png"
+      },
+      "special3": {
+        "w": 249,
+        "h": 262,
+        "ax": 0.5235,
+        "src": "assets/images/sprites/characters/emerson_special3.png"
       },
       "crouch": {
         "w": 169,
@@ -1906,22 +1957,82 @@
         "src": "assets/images/sprites/characters/andrey_idle2.png"
       },
       "punch": {
-        "w": 316,
-        "h": 299,
-        "ax": 0.38,
+        "w": 268,
+        "h": 313,
+        "ax": 0.3729,
         "src": "assets/images/sprites/characters/andrey_punch.png"
       },
+      "punch1": {
+        "w": 268,
+        "h": 313,
+        "ax": 0.3729,
+        "src": "assets/images/sprites/characters/andrey_punch1.png"
+      },
+      "punch2": {
+        "w": 288,
+        "h": 280,
+        "ax": 0.3177,
+        "src": "assets/images/sprites/characters/andrey_punch2.png"
+      },
+      "punch3": {
+        "w": 381,
+        "h": 304,
+        "ax": 0.2224,
+        "src": "assets/images/sprites/characters/andrey_punch3.png"
+      },
       "kick": {
-        "w": 295,
-        "h": 350,
-        "ax": 0.36,
+        "w": 271,
+        "h": 320,
+        "ax": 0.4184,
         "src": "assets/images/sprites/characters/andrey_kick.png"
       },
+      "kick1": {
+        "w": 271,
+        "h": 320,
+        "ax": 0.4184,
+        "src": "assets/images/sprites/characters/andrey_kick1.png"
+      },
+      "kick2": {
+        "w": 279,
+        "h": 305,
+        "ax": 0.3886,
+        "src": "assets/images/sprites/characters/andrey_kick2.png"
+      },
+      "kick3": {
+        "w": 283,
+        "h": 310,
+        "ax": 0.4738,
+        "src": "assets/images/sprites/characters/andrey_kick3.png"
+      },
       "special": {
-        "w": 316,
-        "h": 299,
-        "ax": 0.38,
-        "src": "assets/images/sprites/characters/andrey_special.png"
+        "w": 187,
+        "h": 315,
+        "ax": 0.4408,
+        "src": "assets/images/sprites/characters/andrey_special2.png"
+      },
+      "special1": {
+        "w": 201,
+        "h": 309,
+        "ax": 0.4185,
+        "src": "assets/images/sprites/characters/andrey_special1.png"
+      },
+      "special2": {
+        "w": 187,
+        "h": 315,
+        "ax": 0.4408,
+        "src": "assets/images/sprites/characters/andrey_special2.png"
+      },
+      "special3": {
+        "w": 206,
+        "h": 341,
+        "ax": 0.3211,
+        "src": "assets/images/sprites/characters/andrey_special3.png"
+      },
+      "bot": {
+        "w": 240,
+        "h": 192,
+        "ax": 0.5,
+        "src": "assets/images/sprites/characters/andrey_bot.png"
       },
       "crouch": {
         "w": 228,
@@ -2006,67 +2117,31 @@
         "h": 319,
         "ax": 0.4809,
         "src": "assets/images/sprites/characters/andrey_victory5.png"
-      },
-      "punch1": {
-        "w": 316,
-        "h": 299,
-        "ax": 0.38,
-        "src": "assets/images/sprites/characters/andrey_punch.png"
-      },
-      "punch2": {
-        "w": 316,
-        "h": 299,
-        "ax": 0.38,
-        "src": "assets/images/sprites/characters/andrey_special.png"
-      },
-      "punch3": {
-        "w": 316,
-        "h": 299,
-        "ax": 0.38,
-        "src": "assets/images/sprites/characters/andrey_special.png"
-      },
-      "kick1": {
-        "w": 295,
-        "h": 350,
-        "ax": 0.36,
-        "src": "assets/images/sprites/characters/andrey_kick.png"
-      },
-      "kick2": {
-        "w": 285,
-        "h": 380,
-        "ax": 0.48,
-        "src": "assets/images/sprites/characters/andrey_jump.png"
-      },
-      "kick3": {
-        "w": 285,
-        "h": 380,
-        "ax": 0.48,
-        "src": "assets/images/sprites/characters/andrey_fly.png"
       }
     },
     "enemy_swamp": {
       "idle": {
         "w": 250,
         "h": 270,
-        "ax": 0.5,
+        "ax": 0.3686,
         "src": "assets/images/sprites/enemies/stage1/enemy_swamp_idle.png"
       },
       "walk1": {
         "w": 215,
         "h": 270,
-        "ax": 0.5,
+        "ax": 0.3561,
         "src": "assets/images/sprites/enemies/stage1/enemy_swamp_walk1.png"
       },
       "punch": {
         "w": 230,
         "h": 270,
-        "ax": 0.5,
+        "ax": 0.3687,
         "src": "assets/images/sprites/enemies/stage1/enemy_swamp_punch.png"
       },
       "kick": {
         "w": 337,
         "h": 270,
-        "ax": 0.5,
+        "ax": 0.3052,
         "src": "assets/images/sprites/enemies/stage1/enemy_swamp_kick.png"
       },
       "fall": {
@@ -2078,7 +2153,7 @@
       "walk2": {
         "w": 215,
         "h": 270,
-        "ax": 0.5,
+        "ax": 0.3561,
         "src": "assets/images/sprites/enemies/stage1/enemy_swamp_walk1.png"
       },
       "knockdown": {
@@ -2090,7 +2165,7 @@
       "idle2": {
         "w": 250,
         "h": 270,
-        "ax": 0.5,
+        "ax": 0.3686,
         "src": "assets/images/sprites/enemies/stage1/enemy_swamp_idle.png"
       },
       "crouch": {
@@ -2104,25 +2179,25 @@
       "idle": {
         "w": 283,
         "h": 270,
-        "ax": 0.5,
+        "ax": 0.5503,
         "src": "assets/images/sprites/enemies/stage1/enemy_spear_idle.png"
       },
       "walk1": {
         "w": 295,
         "h": 270,
-        "ax": 0.5,
+        "ax": 0.6508,
         "src": "assets/images/sprites/enemies/stage1/enemy_spear_walk1.png"
       },
       "crouch": {
         "w": 293,
         "h": 270,
-        "ax": 0.5,
+        "ax": 0.4177,
         "src": "assets/images/sprites/enemies/stage1/enemy_spear_crouch.png"
       },
       "punch": {
         "w": 440,
         "h": 270,
-        "ax": 0.5,
+        "ax": 0.2922,
         "src": "assets/images/sprites/enemies/stage1/enemy_spear_punch.png"
       },
       "fall": {
@@ -2134,7 +2209,7 @@
       "walk2": {
         "w": 295,
         "h": 270,
-        "ax": 0.5,
+        "ax": 0.6508,
         "src": "assets/images/sprites/enemies/stage1/enemy_spear_walk1.png"
       },
       "knockdown": {
@@ -2146,7 +2221,7 @@
       "idle2": {
         "w": 283,
         "h": 270,
-        "ax": 0.5,
+        "ax": 0.5503,
         "src": "assets/images/sprites/enemies/stage1/enemy_spear_idle.png"
       },
       "kick": {
@@ -2160,25 +2235,25 @@
       "idle": {
         "w": 234,
         "h": 270,
-        "ax": 0.5,
+        "ax": 0.4771,
         "src": "assets/images/sprites/enemies/stage1/enemy_fish_idle.png"
       },
       "walk1": {
         "w": 246,
         "h": 270,
-        "ax": 0.5,
+        "ax": 0.3702,
         "src": "assets/images/sprites/enemies/stage1/enemy_fish_walk1.png"
       },
       "crouch": {
         "w": 250,
         "h": 270,
-        "ax": 0.5,
+        "ax": 0.4595,
         "src": "assets/images/sprites/enemies/stage1/enemy_fish_crouch.png"
       },
       "punch": {
         "w": 304,
         "h": 270,
-        "ax": 0.5,
+        "ax": 0.2954,
         "src": "assets/images/sprites/enemies/stage1/enemy_fish_punch.png"
       },
       "fall": {
@@ -2190,7 +2265,7 @@
       "walk2": {
         "w": 246,
         "h": 270,
-        "ax": 0.5,
+        "ax": 0.3702,
         "src": "assets/images/sprites/enemies/stage1/enemy_fish_walk1.png"
       },
       "knockdown": {
@@ -2202,7 +2277,7 @@
       "idle2": {
         "w": 234,
         "h": 270,
-        "ax": 0.5,
+        "ax": 0.4771,
         "src": "assets/images/sprites/enemies/stage1/enemy_fish_idle.png"
       },
       "kick": {
@@ -2214,170 +2289,842 @@
     },
     "enemy_goblin": {
       "idle": {
-        "w": 200,
-        "h": 220,
-        "ax": 0.3806,
+        "w": 210,
+        "h": 231,
+        "ax": 0.3549,
         "src": "assets/images/sprites/enemies/stage2/enemy_goblin_idle.png"
       },
       "walk1": {
-        "w": 187,
-        "h": 211,
-        "ax": 0.4002,
+        "w": 199,
+        "h": 222,
+        "ax": 0.3469,
         "src": "assets/images/sprites/enemies/stage2/enemy_goblin_walk1.png"
       },
       "punch": {
-        "w": 184,
-        "h": 226,
-        "ax": 0.5783,
+        "w": 194,
+        "h": 237,
+        "ax": 0.5477,
         "src": "assets/images/sprites/enemies/stage2/enemy_goblin_punch.png"
       },
       "kick": {
-        "w": 282,
-        "h": 216,
-        "ax": 0.4698,
+        "w": 294,
+        "h": 226,
+        "ax": 0.4102,
         "src": "assets/images/sprites/enemies/stage2/enemy_goblin_kick.png"
       },
       "fall": {
-        "w": 224,
-        "h": 185,
-        "ax": 0.5259,
+        "w": 235,
+        "h": 196,
+        "ax": 0.5,
         "src": "assets/images/sprites/enemies/stage2/enemy_goblin_fall.png"
       },
       "walk2": {
-        "w": 187,
-        "h": 211,
-        "ax": 0.4002,
+        "w": 199,
+        "h": 222,
+        "ax": 0.3469,
         "src": "assets/images/sprites/enemies/stage2/enemy_goblin_walk1.png"
       },
       "knockdown": {
-        "w": 224,
-        "h": 185,
-        "ax": 0.5259,
+        "w": 235,
+        "h": 196,
+        "ax": 0.5,
         "src": "assets/images/sprites/enemies/stage2/enemy_goblin_fall.png"
       },
       "idle2": {
-        "w": 200,
-        "h": 220,
-        "ax": 0.3806,
+        "w": 210,
+        "h": 231,
+        "ax": 0.3549,
         "src": "assets/images/sprites/enemies/stage2/enemy_goblin_idle.png"
       },
       "crouch": {
-        "w": 200,
-        "h": 220,
-        "ax": 0.3806,
+        "w": 210,
+        "h": 231,
+        "ax": 0.3831,
         "src": "assets/images/sprites/enemies/stage2/enemy_goblin_idle.png"
       }
     },
     "enemy_elf": {
       "idle": {
-        "w": 220,
-        "h": 250,
-        "ax": 0.4655,
+        "w": 231,
+        "h": 262,
+        "ax": 0.425,
         "src": "assets/images/sprites/enemies/stage2/enemy_elf_idle.png"
       },
       "walk1": {
-        "w": 207,
-        "h": 220,
-        "ax": 0.4578,
+        "w": 219,
+        "h": 231,
+        "ax": 0.4024,
         "src": "assets/images/sprites/enemies/stage2/enemy_elf_walk1.png"
       },
       "crouch": {
-        "w": 225,
-        "h": 243,
-        "ax": 0.4859,
+        "w": 236,
+        "h": 255,
+        "ax": 0.4408,
         "src": "assets/images/sprites/enemies/stage2/enemy_elf_crouch.png"
       },
       "punch": {
-        "w": 337,
-        "h": 245,
-        "ax": 0.3353,
+        "w": 350,
+        "h": 257,
+        "ax": 0.2923,
         "src": "assets/images/sprites/enemies/stage2/enemy_elf_punch.png"
       },
       "fall": {
-        "w": 250,
-        "h": 232,
-        "ax": 0.5475,
+        "w": 264,
+        "h": 248,
+        "ax": 0.5,
         "src": "assets/images/sprites/enemies/stage2/enemy_elf_fall.png"
       },
       "walk2": {
-        "w": 207,
-        "h": 220,
-        "ax": 0.4578,
+        "w": 219,
+        "h": 231,
+        "ax": 0.4024,
         "src": "assets/images/sprites/enemies/stage2/enemy_elf_walk1.png"
       },
       "knockdown": {
-        "w": 250,
-        "h": 232,
-        "ax": 0.5475,
+        "w": 264,
+        "h": 248,
+        "ax": 0.5,
         "src": "assets/images/sprites/enemies/stage2/enemy_elf_fall.png"
       },
       "idle2": {
-        "w": 220,
-        "h": 250,
-        "ax": 0.4655,
+        "w": 231,
+        "h": 262,
+        "ax": 0.425,
         "src": "assets/images/sprites/enemies/stage2/enemy_elf_idle.png"
       },
       "kick": {
-        "w": 337,
-        "h": 245,
-        "ax": 0.3353,
+        "w": 350,
+        "h": 257,
+        "ax": 0.3374,
         "src": "assets/images/sprites/enemies/stage2/enemy_elf_punch.png"
       }
     },
     "enemy_walrus": {
       "idle": {
-        "w": 266,
-        "h": 320,
-        "ax": 0.4711,
+        "w": 289,
+        "h": 346,
+        "ax": 0.4703,
         "src": "assets/images/sprites/enemies/stage2/enemy_walrus_idle.png"
       },
       "walk1": {
-        "w": 245,
-        "h": 311,
-        "ax": 0.4613,
+        "w": 266,
+        "h": 337,
+        "ax": 0.4339,
         "src": "assets/images/sprites/enemies/stage2/enemy_walrus_walk1.png"
       },
       "crouch": {
-        "w": 235,
-        "h": 308,
-        "ax": 0.4772,
+        "w": 258,
+        "h": 334,
+        "ax": 0.4551,
         "src": "assets/images/sprites/enemies/stage2/enemy_walrus_crouch.png"
       },
       "punch": {
-        "w": 306,
-        "h": 290,
-        "ax": 0.3795,
+        "w": 332,
+        "h": 314,
+        "ax": 0.3691,
         "src": "assets/images/sprites/enemies/stage2/enemy_walrus_punch.png"
       },
       "fall": {
-        "w": 341,
-        "h": 320,
-        "ax": 0.5123,
+        "w": 369,
+        "h": 313,
+        "ax": 0.5,
         "src": "assets/images/sprites/enemies/stage2/enemy_walrus_fall.png"
       },
       "walk2": {
-        "w": 245,
-        "h": 311,
-        "ax": 0.4613,
+        "w": 266,
+        "h": 337,
+        "ax": 0.4339,
         "src": "assets/images/sprites/enemies/stage2/enemy_walrus_walk1.png"
       },
       "knockdown": {
-        "w": 341,
-        "h": 320,
-        "ax": 0.5123,
+        "w": 369,
+        "h": 313,
+        "ax": 0.5,
         "src": "assets/images/sprites/enemies/stage2/enemy_walrus_fall.png"
       },
       "idle2": {
-        "w": 266,
-        "h": 320,
-        "ax": 0.4711,
+        "w": 289,
+        "h": 346,
+        "ax": 0.4703,
         "src": "assets/images/sprites/enemies/stage2/enemy_walrus_idle.png"
       },
       "kick": {
-        "w": 306,
-        "h": 290,
-        "ax": 0.3795,
+        "w": 332,
+        "h": 314,
+        "ax": 0.3814,
         "src": "assets/images/sprites/enemies/stage2/enemy_walrus_punch.png"
+      }
+    },
+    "enemy_reptile": {
+      "idle": {
+        "w": 222,
+        "h": 237,
+        "ax": 0.6117,
+        "src": "assets/images/sprites/enemies/stage3/enemy_reptile_idle.png"
+      },
+      "walk1": {
+        "w": 231,
+        "h": 234,
+        "ax": 0.5802,
+        "src": "assets/images/sprites/enemies/stage3/enemy_reptile_walk1.png"
+      },
+      "crouch": {
+        "w": 246,
+        "h": 260,
+        "ax": 0.5132,
+        "src": "assets/images/sprites/enemies/stage3/enemy_reptile_crouch.png"
+      },
+      "punch": {
+        "w": 358,
+        "h": 214,
+        "ax": 0.4442,
+        "src": "assets/images/sprites/enemies/stage3/enemy_reptile_punch.png"
+      },
+      "fall": {
+        "w": 290,
+        "h": 196,
+        "ax": 0.5,
+        "src": "assets/images/sprites/enemies/stage3/enemy_reptile_fall.png"
+      },
+      "walk2": {
+        "w": 231,
+        "h": 234,
+        "ax": 0.5802,
+        "src": "assets/images/sprites/enemies/stage3/enemy_reptile_walk1.png"
+      },
+      "knockdown": {
+        "w": 290,
+        "h": 196,
+        "ax": 0.5,
+        "src": "assets/images/sprites/enemies/stage3/enemy_reptile_fall.png"
+      },
+      "idle2": {
+        "w": 222,
+        "h": 237,
+        "ax": 0.6117,
+        "src": "assets/images/sprites/enemies/stage3/enemy_reptile_idle.png"
+      },
+      "kick": {
+        "w": 358,
+        "h": 214,
+        "ax": 0.4316,
+        "src": "assets/images/sprites/enemies/stage3/enemy_reptile_punch.png"
+      }
+    },
+    "enemy_oni": {
+      "idle": {
+        "w": 212,
+        "h": 214,
+        "ax": 0.8005,
+        "src": "assets/images/sprites/enemies/stage3/enemy_oni_idle.png"
+      },
+      "walk1": {
+        "w": 222,
+        "h": 213,
+        "ax": 0.5624,
+        "src": "assets/images/sprites/enemies/stage3/enemy_oni_walk1.png"
+      },
+      "crouch": {
+        "w": 231,
+        "h": 219,
+        "ax": 0.3477,
+        "src": "assets/images/sprites/enemies/stage3/enemy_oni_crouch.png"
+      },
+      "punch": {
+        "w": 262,
+        "h": 202,
+        "ax": 0.3323,
+        "src": "assets/images/sprites/enemies/stage3/enemy_oni_punch.png"
+      },
+      "fall": {
+        "w": 249,
+        "h": 207,
+        "ax": 0.5,
+        "src": "assets/images/sprites/enemies/stage3/enemy_oni_fall.png"
+      },
+      "walk2": {
+        "w": 222,
+        "h": 213,
+        "ax": 0.5624,
+        "src": "assets/images/sprites/enemies/stage3/enemy_oni_walk1.png"
+      },
+      "knockdown": {
+        "w": 249,
+        "h": 207,
+        "ax": 0.5,
+        "src": "assets/images/sprites/enemies/stage3/enemy_oni_fall.png"
+      },
+      "idle2": {
+        "w": 212,
+        "h": 214,
+        "ax": 0.8005,
+        "src": "assets/images/sprites/enemies/stage3/enemy_oni_idle.png"
+      },
+      "kick": {
+        "w": 262,
+        "h": 202,
+        "ax": 0.4528,
+        "src": "assets/images/sprites/enemies/stage3/enemy_oni_punch.png"
+      }
+    },
+    "enemy_kitsune": {
+      "idle": {
+        "w": 250,
+        "h": 261,
+        "ax": 0.5821,
+        "src": "assets/images/sprites/enemies/stage3/enemy_kitsune_idle.png"
+      },
+      "walk1": {
+        "w": 272,
+        "h": 256,
+        "ax": 0.5954,
+        "src": "assets/images/sprites/enemies/stage3/enemy_kitsune_walk1.png"
+      },
+      "crouch": {
+        "w": 280,
+        "h": 261,
+        "ax": 0.4952,
+        "src": "assets/images/sprites/enemies/stage3/enemy_kitsune_crouch.png"
+      },
+      "punch": {
+        "w": 333,
+        "h": 232,
+        "ax": 0.3106,
+        "src": "assets/images/sprites/enemies/stage3/enemy_kitsune_punch.png"
+      },
+      "fall": {
+        "w": 261,
+        "h": 236,
+        "ax": 0.5,
+        "src": "assets/images/sprites/enemies/stage3/enemy_kitsune_fall.png"
+      },
+      "walk2": {
+        "w": 272,
+        "h": 256,
+        "ax": 0.5954,
+        "src": "assets/images/sprites/enemies/stage3/enemy_kitsune_walk1.png"
+      },
+      "knockdown": {
+        "w": 261,
+        "h": 236,
+        "ax": 0.5,
+        "src": "assets/images/sprites/enemies/stage3/enemy_kitsune_fall.png"
+      },
+      "idle2": {
+        "w": 250,
+        "h": 261,
+        "ax": 0.5821,
+        "src": "assets/images/sprites/enemies/stage3/enemy_kitsune_idle.png"
+      },
+      "kick": {
+        "w": 333,
+        "h": 232,
+        "ax": 0.3453,
+        "src": "assets/images/sprites/enemies/stage3/enemy_kitsune_punch.png"
+      }
+    },
+    "enemy_rat": {
+      "idle": {
+        "w": 274,
+        "h": 273,
+        "ax": 0.4803,
+        "src": "assets/images/sprites/enemies/stage4/enemy_rat_idle.png"
+      },
+      "walk1": {
+        "w": 271,
+        "h": 270,
+        "ax": 0.4818,
+        "src": "assets/images/sprites/enemies/stage4/enemy_rat_walk1.png"
+      },
+      "crouch": {
+        "w": 259,
+        "h": 252,
+        "ax": 0.3793,
+        "src": "assets/images/sprites/enemies/stage4/enemy_rat_crouch.png"
+      },
+      "punch": {
+        "w": 266,
+        "h": 257,
+        "ax": 0.2973,
+        "src": "assets/images/sprites/enemies/stage4/enemy_rat_punch.png"
+      },
+      "fall": {
+        "w": 290,
+        "h": 227,
+        "ax": 0.5,
+        "src": "assets/images/sprites/enemies/stage4/enemy_rat_fall.png"
+      },
+      "walk2": {
+        "w": 271,
+        "h": 270,
+        "ax": 0.4818,
+        "src": "assets/images/sprites/enemies/stage4/enemy_rat_walk1.png"
+      },
+      "knockdown": {
+        "w": 290,
+        "h": 227,
+        "ax": 0.5,
+        "src": "assets/images/sprites/enemies/stage4/enemy_rat_fall.png"
+      },
+      "idle2": {
+        "w": 274,
+        "h": 273,
+        "ax": 0.4803,
+        "src": "assets/images/sprites/enemies/stage4/enemy_rat_idle.png"
+      },
+      "kick": {
+        "w": 266,
+        "h": 257,
+        "ax": 0.297,
+        "src": "assets/images/sprites/enemies/stage4/enemy_rat_punch.png"
+      }
+    },
+    "enemy_ninja": {
+      "idle": {
+        "w": 207,
+        "h": 220,
+        "ax": 0.3442,
+        "src": "assets/images/sprites/enemies/stage4/enemy_ninja_idle.png"
+      },
+      "walk1": {
+        "w": 193,
+        "h": 207,
+        "ax": 0.3542,
+        "src": "assets/images/sprites/enemies/stage4/enemy_ninja_walk1.png"
+      },
+      "crouch": {
+        "w": 161,
+        "h": 223,
+        "ax": 0.4654,
+        "src": "assets/images/sprites/enemies/stage4/enemy_ninja_crouch.png"
+      },
+      "punch": {
+        "w": 227,
+        "h": 217,
+        "ax": 0.3773,
+        "src": "assets/images/sprites/enemies/stage4/enemy_ninja_punch.png"
+      },
+      "fall": {
+        "w": 262,
+        "h": 221,
+        "ax": 0.5,
+        "src": "assets/images/sprites/enemies/stage4/enemy_ninja_fall.png"
+      },
+      "walk2": {
+        "w": 193,
+        "h": 207,
+        "ax": 0.3542,
+        "src": "assets/images/sprites/enemies/stage4/enemy_ninja_walk1.png"
+      },
+      "knockdown": {
+        "w": 262,
+        "h": 221,
+        "ax": 0.5,
+        "src": "assets/images/sprites/enemies/stage4/enemy_ninja_fall.png"
+      },
+      "idle2": {
+        "w": 207,
+        "h": 220,
+        "ax": 0.3442,
+        "src": "assets/images/sprites/enemies/stage4/enemy_ninja_idle.png"
+      },
+      "kick": {
+        "w": 227,
+        "h": 237,
+        "ax": 0.373,
+        "src": "assets/images/sprites/enemies/stage4/enemy_ninja_punch.png"
+      }
+    },
+    "enemy_brute": {
+      "idle": {
+        "w": 268,
+        "h": 297,
+        "ax": 0.4778,
+        "src": "assets/images/sprites/enemies/stage4/enemy_brute_idle.png"
+      },
+      "walk1": {
+        "w": 245,
+        "h": 291,
+        "ax": 0.4466,
+        "src": "assets/images/sprites/enemies/stage4/enemy_brute_walk1.png"
+      },
+      "crouch": {
+        "w": 205,
+        "h": 287,
+        "ax": 0.4233,
+        "src": "assets/images/sprites/enemies/stage4/enemy_brute_crouch.png"
+      },
+      "punch": {
+        "w": 268,
+        "h": 250,
+        "ax": 0.3344,
+        "src": "assets/images/sprites/enemies/stage4/enemy_brute_punch.png"
+      },
+      "fall": {
+        "w": 331,
+        "h": 249,
+        "ax": 0.5,
+        "src": "assets/images/sprites/enemies/stage4/enemy_brute_fall.png"
+      },
+      "walk2": {
+        "w": 245,
+        "h": 291,
+        "ax": 0.4466,
+        "src": "assets/images/sprites/enemies/stage4/enemy_brute_walk1.png"
+      },
+      "knockdown": {
+        "w": 331,
+        "h": 249,
+        "ax": 0.5,
+        "src": "assets/images/sprites/enemies/stage4/enemy_brute_fall.png"
+      },
+      "idle2": {
+        "w": 268,
+        "h": 297,
+        "ax": 0.4778,
+        "src": "assets/images/sprites/enemies/stage4/enemy_brute_idle.png"
+      },
+      "kick": {
+        "w": 268,
+        "h": 250,
+        "ax": 0.3391,
+        "src": "assets/images/sprites/enemies/stage4/enemy_brute_punch.png"
+      }
+    },
+    "enemy_cyber_wolf": {
+      "idle": {
+        "w": 258,
+        "h": 256,
+        "ax": 0.497,
+        "src": "assets/images/sprites/enemies/stage5/enemy_cyber_wolf_idle.png"
+      },
+      "walk1": {
+        "w": 257,
+        "h": 256,
+        "ax": 0.4905,
+        "src": "assets/images/sprites/enemies/stage5/enemy_cyber_wolf_walk1.png"
+      },
+      "crouch": {
+        "w": 267,
+        "h": 242,
+        "ax": 0.3766,
+        "src": "assets/images/sprites/enemies/stage5/enemy_cyber_wolf_crouch.png"
+      },
+      "punch": {
+        "w": 271,
+        "h": 243,
+        "ax": 0.3073,
+        "src": "assets/images/sprites/enemies/stage5/enemy_cyber_wolf_punch.png"
+      },
+      "fall": {
+        "w": 293,
+        "h": 233,
+        "ax": 0.5,
+        "src": "assets/images/sprites/enemies/stage5/enemy_cyber_wolf_fall.png"
+      },
+      "walk2": {
+        "w": 257,
+        "h": 256,
+        "ax": 0.4905,
+        "src": "assets/images/sprites/enemies/stage5/enemy_cyber_wolf_walk1.png"
+      },
+      "knockdown": {
+        "w": 293,
+        "h": 233,
+        "ax": 0.5,
+        "src": "assets/images/sprites/enemies/stage5/enemy_cyber_wolf_fall.png"
+      },
+      "idle2": {
+        "w": 258,
+        "h": 256,
+        "ax": 0.497,
+        "src": "assets/images/sprites/enemies/stage5/enemy_cyber_wolf_idle.png"
+      },
+      "kick": {
+        "w": 271,
+        "h": 243,
+        "ax": 0.3073,
+        "src": "assets/images/sprites/enemies/stage5/enemy_cyber_wolf_punch.png"
+      }
+    },
+    "enemy_cyber_elf": {
+      "idle": {
+        "w": 207,
+        "h": 202,
+        "ax": 0.3375,
+        "src": "assets/images/sprites/enemies/stage5/enemy_cyber_elf_idle.png"
+      },
+      "walk1": {
+        "w": 201,
+        "h": 201,
+        "ax": 0.3588,
+        "src": "assets/images/sprites/enemies/stage5/enemy_cyber_elf_walk1.png"
+      },
+      "crouch": {
+        "w": 167,
+        "h": 208,
+        "ax": 0.483,
+        "src": "assets/images/sprites/enemies/stage5/enemy_cyber_elf_crouch.png"
+      },
+      "punch": {
+        "w": 238,
+        "h": 199,
+        "ax": 0.3542,
+        "src": "assets/images/sprites/enemies/stage5/enemy_cyber_elf_punch.png"
+      },
+      "fall": {
+        "w": 258,
+        "h": 211,
+        "ax": 0.5,
+        "src": "assets/images/sprites/enemies/stage5/enemy_cyber_elf_fall.png"
+      },
+      "walk2": {
+        "w": 201,
+        "h": 201,
+        "ax": 0.3588,
+        "src": "assets/images/sprites/enemies/stage5/enemy_cyber_elf_walk1.png"
+      },
+      "knockdown": {
+        "w": 258,
+        "h": 211,
+        "ax": 0.5,
+        "src": "assets/images/sprites/enemies/stage5/enemy_cyber_elf_fall.png"
+      },
+      "idle2": {
+        "w": 207,
+        "h": 202,
+        "ax": 0.3375,
+        "src": "assets/images/sprites/enemies/stage5/enemy_cyber_elf_idle.png"
+      },
+      "kick": {
+        "w": 238,
+        "h": 199,
+        "ax": 0.3542,
+        "src": "assets/images/sprites/enemies/stage5/enemy_cyber_elf_punch.png"
+      }
+    },
+    "enemy_mecha_gorilla": {
+      "idle": {
+        "w": 281,
+        "h": 299,
+        "ax": 0.4473,
+        "src": "assets/images/sprites/enemies/stage5/enemy_mecha_gorilla_idle.png"
+      },
+      "walk1": {
+        "w": 278,
+        "h": 277,
+        "ax": 0.5167,
+        "src": "assets/images/sprites/enemies/stage5/enemy_mecha_gorilla_walk1.png"
+      },
+      "crouch": {
+        "w": 239,
+        "h": 299,
+        "ax": 0.4891,
+        "src": "assets/images/sprites/enemies/stage5/enemy_mecha_gorilla_crouch.png"
+      },
+      "punch": {
+        "w": 271,
+        "h": 239,
+        "ax": 0.3545,
+        "src": "assets/images/sprites/enemies/stage5/enemy_mecha_gorilla_punch.png"
+      },
+      "fall": {
+        "w": 328,
+        "h": 243,
+        "ax": 0.5,
+        "src": "assets/images/sprites/enemies/stage5/enemy_mecha_gorilla_fall.png"
+      },
+      "walk2": {
+        "w": 278,
+        "h": 277,
+        "ax": 0.5167,
+        "src": "assets/images/sprites/enemies/stage5/enemy_mecha_gorilla_walk1.png"
+      },
+      "knockdown": {
+        "w": 328,
+        "h": 243,
+        "ax": 0.5,
+        "src": "assets/images/sprites/enemies/stage5/enemy_mecha_gorilla_fall.png"
+      },
+      "idle2": {
+        "w": 281,
+        "h": 299,
+        "ax": 0.4473,
+        "src": "assets/images/sprites/enemies/stage5/enemy_mecha_gorilla_idle.png"
+      },
+      "kick": {
+        "w": 271,
+        "h": 239,
+        "ax": 0.3545,
+        "src": "assets/images/sprites/enemies/stage5/enemy_mecha_gorilla_punch.png"
+      }
+    },
+    "enemy_toucan": {
+      "idle": {
+        "w": 240,
+        "h": 228,
+        "ax": 0.4964,
+        "src": "assets/images/sprites/enemies/stage6/enemy_toucan_idle.png"
+      },
+      "walk1": {
+        "w": 255,
+        "h": 227,
+        "ax": 0.4511,
+        "src": "assets/images/sprites/enemies/stage6/enemy_toucan_walk1.png"
+      },
+      "crouch": {
+        "w": 237,
+        "h": 228,
+        "ax": 0.4426,
+        "src": "assets/images/sprites/enemies/stage6/enemy_toucan_crouch.png"
+      },
+      "punch": {
+        "w": 256,
+        "h": 240,
+        "ax": 0.4089,
+        "src": "assets/images/sprites/enemies/stage6/enemy_toucan_punch.png"
+      },
+      "fall": {
+        "w": 274,
+        "h": 209,
+        "ax": 0.5,
+        "src": "assets/images/sprites/enemies/stage6/enemy_toucan_fall.png"
+      },
+      "walk2": {
+        "w": 255,
+        "h": 227,
+        "ax": 0.4511,
+        "src": "assets/images/sprites/enemies/stage6/enemy_toucan_walk1.png"
+      },
+      "knockdown": {
+        "w": 274,
+        "h": 209,
+        "ax": 0.5,
+        "src": "assets/images/sprites/enemies/stage6/enemy_toucan_fall.png"
+      },
+      "idle2": {
+        "w": 240,
+        "h": 228,
+        "ax": 0.4964,
+        "src": "assets/images/sprites/enemies/stage6/enemy_toucan_idle.png"
+      },
+      "kick": {
+        "w": 256,
+        "h": 240,
+        "ax": 0.4089,
+        "src": "assets/images/sprites/enemies/stage6/enemy_toucan_punch.png"
+      }
+    },
+    "enemy_crane": {
+      "idle": {
+        "w": 285,
+        "h": 265,
+        "ax": 0.4691,
+        "src": "assets/images/sprites/enemies/stage6/enemy_crane_idle.png"
+      },
+      "walk1": {
+        "w": 276,
+        "h": 267,
+        "ax": 0.5892,
+        "src": "assets/images/sprites/enemies/stage6/enemy_crane_walk1.png"
+      },
+      "crouch": {
+        "w": 195,
+        "h": 252,
+        "ax": 0.3922,
+        "src": "assets/images/sprites/enemies/stage6/enemy_crane_crouch.png"
+      },
+      "punch": {
+        "w": 260,
+        "h": 239,
+        "ax": 0.3382,
+        "src": "assets/images/sprites/enemies/stage6/enemy_crane_punch.png"
+      },
+      "fall": {
+        "w": 306,
+        "h": 271,
+        "ax": 0.5,
+        "src": "assets/images/sprites/enemies/stage6/enemy_crane_fall.png"
+      },
+      "walk2": {
+        "w": 276,
+        "h": 267,
+        "ax": 0.5892,
+        "src": "assets/images/sprites/enemies/stage6/enemy_crane_walk1.png"
+      },
+      "knockdown": {
+        "w": 306,
+        "h": 271,
+        "ax": 0.5,
+        "src": "assets/images/sprites/enemies/stage6/enemy_crane_fall.png"
+      },
+      "idle2": {
+        "w": 285,
+        "h": 265,
+        "ax": 0.4691,
+        "src": "assets/images/sprites/enemies/stage6/enemy_crane_idle.png"
+      },
+      "kick": {
+        "w": 260,
+        "h": 239,
+        "ax": 0.3382,
+        "src": "assets/images/sprites/enemies/stage6/enemy_crane_punch.png"
+      }
+    },
+    "enemy_swallow": {
+      "idle": {
+        "w": 203,
+        "h": 154,
+        "ax": 0.7455,
+        "src": "assets/images/sprites/enemies/stage6/enemy_swallow_idle.png"
+      },
+      "walk1": {
+        "w": 215,
+        "h": 202,
+        "ax": 0.655,
+        "src": "assets/images/sprites/enemies/stage6/enemy_swallow_walk1.png"
+      },
+      "crouch": {
+        "w": 180,
+        "h": 159,
+        "ax": 0.5344,
+        "src": "assets/images/sprites/enemies/stage6/enemy_swallow_crouch.png"
+      },
+      "punch": {
+        "w": 217,
+        "h": 217,
+        "ax": 0.5073,
+        "src": "assets/images/sprites/enemies/stage6/enemy_swallow_punch.png"
+      },
+      "fall": {
+        "w": 271,
+        "h": 201,
+        "ax": 0.5,
+        "src": "assets/images/sprites/enemies/stage6/enemy_swallow_fall.png"
+      },
+      "walk2": {
+        "w": 215,
+        "h": 202,
+        "ax": 0.655,
+        "src": "assets/images/sprites/enemies/stage6/enemy_swallow_walk1.png"
+      },
+      "knockdown": {
+        "w": 271,
+        "h": 201,
+        "ax": 0.5,
+        "src": "assets/images/sprites/enemies/stage6/enemy_swallow_fall.png"
+      },
+      "idle2": {
+        "w": 203,
+        "h": 154,
+        "ax": 0.7455,
+        "src": "assets/images/sprites/enemies/stage6/enemy_swallow_idle.png"
+      },
+      "kick": {
+        "w": 217,
+        "h": 217,
+        "ax": 0.5073,
+        "src": "assets/images/sprites/enemies/stage6/enemy_swallow_punch.png"
       }
     }
   };
@@ -2442,10 +3189,10 @@
         jumpKick: 28,
         special: 56
       },
-      specialCooldown: 6.5,
-      specialDuration: 0.85,
-      specialName: "PULSO DE PLASMA & DRONE BOT",
-      description: "Especialista em alta tecnologia com exoesqueleto de combate e disparos de plasma devastadores."
+      specialCooldown: 8.5,
+      specialDuration: 4.5,
+      specialName: "ESQUADR\xC3O ANDREYBOT (BOMBARDEIO A\xC9REO)",
+      description: "G\xEAnio da alta tecnologia. Seu especial 100% convoca 3 AndreyBots que cruzam a tela indo e voltando, bombardeando os inimigos com tiros que tiram 5% de vida a cada acerto!"
     },
     emerson: {
       id: "emerson",
@@ -2467,10 +3214,10 @@
         jumpKick: 34,
         special: 60
       },
-      specialCooldown: 7.5,
-      specialDuration: 0.85,
-      specialName: "IMPACTO S\xCDSMICO DEMOLIDOR",
-      description: "Possui super for\xE7a colossal e resist\xEAncia tit\xE2nica. Seus golpes esmagam tudo pela frente."
+      specialCooldown: 8,
+      specialDuration: 1.25,
+      specialName: "SOCO S\xCDSMICO DEMOLIDOR (TERREMOTO TOTAL)",
+      description: "Possui super for\xE7a colossal. Seu especial 100% \xE9 um estrondoso soco no ch\xE3o que faz toda a tela tremer e estra\xE7alha todos os inimigos (50% de dano) e o chefe (25% de dano)!"
     },
     nata: {
       id: "nata",
@@ -2530,7 +3277,10 @@
       name: "KING GATOR",
       title: "O Flagelo dos Esgotos",
       spriteId: "alligator",
-      maxHp: 320,
+      bars: 4,
+      hpPerBar: 320,
+      maxHp: 1280,
+      // 4x (4 barras de 320)
       speed: 2.8,
       attackPower: 16,
       specialCooldown: 7,
@@ -2544,7 +3294,10 @@
       name: "URSUS MAGNUS",
       title: "O Guardi\xE3o da Floresta",
       spriteId: "bear",
-      maxHp: 380,
+      bars: 4,
+      hpPerBar: 380,
+      maxHp: 1520,
+      // 4x (4 barras de 380)
       speed: 2.7,
       attackPower: 19,
       specialCooldown: 8,
@@ -2558,7 +3311,10 @@
       name: "CAPY SENSEI",
       title: "O Monge da Lagoa",
       spriteId: "capybara",
-      maxHp: 440,
+      bars: 4,
+      hpPerBar: 440,
+      maxHp: 1760,
+      // 4x (4 barras de 440)
       speed: 3,
       attackPower: 20,
       specialCooldown: 7,
@@ -2572,7 +3328,10 @@
       name: "SHADOW CLAW",
       title: "A Ninja das Sombras",
       spriteId: "cat",
-      maxHp: 500,
+      bars: 4,
+      hpPerBar: 500,
+      maxHp: 2e3,
+      // 4x (4 barras de 500)
       speed: 4.2,
       attackPower: 22,
       specialCooldown: 6,
@@ -2586,7 +3345,10 @@
       name: "TITAN KONG",
       title: "O Esmagador Urbano",
       spriteId: "gorilla",
-      maxHp: 580,
+      bars: 4,
+      hpPerBar: 580,
+      maxHp: 2320,
+      // 4x (4 barras de 580)
       speed: 3,
       attackPower: 25,
       specialCooldown: 8,
@@ -2600,7 +3362,10 @@
       name: "ZEPHYR OWL",
       title: "O Lorde dos Ventos",
       spriteId: "owl",
-      maxHp: 650,
+      bars: 4,
+      hpPerBar: 650,
+      maxHp: 2600,
+      // 4x (4 barras de 650)
       speed: 3.6,
       attackPower: 24,
       specialCooldown: 6.5,
@@ -2615,7 +3380,10 @@
       name: "RAIDEN TIGER",
       title: "A Fera do Trov\xE3o",
       spriteId: "tiger",
-      maxHp: 740,
+      bars: 4,
+      hpPerBar: 740,
+      maxHp: 2960,
+      // 4x (4 barras de 740)
       speed: 4,
       attackPower: 27,
       specialCooldown: 6,
@@ -2629,7 +3397,10 @@
       name: "FENRIR LUPUS",
       title: "O Alfa da Nevasca",
       spriteId: "wolf",
-      maxHp: 840,
+      bars: 4,
+      hpPerBar: 840,
+      maxHp: 3360,
+      // 4x (4 barras de 840)
       speed: 4.1,
       attackPower: 29,
       specialCooldown: 5.5,
@@ -2643,7 +3414,10 @@
       name: "BAHAMUT DRAGON",
       title: "O Imperador do Apocalipse",
       spriteId: "dragon",
-      maxHp: 1100,
+      bars: 10,
+      hpPerBar: 1100,
+      maxHp: 11e3,
+      // 10x (10 barras de 1100)
       speed: 3.8,
       attackPower: 35,
       specialCooldown: 5,
@@ -2672,14 +3446,33 @@
       const heroKeys = ["andrey", "emerson", "nata", "dog"];
       for (const hero of heroKeys) {
         if (SPRITE_META[hero]) {
-          ["idle", "walk1", "punch", "kick"].forEach((a) => {
+          ["idle", "walk1", "punch", "punch1", "punch2", "punch3", "kick", "kick1", "kick2", "kick3", "special", "special1", "special2", "special3", "bot"].forEach((a) => {
             if (SPRITE_META[hero][a]) {
               essentialUrls.add(SPRITE_META[hero][a].src);
             }
           });
         }
       }
-      const stageEnemies = ["enemy_swamp", "enemy_spear", "enemy_fish", "enemy_goblin", "enemy_elf", "enemy_walrus"];
+      const stageEnemies = [
+        "enemy_swamp",
+        "enemy_spear",
+        "enemy_fish",
+        "enemy_goblin",
+        "enemy_elf",
+        "enemy_walrus",
+        "enemy_reptile",
+        "enemy_oni",
+        "enemy_kitsune",
+        "enemy_rat",
+        "enemy_ninja",
+        "enemy_brute",
+        "enemy_cyber_wolf",
+        "enemy_cyber_elf",
+        "enemy_mecha_gorilla",
+        "enemy_swallow",
+        "enemy_toucan",
+        "enemy_crane"
+      ];
       for (const ek of stageEnemies) {
         if (SPRITE_META[ek]) {
           ["idle", "walk1", "punch", "fall"].forEach((a) => {
@@ -2689,7 +3482,7 @@
           });
         }
       }
-      for (const bk of ["alligator", "bear"]) {
+      for (const bk of ["alligator", "bear", "capybara", "cat", "gorilla", "owl"]) {
         if (SPRITE_META[bk]) {
           ["idle", "walk1", "punch", "fall"].forEach((a) => {
             if (SPRITE_META[bk][a]) {
@@ -2821,6 +3614,11 @@
         else s = "idle";
       } else if (s === "hurt") {
         s = meta["crouch"] ? "crouch" : "idle";
+      } else if (s === "special") {
+        if (this.specialPhase && meta[`special${this.specialPhase}`]) {
+          return `special${this.specialPhase}`;
+        }
+        if (meta["special"]) return "special";
       }
       if (meta[s]) return s;
       if (s.startsWith("punch") && meta["punch"]) return "punch";
@@ -2971,9 +3769,12 @@
       this.score = 0;
       this.attackCooldown = 0;
       this.punchComboStep = 0;
-      this.kickComboStep = 0;
       this.comboResetTimer = 0;
       this.hitEntities = /* @__PURE__ */ new Set();
+      this.andreyBots = [];
+      this.andreyShots = [];
+      this.andreyBotsSpawned = false;
+      this.jumpPower = config.jumpPower || 7;
     }
     isAttacking() {
       return this.state.startsWith("punch") || this.state.startsWith("kick") || this.state === "special";
@@ -2984,14 +3785,14 @@
         return;
       }
       if (input.isActionPressed("special")) {
-        if (this.specialMeter >= 40 && this.state !== "special") {
+        if (this.specialMeter >= 100 && this.state !== "special") {
           this.performSpecial();
           return;
         }
       }
       if (input.isActionPressed("jump") && this.y === 0 && !this.isAttacking() && this.state !== "jump") {
         this.state = "jump";
-        this.vy = 10.5;
+        this.vy = this.jumpPower;
         this.punchComboStep = 0;
         this.kickComboStep = 0;
         let jumpDx = 0;
@@ -3116,16 +3917,54 @@
     }
     performSpecial() {
       this.state = "special";
-      this.stateTimer = this.config.specialDuration;
-      this.specialMeter = Math.max(0, this.specialMeter - 40);
+      this.specialDuration = this.config.specialDuration || 1.25;
+      this.stateTimer = this.specialDuration;
+      this.specialMeter = 0;
       this.isInvincible = true;
-      this.invincibleTimer = this.config.specialDuration + 0.15;
+      this.invincibleTimer = this.specialDuration + 0.25;
       this.punchComboStep = 0;
       this.kickComboStep = 0;
       this.comboResetTimer = 0;
       this.hitEntities.clear();
-      this.vx = this.facing * (this.charKey === "emerson" ? 6 : 4.5);
+      this.specialPhase = 1;
+      this.specialImpactTriggered = false;
+      if (this.charKey === "emerson") {
+        this.vy = 5.5;
+        this.vx = this.facing * 1.5;
+      } else if (this.charKey === "andrey") {
+        this.vy = 0;
+        this.vx = 0;
+        this.andreyBots = [];
+        this.andreyShots = [];
+        this.andreyBotsSpawned = false;
+      } else {
+        this.vx = this.facing * 4.5;
+      }
       Sound.playSpecial();
+    }
+    takeDamage(amount, knockbackX = 0, knockbackY = 0) {
+      if (this.isInvincible || this.isDead) return false;
+      this.hp -= amount;
+      this.isInvincible = false;
+      this.invincibleTimer = 0;
+      if (this.hp <= 0) {
+        this.hp = 0;
+        this.isDead = true;
+        this.state = "fall";
+        this.vy = Math.max(knockbackY, 7.5);
+        this.vx = knockbackX * 1.3;
+        this.deathTimer = 0.45;
+      } else if (knockbackY > 4 || amount >= 25) {
+        this.state = "knockdown";
+        this.stateTimer = 0.6;
+        this.vy = knockbackY || 6;
+        this.vx = knockbackX;
+      } else {
+        this.state = "hurt";
+        this.stateTimer = 0.22;
+        this.vx = knockbackX * 0.4;
+      }
+      return true;
     }
     heal(amount) {
       this.hp = Math.min(this.maxHp, this.hp + amount);
@@ -3135,7 +3974,7 @@
       this.score += points;
       this.specialMeter = Math.min(100, this.specialMeter + points * 0.08);
     }
-    update(dt, stageLimits, camera) {
+    update(dt, stageLimits, camera, particles = null) {
       if (this.attackCooldown > 0) {
         this.attackCooldown -= dt;
       }
@@ -3150,6 +3989,48 @@
         this.specialMeter = Math.min(100, this.specialMeter + dt * 4.5);
       }
       this.updatePhysics(dt, stageLimits);
+      if (this.state === "special") {
+        if (this.charKey === "emerson") {
+          const total = this.specialDuration || 1.25;
+          const elapsed = total - this.stateTimer;
+          if (elapsed < 0.35) {
+            this.specialPhase = 1;
+          } else if (elapsed < 0.65) {
+            this.specialPhase = 2;
+            this.y = 0;
+            this.vy = 0;
+            this.vx = 0;
+          } else {
+            this.specialPhase = 3;
+            this.y = 0;
+            this.vy = 0;
+            this.vx = 0;
+          }
+        } else if (this.charKey === "andrey") {
+          const total = this.specialDuration || 4.5;
+          const elapsed = total - this.stateTimer;
+          if (elapsed < 0.5) {
+            this.specialPhase = 1;
+          } else if (elapsed < 1.1) {
+            this.specialPhase = 2;
+            if (!this.andreyBotsSpawned) {
+              this.andreyBotsSpawned = true;
+              this.spawnAndreyBots(camera);
+            }
+          } else {
+            this.specialPhase = 3;
+          }
+          this.y = 0;
+          this.vy = 0;
+          this.vx = 0;
+        } else {
+          this.specialPhase = 1;
+        }
+      } else {
+        this.specialPhase = 0;
+        this.specialImpactTriggered = false;
+        this.andreyBotsSpawned = false;
+      }
       const screenLeft = camera.x + 35;
       const screenRight = camera.x + camera.width - 35;
       if (this.x < screenLeft) this.x = screenLeft;
@@ -3157,9 +4038,14 @@
       if (this.stateTimer <= 0) {
         if (this.isAttacking()) {
           this.state = "idle";
+          this.specialPhase = 0;
+          this.specialImpactTriggered = false;
           if (this.punchComboStep === 3) this.punchComboStep = 0;
           if (this.kickComboStep === 3) this.kickComboStep = 0;
         }
+      }
+      if (this.andreyBots.length > 0 || this.andreyShots.length > 0) {
+        this.updateAndreyBots(dt, camera, particles);
       }
     }
     // Get current attack hitbox based on active state (punch1, punch2, punch3, kick1, kick2, kick3, special)
@@ -3200,6 +4086,7 @@
         knockbackX = this.facing * 10.5;
         knockbackY = 6.5;
       } else if (this.state === "special") {
+        if (this.charKey === "emerson" || this.charKey === "andrey") return null;
         damage = this.config.damage.special;
         reach = 100;
         knockbackX = this.facing * 11;
@@ -3218,6 +4105,187 @@
         knockbackY
       };
     }
+    // Spawn the 3 AndreyBots patrolling across the screen
+    spawnAndreyBots(camera) {
+      Sound.playBotSummon();
+      const camLeft = camera ? camera.x : this.x - 200;
+      const camW = camera ? camera.width : 960;
+      this.andreyBots = [
+        {
+          id: 1,
+          x: camLeft + 100,
+          z: this.z - 40,
+          baseY: 200,
+          y: 200,
+          vx: 6.2,
+          facing: 1,
+          hoverTimer: 0,
+          dropTimer: 0.2,
+          scale: 0.36,
+          color: "#00ff88",
+          life: 3.8
+        },
+        {
+          id: 2,
+          x: camLeft + camW - 120,
+          z: this.z + 5,
+          baseY: 235,
+          y: 235,
+          vx: -5.6,
+          facing: -1,
+          hoverTimer: 1.5,
+          dropTimer: 0.45,
+          scale: 0.34,
+          color: "#00e5ff",
+          life: 3.8
+        },
+        {
+          id: 3,
+          x: camLeft + 220,
+          z: this.z + 45,
+          baseY: 175,
+          y: 175,
+          vx: 6.8,
+          facing: 1,
+          hoverTimer: 3,
+          dropTimer: 0.35,
+          scale: 0.38,
+          color: "#39ff14",
+          life: 3.8
+        }
+      ];
+    }
+    // Update AndreyBots patrol ("indo e voltando") and their falling plasma shots
+    updateAndreyBots(dt, camera, particles) {
+      const camLeft = camera ? camera.x + 35 : 0;
+      const camRight = camera ? camera.x + camera.width - 35 : 2e3;
+      for (let i = this.andreyBots.length - 1; i >= 0; i--) {
+        const bot = this.andreyBots[i];
+        bot.life -= dt;
+        bot.hoverTimer += dt;
+        bot.y = bot.baseY + Math.sin(bot.hoverTimer * 5.5) * 12;
+        bot.x += bot.vx * dt * 60;
+        if (bot.x >= camRight && bot.vx > 0) {
+          bot.vx = -Math.abs(bot.vx);
+          bot.facing = -1;
+        } else if (bot.x <= camLeft && bot.vx < 0) {
+          bot.vx = Math.abs(bot.vx);
+          bot.facing = 1;
+        }
+        if (particles && Math.random() < 0.6) {
+          particles.addHitSparks(bot.x - bot.facing * 10, bot.y - 12, bot.z, bot.color, 1);
+        }
+        bot.dropTimer -= dt;
+        if (bot.dropTimer <= 0 && bot.life > 0.4) {
+          bot.dropTimer = 0.38 + Math.random() * 0.12;
+          Sound.playLaserDrop();
+          this.andreyShots.push({
+            x: bot.x,
+            z: bot.z + (Math.random() - 0.5) * 16,
+            y: bot.y - 15,
+            vx: bot.vx * 0.22,
+            vy: -7.5,
+            color: bot.color,
+            radius: 11,
+            isDead: false
+          });
+        }
+        if (bot.life <= 0) {
+          bot.baseY += 18 * dt * 60;
+          if (bot.y > 450) {
+            this.andreyBots.splice(i, 1);
+          }
+        }
+      }
+      for (let i = this.andreyShots.length - 1; i >= 0; i--) {
+        const shot = this.andreyShots[i];
+        shot.x += shot.vx * dt * 60;
+        shot.y += shot.vy * dt * 60;
+        if (particles && Math.random() < 0.5) {
+          particles.addHitSparks(shot.x, shot.y, shot.z, shot.color, 1);
+        }
+        if (shot.y <= 0) {
+          shot.isDead = true;
+          if (particles) {
+            particles.addHitSparks(shot.x, 8, shot.z, shot.color, 8);
+            particles.addShockwave(shot.x, shot.z, 35, shot.color);
+          }
+        }
+        if (shot.isDead) {
+          this.andreyShots.splice(i, 1);
+        }
+      }
+    }
+    // Draw active AndreyBots and falling plasma shots in world space
+    drawBots(ctx, camera, imageLoader) {
+      const botImg = imageLoader.getImage("assets/images/sprites/characters/andrey_bot.png");
+      for (const bot of this.andreyBots) {
+        const screenX = camera.toScreenX(bot.x);
+        const screenY = camera.toScreenY(bot.z);
+        const depthScale = 0.8 + bot.z / 600 * 0.35;
+        ctx.save();
+        ctx.fillStyle = "rgba(0, 0, 0, 0.32)";
+        ctx.beginPath();
+        ctx.ellipse(screenX, screenY, 24 * depthScale, 8 * depthScale, 0, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      }
+      for (const bot of this.andreyBots) {
+        const screenX = camera.toScreenX(bot.x);
+        const screenY = camera.toScreenY(bot.z - bot.y);
+        const w = 240 * bot.scale;
+        const h = 192 * bot.scale;
+        ctx.save();
+        ctx.translate(screenX, screenY);
+        if (bot.facing === -1) {
+          ctx.scale(-1, 1);
+        }
+        ctx.shadowBlur = 14;
+        ctx.shadowColor = bot.color;
+        if (botImg) {
+          ctx.drawImage(botImg, -w / 2, -h / 2, w, h);
+        } else {
+          ctx.fillStyle = "#ff7755";
+          ctx.fillRect(-20, -18, 40, 36);
+        }
+        ctx.fillStyle = bot.color;
+        ctx.beginPath();
+        ctx.arc(-14, h / 2 - 2, 4 + Math.random() * 3, 0, Math.PI * 2);
+        ctx.arc(14, h / 2 - 2, 4 + Math.random() * 3, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      }
+      for (const shot of this.andreyShots) {
+        if (shot.isDead) continue;
+        const sx = camera.toScreenX(shot.x);
+        const sy = camera.toScreenY(shot.z - shot.y);
+        const r = shot.radius || 11;
+        const groundY = camera.toScreenY(shot.z);
+        const fallProgress = Math.min(1, Math.max(0, 1 - shot.y / 240));
+        ctx.save();
+        ctx.fillStyle = `rgba(0, 255, 136, ${0.15 + fallProgress * 0.35})`;
+        ctx.beginPath();
+        ctx.ellipse(sx, groundY, 15 * fallProgress, 6 * fallProgress, 0, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.translate(sx, sy);
+        ctx.shadowBlur = 14;
+        ctx.shadowColor = shot.color;
+        const grad = ctx.createRadialGradient(0, 0, 2, 0, 0, r);
+        grad.addColorStop(0, "#ffffff");
+        grad.addColorStop(0.35, "#a8ffc4");
+        grad.addColorStop(0.85, shot.color);
+        grad.addColorStop(1, "rgba(0, 255, 136, 0)");
+        ctx.fillStyle = grad;
+        ctx.beginPath();
+        ctx.arc(0, 0, r, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = "rgba(0, 255, 136, 0.55)";
+        ctx.beginPath();
+        ctx.ellipse(0, -r * 0.9, r * 0.45, r * 1.1, 0, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      }
+    }
     respawn(spawnX, spawnZ) {
       this.hp = this.maxHp;
       this.isDead = false;
@@ -3233,6 +4301,8 @@
       this.comboResetTimer = 0;
       this.isInvincible = true;
       this.invincibleTimer = 2;
+      this.andreyBots = [];
+      this.andreyShots = [];
     }
   };
 
@@ -3434,9 +4504,9 @@
         glowColor: "#55ffdd"
       },
       enemyPool: [
-        { type: "enemy_swamp", name: "Monstro do Lodo", hp: 48, speed: 2.7, damage: 9, spriteKey: "enemy_swamp" },
-        { type: "enemy_spear", name: "Guerreiro da Lan\xE7a", hp: 40, speed: 3.3, damage: 10, spriteKey: "enemy_spear" },
-        { type: "enemy_fish", name: "Peixe-Bagre Parrudo", hp: 60, speed: 2.5, damage: 13, spriteKey: "enemy_fish" }
+        { type: "enemy_swamp", name: "Monstro do Lodo", hp: 48, speed: 2.7, damage: 9, spriteKey: "enemy_swamp", scale: 1, shadowWidth: 48, width: 40 },
+        { type: "enemy_spear", name: "Guerreiro da Lan\xE7a", hp: 40, speed: 3.3, damage: 10, spriteKey: "enemy_spear", scale: 0.95, shadowWidth: 46, width: 38 },
+        { type: "enemy_fish", name: "Peixe-Bagre Parrudo", hp: 60, speed: 2.5, damage: 13, spriteKey: "enemy_fish", scale: 1.1, shadowWidth: 60, width: 48 }
       ],
       chickenSpawns: [600, 1400, 2300, 2900]
     },
@@ -3468,9 +4538,9 @@
         glowColor: "#a8ff78"
       },
       enemyPool: [
-        { type: "enemy_goblin", name: "Goblin da Picareta", hp: 44, speed: 3.4, damage: 10, spriteKey: "enemy_goblin" },
-        { type: "enemy_elf", name: "Elfo das Adagas", hp: 48, speed: 3.8, damage: 11, spriteKey: "enemy_elf" },
-        { type: "enemy_walrus", name: "Morsa B\xE1rbaro", hp: 75, speed: 2.6, damage: 14, spriteKey: "enemy_walrus" }
+        { type: "enemy_goblin", name: "Goblin da Picareta", hp: 44, speed: 3.4, damage: 10, spriteKey: "enemy_goblin", scale: 0.9, shadowWidth: 42, width: 34 },
+        { type: "enemy_elf", name: "Elfo das Adagas", hp: 48, speed: 3.8, damage: 11, spriteKey: "enemy_elf", scale: 1, shadowWidth: 48, width: 38 },
+        { type: "enemy_walrus", name: "Morsa B\xE1rbaro", hp: 75, speed: 2.6, damage: 14, spriteKey: "enemy_walrus", scale: 1.15, shadowWidth: 68, width: 52 }
       ],
       chickenSpawns: [700, 1500, 2400, 3100]
     },
@@ -3502,9 +4572,9 @@
         glowColor: "#ffd000"
       },
       enemyPool: [
-        { type: "thug_quick", name: "Monge Renegado", hp: 48, speed: 3.6, damage: 10, spriteMod: "nata_mod" },
-        { type: "thug_medium", name: "Guarda da Lagoa", hp: 60, speed: 2.8, damage: 12, spriteMod: "dog_mod" },
-        { type: "thug_heavy", name: "Buda de Ferro", hp: 68, speed: 2.6, damage: 13, spriteMod: "emerson_mod" }
+        { type: "enemy_oni", name: "Oni das L\xE2minas", hp: 48, speed: 3.7, damage: 11, spriteKey: "enemy_oni", scale: 0.95, shadowWidth: 44, width: 36 },
+        { type: "enemy_reptile", name: "Ninja R\xE9ptil", hp: 56, speed: 3.3, damage: 12, spriteKey: "enemy_reptile", scale: 1, shadowWidth: 48, width: 40 },
+        { type: "enemy_kitsune", name: "Lobo Shinobi", hp: 76, speed: 2.7, damage: 15, spriteKey: "enemy_kitsune", scale: 1.15, shadowWidth: 66, width: 50 }
       ],
       chickenSpawns: [650, 1450, 2350, 3050]
     },
@@ -3536,9 +4606,9 @@
         glowColor: "#ff66db"
       },
       enemyPool: [
-        { type: "thug_quick", name: "Ninja Cibern\xE9tico", hp: 52, speed: 3.8, damage: 11, spriteMod: "nata_mod" },
-        { type: "thug_heavy", name: "Ronin Blindado", hp: 72, speed: 2.6, damage: 14, spriteMod: "andrey_mod" },
-        { type: "thug_medium", name: "Agente das Sombras", hp: 62, speed: 3.2, damage: 12, spriteMod: "emerson_mod" }
+        { type: "enemy_ninja", name: "Garras da Noite", hp: 50, speed: 3.8, damage: 11, spriteKey: "enemy_ninja", scale: 0.95, shadowWidth: 42, width: 36 },
+        { type: "enemy_rat", name: "Punk Roedor", hp: 60, speed: 3.4, damage: 12, spriteKey: "enemy_rat", scale: 1, shadowWidth: 50, width: 42 },
+        { type: "enemy_brute", name: "Bruto Mutante", hp: 82, speed: 2.6, damage: 16, spriteKey: "enemy_brute", scale: 1.15, shadowWidth: 68, width: 54 }
       ],
       chickenSpawns: [750, 1600, 2500, 3200]
     },
@@ -3570,9 +4640,9 @@
         glowColor: "#ff7733"
       },
       enemyPool: [
-        { type: "thug_heavy", name: "Oper\xE1rio Enfurecido", hp: 76, speed: 2.7, damage: 15, spriteMod: "andrey_mod" },
-        { type: "thug_medium", name: "Capataz de Ferro", hp: 66, speed: 3.1, damage: 13, spriteMod: "dog_mod" },
-        { type: "thug_quick", name: "Soldador Louco", hp: 55, speed: 3.5, damage: 12, spriteMod: "emerson_mod" }
+        { type: "enemy_cyber_elf", name: "Guerreiro de Plasma", hp: 56, speed: 3.9, damage: 12, spriteKey: "enemy_cyber_elf", scale: 0.95, shadowWidth: 42, width: 36 },
+        { type: "enemy_cyber_wolf", name: "Lobo Biomec\xE2nico", hp: 68, speed: 3.5, damage: 14, spriteKey: "enemy_cyber_wolf", scale: 1.05, shadowWidth: 54, width: 44 },
+        { type: "enemy_mecha_gorilla", name: "Mecha S\xEDmio a Vapor", hp: 92, speed: 2.6, damage: 18, spriteKey: "enemy_mecha_gorilla", scale: 1.2, shadowWidth: 72, width: 58 }
       ],
       chickenSpawns: [800, 1650, 2550, 3250]
     },
@@ -3604,9 +4674,9 @@
         glowColor: "#82e6ff"
       },
       enemyPool: [
-        { type: "thug_quick", name: "Cultista do Vento", hp: 58, speed: 3.9, damage: 13, spriteMod: "emerson_mod" },
-        { type: "thug_medium", name: "Guardi\xE3o Alado", hp: 70, speed: 3.2, damage: 14, spriteMod: "nata_mod" },
-        { type: "thug_heavy", name: "Cruzado da Tempestade", hp: 80, speed: 2.8, damage: 16, spriteMod: "andrey_mod" }
+        { type: "enemy_swallow", name: "Andorinha Veloz", hp: 54, speed: 4.1, damage: 12, spriteKey: "enemy_swallow", scale: 0.95, shadowWidth: 40, width: 34 },
+        { type: "enemy_toucan", name: "Tucano Lutador", hp: 70, speed: 3.4, damage: 14, spriteKey: "enemy_toucan", scale: 1.05, shadowWidth: 50, width: 42 },
+        { type: "enemy_crane", name: "Gar\xE7a Tuiui\xFA", hp: 84, speed: 3, damage: 16, spriteKey: "enemy_crane", scale: 1.12, shadowWidth: 56, width: 44 }
       ],
       chickenSpawns: [700, 1500, 2450, 3250]
     },
@@ -3748,6 +4818,18 @@
       this.flankOffsetZ = (Math.random() - 0.5) * 50;
       this.hitPlayer = false;
       this.scoreValue = 100;
+      if (config.scale) {
+        this.scale = config.scale;
+      }
+      if (config.shadowWidth) {
+        this.shadowWidth = config.shadowWidth;
+      }
+      if (config.width) {
+        this.width = config.width;
+      }
+      if (config.depth) {
+        this.depth = config.depth;
+      }
     }
     updateAI(dt, stageLimits) {
       if (this.isDead) {
@@ -3917,6 +4999,8 @@
       this.stageNumber = stageNumber;
       this.name = config.name;
       this.title = config.title;
+      this.barsMax = config.bars || (stageNumber === 9 ? 10 : 4);
+      this.hpPerBar = config.hpPerBar || config.maxHp / this.barsMax;
       this.maxHp = config.maxHp;
       this.hp = this.maxHp;
       this.speed = config.speed;
@@ -3924,6 +5008,8 @@
       this.scale = config.scale || 1.1;
       this.player = playerTarget;
       this.projectiles = [];
+      this.barBroken = false;
+      this.lastBrokenBar = 0;
       this.superArmor = 50;
       this.superArmorMax = 50;
       this.specialCooldown = config.specialCooldown || 7;
@@ -3933,12 +5019,29 @@
       this.introTimer = 2;
       this.hitPlayerThisSwing = false;
     }
+    get currentBar() {
+      if (this.hp <= 0) return 0;
+      return Math.min(this.barsMax, Math.ceil(this.hp / this.hpPerBar));
+    }
+    get currentBarRatio() {
+      if (this.hp <= 0) return 0;
+      const cur = this.currentBar;
+      const barBaseHp = (cur - 1) * this.hpPerBar;
+      const rem = this.hp - barBaseHp;
+      return Math.max(0, Math.min(1, rem / this.hpPerBar));
+    }
     takeDamage(amount, knockbackX = 0, knockbackY = 0) {
       if (this.isInvincible || this.isDead) return false;
+      const prevBar = this.currentBar;
       this.hp -= amount;
       this.superArmor -= amount;
       this.isInvincible = true;
       this.invincibleTimer = 0.25;
+      const newBar = this.currentBar;
+      if (newBar < prevBar && newBar > 0) {
+        this.barBroken = true;
+        this.lastBrokenBar = prevBar;
+      }
       if (this.hp <= 0) {
         this.hp = 0;
         this.isDead = true;
@@ -4264,9 +5367,30 @@
         maxLife: 0.8
       });
     }
+    addShockwave(x, z, maxRadius = 150, color = "#00e5ff") {
+      this.particles.push({
+        type: "shockwave",
+        x,
+        y: 0,
+        z,
+        radius: 12,
+        maxRadius,
+        color,
+        life: 0.65,
+        maxLife: 0.65
+      });
+    }
     update(dt) {
       for (let i = this.particles.length - 1; i >= 0; i--) {
         const p = this.particles[i];
+        if (p.type === "shockwave") {
+          p.radius += (p.maxRadius - p.radius) * dt * 9;
+          p.life -= dt;
+          if (p.life <= 0) {
+            this.particles.splice(i, 1);
+          }
+          continue;
+        }
         p.x += p.vx * dt * 60;
         p.y += p.vy * dt * 60;
         p.z += p.vz * dt * 60;
@@ -4287,6 +5411,22 @@
     }
     draw(ctx, camera) {
       for (const p of this.particles) {
+        if (p.type === "shockwave") {
+          const sx2 = camera.toScreenX(p.x);
+          const sy2 = camera.toScreenY(p.z);
+          const alpha2 = Math.max(0, p.life / p.maxLife);
+          ctx.save();
+          ctx.globalAlpha = alpha2 * 0.9;
+          ctx.strokeStyle = p.color;
+          ctx.lineWidth = Math.max(2, 6 * alpha2);
+          ctx.shadowBlur = 18;
+          ctx.shadowColor = p.color;
+          ctx.beginPath();
+          ctx.ellipse(sx2, sy2, p.radius, p.radius * 0.36, 0, 0, Math.PI * 2);
+          ctx.stroke();
+          ctx.restore();
+          continue;
+        }
         const sx = camera.toScreenX(p.x);
         const sy = camera.toScreenY(p.z - p.y);
         const alpha = Math.max(0, p.life / p.maxLife);
@@ -4333,6 +5473,14 @@
       this.particles = new ParticleSystem();
       this.spawnTimer = 0;
       this.nextChickenIndex = 0;
+      this.defeatedEnemiesCount = 0;
+      this.bossBattleTimer = 0;
+      this.bossChickensSpawned = 0;
+      this.bossChickenHpThresh1 = 0.65;
+      this.bossChickenHpThresh2 = 0.35;
+      this.bossChickenTimeThresh1 = 15;
+      this.bossChickenTimeThresh2 = 32;
+      this.bossMinionSpawnTimer = 0;
       this.stageLimits = {
         minZ: 370,
         maxZ: 500
@@ -4354,13 +5502,14 @@
       this.nextChickenIndex = 0;
       this.transitionTimer = 0;
       this.clearTimer = 0;
+      this.defeatedEnemiesCount = 0;
       this.door = new BossDoor(this.stageConfig.stageLength - 160, 420, this.stageConfig);
-      if (this.stageConfig.chickenSpawns) {
-        for (const cx of this.stageConfig.chickenSpawns) {
-          const cz = 380 + Math.random() * 100;
-          this.chickens.push(new ChickenItem(cx, cz));
-        }
-      }
+      const startX = 350 + Math.random() * 450;
+      const startZ = this.stageLimits.minZ + 15 + Math.random() * (this.stageLimits.maxZ - this.stageLimits.minZ - 30);
+      this.chickens.push(new ChickenItem(startX, startZ));
+      const endX = Math.max(startX + 800, this.stageConfig.stageLength - 950 + Math.random() * 450);
+      const endZ = this.stageLimits.minZ + 15 + Math.random() * (this.stageLimits.maxZ - this.stageLimits.minZ - 30);
+      this.chickens.push(new ChickenItem(endX, endZ));
       this.game.camera.x = 0;
       this.game.camera.setLimits(0, this.stageConfig.stageLength);
       this.game.camera.isLocked = false;
@@ -4442,8 +5591,14 @@
           enemy.deathTimer = (enemy.deathTimer !== void 0 ? enemy.deathTimer : 0.45) - dt;
           if (enemy.y <= 0 || enemy.deathTimer <= 0) {
             this.particles.addHitSparks(enemy.x, enemy.y || 15, enemy.z, "#ffbb00", 12);
-            if (Math.random() < 0.3 || player && player.hp < 45) {
-              this.chickens.push(new ChickenItem(enemy.x, enemy.z));
+            this.defeatedEnemiesCount++;
+            if (this.defeatedEnemiesCount % 6 === 0) {
+              const dropX = enemy.x + (Math.random() - 0.5) * 35;
+              const dropZ = Math.min(this.stageLimits.maxZ, Math.max(this.stageLimits.minZ, enemy.z + (Math.random() - 0.5) * 25));
+              this.chickens.push(new ChickenItem(dropX, dropZ));
+              this.particles.addHitSparks(dropX, 15, dropZ, "#ffd700", 22);
+              this.particles.addFloatingText("\u{1F357} FRANGO!", dropX, 65, dropZ, "#ffd700");
+              Sound.playChickenHeal();
             }
             this.enemies.splice(i, 1);
           }
@@ -4473,6 +5628,13 @@
       }
       this.boss = new Boss(this.stageConfig.number, 740, 430, player);
       this.enemies = [];
+      this.bossBattleTimer = 0;
+      this.bossChickensSpawned = 0;
+      this.bossChickenHpThresh1 = 0.72 - Math.random() * 0.14;
+      this.bossChickenHpThresh2 = 0.38 - Math.random() * 0.14;
+      this.bossChickenTimeThresh1 = 12 + Math.random() * 6;
+      this.bossChickenTimeThresh2 = 28 + Math.random() * 8;
+      this.bossMinionSpawnTimer = 3.2;
       Sound.playBossWarning();
       Sound.setBossIntensity(true);
       this.game.camera.shake(12, 0.6);
@@ -4480,7 +5642,81 @@
     updateBossBattle(dt) {
       const player = this.game.player;
       if (!this.boss || !player) return;
+      this.bossBattleTimer += dt;
       this.boss.updateAI(dt, this.stageLimits, this.game.camera);
+      if (this.bossChickensSpawned < 2 && !this.boss.isDead) {
+        const bossHpPct = this.boss.hp / this.boss.maxHp;
+        let shouldSpawn = false;
+        if (this.bossChickensSpawned === 0) {
+          if (bossHpPct <= this.bossChickenHpThresh1 || this.bossBattleTimer >= this.bossChickenTimeThresh1) {
+            shouldSpawn = true;
+            this.bossChickensSpawned = 1;
+          }
+        } else if (this.bossChickensSpawned === 1) {
+          if (bossHpPct <= this.bossChickenHpThresh2 || this.bossBattleTimer >= this.bossChickenTimeThresh2) {
+            shouldSpawn = true;
+            this.bossChickensSpawned = 2;
+          }
+        }
+        if (shouldSpawn) {
+          const chickenX = 220 + Math.random() * 520;
+          const chickenZ = this.stageLimits.minZ + 15 + Math.random() * (this.stageLimits.maxZ - this.stageLimits.minZ - 30);
+          this.chickens.push(new ChickenItem(chickenX, chickenZ));
+          this.particles.addHitSparks(chickenX, 15, chickenZ, "#ffd700", 24);
+          this.particles.addFloatingText("\u{1F357} FRANGO ASSADO!", chickenX, 65, chickenZ, "#ffd700");
+          Sound.playChickenHeal();
+        }
+      }
+      for (const chicken of this.chickens) {
+        chicken.update(dt, player);
+      }
+      if (!this.boss.isDead) {
+        const livingMinions = this.enemies.filter((e) => !e.isDead);
+        if (livingMinions.length < 2) {
+          this.bossMinionSpawnTimer -= dt;
+          if (this.bossMinionSpawnTimer <= 0) {
+            const countNeeded = 2 - livingMinions.length;
+            const pool = this.stageConfig.enemyPool;
+            if (pool && pool.length > 0) {
+              for (let k = 0; k < countNeeded; k++) {
+                const enemyConfig = pool[Math.floor(Math.random() * pool.length)];
+                const spawnLeft = Math.random() < 0.5;
+                const spawnX = spawnLeft ? -25 - Math.random() * 30 : 985 + Math.random() * 30;
+                const spawnZ = this.stageLimits.minZ + Math.random() * (this.stageLimits.maxZ - this.stageLimits.minZ);
+                const minion = new Enemy(spawnX, spawnZ, enemyConfig, player);
+                this.enemies.push(minion);
+              }
+            }
+            this.bossMinionSpawnTimer = 3.5 + Math.random() * 2.5;
+          }
+        }
+      } else {
+        for (let i = this.enemies.length - 1; i >= 0; i--) {
+          const e = this.enemies[i];
+          this.particles.addHitSparks(e.x, e.y || 20, e.z, "#ffaa00", 8);
+          this.enemies.splice(i, 1);
+        }
+      }
+      for (let i = this.enemies.length - 1; i >= 0; i--) {
+        const enemy = this.enemies[i];
+        enemy.updateAI(dt, this.stageLimits);
+        if (enemy.isDead) {
+          enemy.deathTimer = (enemy.deathTimer !== void 0 ? enemy.deathTimer : 0.45) - dt;
+          if (enemy.y <= 0 || enemy.deathTimer <= 0) {
+            this.particles.addHitSparks(enemy.x, enemy.y || 15, enemy.z, "#ffbb00", 12);
+            this.defeatedEnemiesCount++;
+            if (this.defeatedEnemiesCount % 6 === 0) {
+              const dropX = enemy.x + (Math.random() - 0.5) * 35;
+              const dropZ = Math.min(this.stageLimits.maxZ, Math.max(this.stageLimits.minZ, enemy.z + (Math.random() - 0.5) * 25));
+              this.chickens.push(new ChickenItem(dropX, dropZ));
+              this.particles.addHitSparks(dropX, 15, dropZ, "#ffd700", 20);
+              this.particles.addFloatingText("\u{1F357} FRANGO!", dropX, 65, dropZ, "#ffd700");
+              Sound.playChickenHeal();
+            }
+            this.enemies.splice(i, 1);
+          }
+        }
+      }
       if (this.boss.isDead && this.boss.y === 0) {
         this.clearTimer += dt;
         if (this.clearTimer >= 1.5 && this.phase !== "stage_cleared") {
@@ -4514,11 +5750,9 @@
       if (this.door && this.phase !== "boss_battle" && this.phase !== "stage_cleared") {
         renderList.push({ z: this.door.z - 20, type: "door", entity: this.door });
       }
-      if (this.phase !== "boss_battle") {
-        for (const c of this.chickens) {
-          if (!c.isCollected) {
-            renderList.push({ z: c.z, type: "chicken", entity: c });
-          }
+      for (const c of this.chickens) {
+        if (!c.isCollected) {
+          renderList.push({ z: c.z, type: "chicken", entity: c });
         }
       }
       if (this.game.player) {
@@ -4550,6 +5784,9 @@
       }
       if (this.boss) {
         this.boss.drawProjectiles(ctx, camera, imageLoader);
+      }
+      if (this.game && this.game.player && this.game.player.drawBots) {
+        this.game.player.drawBots(ctx, camera, imageLoader);
       }
       this.particles.draw(ctx, camera);
     }
@@ -4643,11 +5880,21 @@
       const spRatio = Math.max(0, player.specialMeter / 100);
       ctx.fillStyle = "rgba(0, 0, 0, 0.75)";
       ctx.fillRect(hpX - 1, spY - 1, spW + 2, spH + 2);
-      ctx.fillStyle = spRatio >= 0.4 ? "#00e5ff" : "#0066aa";
+      const isReady = spRatio >= 1;
+      if (isReady) {
+        const pulse = 0.75 + Math.sin(Date.now() / 140) * 0.25;
+        ctx.fillStyle = `rgba(0, 240, 255, ${pulse})`;
+        ctx.shadowBlur = 10;
+        ctx.shadowColor = "#00f0ff";
+      } else {
+        ctx.fillStyle = "#0088cc";
+        ctx.shadowBlur = 0;
+      }
       ctx.fillRect(hpX, spY, spW * spRatio, spH);
-      ctx.fillStyle = spRatio >= 0.4 ? "#00e5ff" : "#888888";
+      ctx.shadowBlur = 0;
+      ctx.fillStyle = isReady ? "#00ffff" : "#888888";
       ctx.font = "bold 9px sans-serif";
-      ctx.fillText(spRatio >= 0.4 ? "ESPECIAL PRONTO [L/C]" : "CARREGANDO SP", hpX + spW + 8, spY + 8);
+      ctx.fillText(isReady ? "ESPECIAL 100% PRONTO [L/C]" : `SP: ${Math.floor(player.specialMeter)}%`, hpX + spW + 8, spY + 8);
       ctx.font = "bold 13px sans-serif";
       let hearts = "";
       for (let i = 0; i < 3; i++) {
@@ -4702,46 +5949,139 @@
       ctx.restore();
     }
     drawBossHealthBar(ctx, boss) {
+      const barsMax = boss.barsMax || 4;
+      const curBar = boss.currentBar;
+      if (curBar <= 0 && boss.hp <= 0) return;
+      const BOSS_PALETTES = {
+        4: [
+          null,
+          { primary: "#ff0055", secondary: "#990022", glow: "#ff0033", label: "CR\xCDTICA" },
+          // 1 (Vermelho Sangue)
+          { primary: "#ff7700", secondary: "#cc4400", glow: "#ff6600", label: "LARANJA" },
+          // 2 (Laranja Fogo)
+          { primary: "#ffd700", secondary: "#cc9900", glow: "#ffd700", label: "DOURADA" },
+          // 3 (Ouro)
+          { primary: "#00e676", secondary: "#009944", glow: "#00ff88", label: "VERDE" }
+          // 4 (Verde Neon)
+        ],
+        10: [
+          null,
+          { primary: "#ff0055", secondary: "#990022", glow: "#ff0033", label: "CR\xCDTICA" },
+          // 1 (Vermelho)
+          { primary: "#ff3d00", secondary: "#bf360c", glow: "#ff3d00", label: "LAVA" },
+          // 2 (Lava)
+          { primary: "#ff9100", secondary: "#e65100", glow: "#ff9100", label: "\xC2MBAR" },
+          // 3 (Âmbar)
+          { primary: "#ffd600", secondary: "#f57f17", glow: "#ffd600", label: "SOLAR" },
+          // 4 (Ouro Solar)
+          { primary: "#76ff03", secondary: "#33691e", glow: "#76ff03", label: "LIMA" },
+          // 5 (Lima)
+          { primary: "#00e676", secondary: "#004d40", glow: "#00ff88", label: "VERDE" },
+          // 6 (Esmeralda)
+          { primary: "#00e5ff", secondary: "#006064", glow: "#00e5ff", label: "CIANO" },
+          // 7 (Ciano)
+          { primary: "#2979ff", secondary: "#0d47a1", glow: "#2979ff", label: "AZUL" },
+          // 8 (Cobalto)
+          { primary: "#ff1744", secondary: "#880e4f", glow: "#ff1744", label: "MAGENTA" },
+          // 9 (Magenta)
+          { primary: "#d500f9", secondary: "#4a148c", glow: "#e040fb", label: "C\xD3SMICA" }
+          // 10 (Cósmica)
+        ]
+      };
+      const palette = barsMax === 10 ? BOSS_PALETTES[10] : BOSS_PALETTES[4];
+      const curColor = palette[curBar] || palette[1];
+      const underBar = curBar - 1;
+      const underColor = underBar >= 1 ? palette[underBar] : null;
+      const ratio = Math.max(0, Math.min(1, boss.currentBarRatio));
       const cx = 480;
       const cy = 492;
       const bw = 380;
       const bh = 18;
-      const ratio = Math.max(0, boss.hp / boss.maxHp);
       ctx.save();
-      ctx.fillStyle = "rgba(10, 8, 22, 0.88)";
-      ctx.strokeStyle = "#ff2255";
+      ctx.fillStyle = "rgba(10, 8, 22, 0.92)";
+      ctx.strokeStyle = curColor.glow;
       ctx.lineWidth = 2;
-      ctx.shadowBlur = 15;
-      ctx.shadowColor = "rgba(255, 34, 85, 0.5)";
-      ctx.strokeRect(cx - bw / 2 - 14, cy - 22, bw + 28, bh + 30);
-      ctx.fillRect(cx - bw / 2 - 14, cy - 22, bw + 28, bh + 30);
-      ctx.textAlign = "center";
-      ctx.fillStyle = "#ff2255";
+      ctx.shadowBlur = 16;
+      ctx.shadowColor = curColor.glow;
+      ctx.strokeRect(cx - bw / 2 - 52, cy - 23, bw + 64, bh + 31);
+      ctx.fillRect(cx - bw / 2 - 52, cy - 23, bw + 64, bh + 31);
+      ctx.textAlign = "left";
+      ctx.fillStyle = curColor.primary;
       ctx.font = "bold 13px sans-serif";
       ctx.shadowBlur = 10;
-      ctx.shadowColor = "#ff0033";
-      ctx.fillText(`\u2620 CHEFE: ${boss.name.toUpperCase()} - ${boss.title}`, cx, cy - 6);
-      ctx.fillStyle = "rgba(0, 0, 0, 0.9)";
-      ctx.strokeStyle = "#ff4477";
-      ctx.lineWidth = 1.5;
-      ctx.strokeRect(cx - bw / 2 - 1, cy - 1, bw + 2, bh + 2);
-      ctx.fillRect(cx - bw / 2, cy, bw, bh);
-      const bossGrad = ctx.createLinearGradient(cx - bw / 2, 0, cx + bw / 2, 0);
-      bossGrad.addColorStop(0, "#ff0055");
-      bossGrad.addColorStop(0.5, "#ff6600");
-      bossGrad.addColorStop(1, "#ffd700");
-      ctx.fillStyle = bossGrad;
-      ctx.shadowBlur = 12;
-      ctx.shadowColor = "#ff3300";
-      ctx.fillRect(cx - bw / 2, cy, bw * ratio, bh);
-      ctx.fillStyle = "rgba(255, 255, 255, 0.22)";
-      ctx.fillRect(cx - bw / 2, cy, bw * ratio, bh / 2);
+      ctx.shadowColor = curColor.glow;
+      ctx.fillText(`\u2620 CHEFE: ${boss.name.toUpperCase()} - ${boss.title}`, cx - bw / 2 - 46, cy - 7);
+      ctx.textAlign = "right";
+      let pipsStr = "";
+      for (let b = 1; b <= barsMax; b++) {
+        pipsStr += b <= curBar ? "\u25C6" : "\u25C7";
+      }
+      ctx.font = "11px sans-serif";
+      ctx.fillStyle = curBar === 1 ? "#ff2255" : curColor.primary;
+      ctx.fillText(pipsStr, cx + bw / 2 + 6, cy - 7);
+      const badgeX = cx - bw / 2 - 48;
+      const badgeY = cy;
+      const badgeW = 42;
+      const badgeH = bh;
+      const badgeGrad = ctx.createLinearGradient(badgeX, badgeY, badgeX + badgeW, badgeY + badgeH);
+      badgeGrad.addColorStop(0, curColor.primary);
+      badgeGrad.addColorStop(1, curColor.secondary);
+      ctx.fillStyle = badgeGrad;
+      ctx.shadowBlur = curBar === 1 ? 12 + Math.sin(Date.now() * 0.015) * 6 : 8;
+      ctx.shadowColor = curColor.glow;
+      ctx.fillRect(badgeX, badgeY, badgeW, badgeH);
+      ctx.strokeStyle = "#ffffff";
+      ctx.lineWidth = 1;
+      ctx.strokeRect(badgeX, badgeY, badgeW, badgeH);
+      ctx.textAlign = "center";
+      ctx.fillStyle = "#ffffff";
+      ctx.font = "bold 12px sans-serif";
       ctx.shadowBlur = 4;
-      ctx.shadowColor = "#000";
+      ctx.shadowColor = "#000000";
+      ctx.fillText(`x${curBar}`, badgeX + badgeW / 2, badgeY + 13);
+      const barX = cx - bw / 2;
+      const barY = cy;
+      ctx.fillStyle = "rgba(0, 0, 0, 0.95)";
+      ctx.strokeStyle = "#222233";
+      ctx.lineWidth = 1.5;
+      ctx.strokeRect(barX - 1, barY - 1, bw + 2, bh + 2);
+      ctx.fillRect(barX, barY, bw, bh);
+      if (underColor) {
+        const underGrad = ctx.createLinearGradient(barX, 0, barX + bw, 0);
+        underGrad.addColorStop(0, underColor.primary);
+        underGrad.addColorStop(1, underColor.secondary);
+        ctx.fillStyle = underGrad;
+        ctx.shadowBlur = 0;
+        ctx.fillRect(barX, barY, bw, bh);
+        ctx.fillStyle = "rgba(0, 0, 0, 0.25)";
+        ctx.fillRect(barX, barY, bw, bh);
+      } else {
+        ctx.fillStyle = "rgba(25, 4, 10, 0.95)";
+        ctx.fillRect(barX, barY, bw, bh);
+      }
+      if (ratio > 0) {
+        const fillW = bw * ratio;
+        const curGrad = ctx.createLinearGradient(barX, 0, barX + bw, 0);
+        curGrad.addColorStop(0, curColor.primary);
+        curGrad.addColorStop(1, curColor.secondary);
+        ctx.fillStyle = curGrad;
+        ctx.shadowBlur = 12;
+        ctx.shadowColor = curColor.glow;
+        ctx.fillRect(barX, barY, fillW, bh);
+        ctx.fillStyle = "#ffffff";
+        ctx.shadowBlur = 8;
+        ctx.shadowColor = "#ffffff";
+        ctx.fillRect(barX + fillW - 2, barY, 2, bh);
+        ctx.fillStyle = "rgba(255, 255, 255, 0.28)";
+        ctx.shadowBlur = 0;
+        ctx.fillRect(barX, barY, fillW, bh / 2);
+      }
+      ctx.shadowBlur = 4;
+      ctx.shadowColor = "#000000";
       ctx.fillStyle = "#ffffff";
       ctx.font = "bold 11px sans-serif";
       ctx.textAlign = "center";
-      ctx.fillText(`${Math.ceil(boss.hp)} / ${boss.maxHp}`, cx, cy + 13);
+      ctx.fillText(`VIDA ${curBar}/${barsMax} \u2022 ${Math.ceil(boss.hp)} / ${boss.maxHp}`, cx, cy + 13);
       ctx.restore();
     }
     drawGoPrompt(ctx, isPortalOpen = false) {
@@ -4799,29 +6139,43 @@
       this.charThemes = {
         andrey: {
           themeClass: "theme-andrey",
-          styleTag: "CIBERN\xC9TICO & PLASMA",
+          styleTag: "PLASMA & TECH",
+          rank: "S",
           color: "#00f0ff",
-          spriteSrc: "assets/images/sprites/characters/andrey_idle.png"
+          spriteSrc: "assets/images/sprites/characters/andrey_idle.png",
+          sound: () => Sound.playTone(420, 680, 0.08, "sine", 0.25)
         },
         emerson: {
           themeClass: "theme-emerson",
-          styleTag: "TIT\xC3 DA SUPER FOR\xC7A",
+          styleTag: "FOR\xC7A TIT\xC2NICA",
+          rank: "S",
           color: "#ffb700",
-          spriteSrc: "assets/images/sprites/characters/emerson_idle.png"
+          spriteSrc: "assets/images/sprites/characters/emerson_idle.png",
+          sound: () => Sound.playTone(130, 240, 0.12, "sawtooth", 0.28)
         },
         nata: {
           themeClass: "theme-nata",
-          styleTag: "DAN\xC7ARINA FLAMEJANTE",
+          styleTag: "VELOCIDADE & ROCK",
+          rank: "S",
           color: "#ff0077",
-          spriteSrc: "assets/images/sprites/characters/nata_idle.png"
+          spriteSrc: "assets/images/sprites/characters/nata_idle.png",
+          sound: () => Sound.playTone(340, 580, 0.09, "triangle", 0.26)
         },
         unicao: {
           themeClass: "theme-unicao",
-          styleTag: "LENDA CANINA DAS 4 PATAS",
+          styleTag: "LENDA CANINA",
+          rank: "S",
           color: "#00ffaa",
-          spriteSrc: "assets/images/sprites/characters/dog_idle.png"
+          spriteSrc: "assets/images/sprites/characters/dog_idle.png",
+          sound: () => Sound.playTone(400, 720, 0.08, "square", 0.2)
         }
       };
+    }
+    selectKey(key) {
+      const idx = this.charKeys.indexOf(key);
+      if (idx !== -1) {
+        this.selectIndex(idx);
+      }
     }
     setupDOM() {
       const container = document.getElementById("char-select-grid");
@@ -4832,8 +6186,10 @@
         const theme = this.charThemes[key] || {
           themeClass: "theme-default",
           styleTag: "LUTADOR",
+          rank: "A",
           color: "#00f0ff",
-          spriteSrc: ""
+          spriteSrc: "",
+          sound: () => Sound.playTone(300, 500, 0.06, "triangle", 0.2)
         };
         const card = document.createElement("div");
         card.className = `char-card ${theme.themeClass} ${index === this.selectedIndex ? "selected" : ""}`;
@@ -4842,7 +6198,7 @@
         <div class="card-glow"></div>
         <div class="card-1p-badge">
           <span class="p1-icon">\u2605 1P</span>
-          <span class="p1-text">ESCOLHIDO</span>
+          <span class="p1-text">SELECIONADO</span>
         </div>
 
         <div class="card-media-combo">
@@ -4852,8 +6208,12 @@
           </div>
           <div class="card-sprite-preview">
             <img src="${theme.spriteSrc}" alt="${char.name} sprite" class="fighter-idle-sprite">
+            <div class="fighter-ground-shadow"></div>
           </div>
-          <span class="char-archetype-tag" style="border-color: ${theme.color}; color: ${theme.color};">${theme.styleTag}</span>
+          <div class="card-top-tags">
+            <span class="char-archetype-tag" style="border-color: ${theme.color}; color: ${theme.color};">${theme.styleTag}</span>
+            <span class="char-rank-badge" style="background: ${theme.color};">RANK ${theme.rank}</span>
+          </div>
         </div>
 
         <div class="card-info">
@@ -4864,9 +6224,9 @@
 
           <p class="char-desc">${char.description}</p>
 
-          <div class="char-special-box">
+          <div class="char-special-box" style="border-color: ${theme.color}66;">
             <span class="sp-icon">\u26A1</span>
-            <span class="sp-name" title="${char.specialName}">${char.specialName}</span>
+            <span class="sp-name" style="color: ${theme.color};" title="${char.specialName}">${char.specialName}</span>
           </div>
 
           <div class="stat-bars">
@@ -4892,7 +6252,7 @@
             </div>
           </div>
 
-          <button type="button" class="select-btn">
+          <button type="button" class="select-btn" style="border-color: ${theme.color};">
             ESCOLHER ${char.name} \u2794
           </button>
         </div>
@@ -4912,7 +6272,8 @@
         card.addEventListener("mouseenter", () => {
           if (this.selectedIndex !== index) {
             this.selectIndex(index);
-            Sound.playTone(320, 520, 0.06, "triangle", 0.2);
+            if (theme.sound) theme.sound();
+            else Sound.playTone(320, 520, 0.06, "triangle", 0.2);
           }
         });
         container.appendChild(card);
@@ -4977,7 +6338,9 @@
     navigate(dir) {
       this.selectIndex(this.selectedIndex + dir);
       Sound.init();
-      Sound.playTone(320, 560, 0.07, "triangle", 0.25);
+      const theme = this.charThemes[this.charKeys[this.selectedIndex]];
+      if (theme && theme.sound) theme.sound();
+      else Sound.playTone(320, 560, 0.07, "triangle", 0.25);
     }
     confirmSelection() {
       const selectedKey = this.charKeys[this.selectedIndex];
@@ -4986,6 +6349,430 @@
       if (this.onSelect) {
         this.onSelect(selectedKey);
       }
+    }
+  };
+
+  // js/ui/storyIntro.js
+  var StoryIntro = class {
+    constructor(onComplete, onSkip) {
+      this.onComplete = onComplete;
+      this.onSkip = onSkip;
+      this.currentScene = 0;
+      this.container = null;
+      this.autoTimer = null;
+      this.autoDuration = 7500;
+      this.timerStartTime = 0;
+      this.rafId = null;
+      this.scenes = [
+        {
+          id: "prologue",
+          type: "prologue",
+          badge: "\u2605 PR\xD3LOGO \u2022 O CERCO DE NEO-METR\xD3POLE \u2605",
+          title: "A BATALHA PELOS 9 REINOS",
+          subtitle: "QUEDA DA CIDADE & O CHAMADO DA REBELI\xC3O",
+          themeColor: "#00f0ff",
+          glowColor: "rgba(0, 240, 255, 0.5)",
+          text: "Ano 209X. Uma tempestade c\xF3smica cobriu os c\xE9us e Bahamut Dragon, o Imperador do Apocalipse, assumiu o poder absoluto. Sob suas ordens, 9 Lordes Supremos governaram com m\xE3o de ferro \u2014 dos canais de esgoto mais imundos aos terra\xE7os neon mais altos. Quando toda a esperan\xE7a parecia extinta, os quatro maiores guerreiros do submundo se uniram sob uma \xFAnica bandeira: STREET BRAWLERS!",
+          imageBg: "assets/images/backgrounds/stage1_alligator.jpg",
+          sfx: "start"
+        },
+        {
+          id: "andrey",
+          type: "hero",
+          charKey: "andrey",
+          name: "ANDREY",
+          title: "O G\xEAnio da Tecnologia & Esquadr\xE3o AndreyBot",
+          themeColor: "#00f0ff",
+          glowColor: "rgba(0, 240, 255, 0.65)",
+          portrait: "assets/images/portrait_andrey.jpg",
+          sprite: "assets/images/sprites/characters/andrey_idle.png",
+          subSprite: "assets/images/sprites/characters/andrey_bot.png",
+          roleBadge: "ESTRATEGISTA CIBERN\xC9TICO \u2022 PLASMA T\xC1TICO",
+          stats: { poder: "82%", velocidade: "85%", tecnologia: "100%" },
+          history: "Prod\xEDgio em rob\xF3tica e ciberseguran\xE7a. Construiu seu pr\xF3prio exo-equipamento de plasma e lan\xE7ou 3 drones aut\xF4nomos em \xF3rbita baixa para bombardear as for\xE7as inimigas a qualquer chamado.",
+          quote: '"Os sensores mostram que King Gator selou os esgotos da cidade. Se n\xE3o agirmos r\xE1pido, a rede de energia cai e os outros 8 reinos ser\xE3o fortificados. Meus AndreyBots j\xE1 est\xE3o engatilhados. Vamos descer e restaurar a ordem!"',
+          sfx: "laser"
+        },
+        {
+          id: "emerson",
+          type: "hero",
+          charKey: "emerson",
+          name: "EMERSON",
+          title: "O Tit\xE3 S\xEDsmico da Super For\xE7a",
+          themeColor: "#ffaa00",
+          glowColor: "rgba(255, 170, 0, 0.65)",
+          portrait: "assets/images/portrait_emerson.jpg",
+          sprite: "assets/images/sprites/characters/emerson_idle.png",
+          subSprite: "assets/images/sprites/characters/emerson_special1.png",
+          roleBadge: "DEMOLIDOR TECT\xD4NICO \u2022 FOR\xC7A COLOSSAL",
+          stats: { poder: "100%", resistencia: "95%", impacto: "100%" },
+          history: "Nascido nos distritos industriais de forja pesada, Emerson desenvolveu uma musculatura tit\xE2nica capaz de desferir socos com impacto de abalos s\xEDsmicos. Quando ele golpeia o solo, a terra inteira estremece.",
+          quote: '"Deixa a conversa fiada pros computadores, Andrey! Plano bom \xE9 plano que derruba parede e amassa cara de r\xE9ptil gigante. Meu soco especial t\xE1 a 100% carregado. Deixa que eu entro na frente arrombando as portas!"',
+          sfx: "heavy"
+        },
+        {
+          id: "nata",
+          type: "hero",
+          charKey: "nata",
+          name: "NATA",
+          title: "A Dan\xE7arina Flamejante da Noite",
+          themeColor: "#ff0077",
+          glowColor: "rgba(255, 0, 119, 0.65)",
+          portrait: "assets/images/portrait_nata.jpg",
+          sprite: "assets/images/sprites/characters/nata_idle.png",
+          subSprite: "assets/images/sprites/characters/nata_kick.png",
+          roleBadge: "VELOCIDADE DA LUZ \u2022 CHUTES ACROB\xC1TICOS",
+          stats: { velocidade: "98%", agilidade: "96%", precisao: "90%" },
+          history: "Mestre suprema em artes marciais acrob\xE1ticas e capoeira cyberpunk. Seus p\xE9s em chamas movem-se com tamanha rapidez que seus inimigos s\xF3 percebem o golpe depois de estarem no ch\xE3o.",
+          quote: '"Voc\xEAs dois demoram uma eternidade! Enquanto o Emerson bate na parede e o Andrey ajusta antena, eu j\xE1 des\xE7o voando e limpo a primeira linha de capangas. S\xF3 tentem n\xE3o ficar pra tr\xE1s enquanto eu dan\xE7o!"',
+          sfx: "kick"
+        },
+        {
+          id: "unicao",
+          type: "hero",
+          charKey: "unicao",
+          name: "UNIC\xC3O",
+          title: "A Lenda Canina Ancestral",
+          themeColor: "#00ff88",
+          glowColor: "rgba(0, 255, 136, 0.65)",
+          portrait: "assets/images/portrait_dog.jpg",
+          sprite: "assets/images/sprites/characters/dog_idle.png",
+          subSprite: "assets/images/sprites/characters/dog_special.png",
+          roleBadge: "GUARDI\xC3O FERAL \u2022 FARO T\xC1TICO IMBAT\xCDVEL",
+          stats: { faro: "100%", velocidade: "88%", lealdade: "100%" },
+          history: "Guardi\xE3o canino de sentidos lend\xE1rios e presas afiadas. Seu faro detecta emboscadas e covis a quil\xF4metros de dist\xE2ncia. \xC9 o cora\xE7\xE3o e a prote\xE7\xE3o viva dos Street Brawlers.",
+          quote: '"AUUUU! GRRRR...! (O cheiro dos monstros do lodo t\xE1 forte nos canais de esgoto... Sigam minhas patas! Ningu\xE9m mexe com a nossa matilha!)"',
+          sfx: "growl"
+        },
+        {
+          id: "dialogue_assembly",
+          type: "assembly",
+          badge: "\u2605 BRIEFING DE MISS\xC3O \u2022 ENTRADA DOS ESGOTOS \u2605",
+          title: "O CONSELHO DE GUERRA DOS BRAWLERS",
+          subtitle: "A ESTRAT\xC9GIA FINAL ANTES DA INVAS\xC3O",
+          themeColor: "#ffd700",
+          glowColor: "rgba(255, 215, 0, 0.55)",
+          dialogues: [
+            { speaker: "ANDREY", color: "#00f0ff", portrait: "assets/images/portrait_andrey.jpg", text: "A rota t\xE1 selada. Entramos pelo P\xE2ntano & Esgoto, derrotamos King Gator e avan\xE7amos rumo \xE0 Floresta dos Pinheiros!" },
+            { speaker: "EMERSON", color: "#ffaa00", portrait: "assets/images/portrait_emerson.jpg", text: "E se o r\xE9ptil de armadura vier de dente aberto, vai tomar um soco s\xEDsmico que vai fazer a carca\xE7a dele voar!" },
+            { speaker: "NATA", color: "#ff0077", portrait: "assets/images/portrait_nata.jpg", text: "Eu cubro a retaguarda a\xE9rea. Qualquer capanga que tentar cercar a gente vai virar churrasco nos meus p\xE9s!" },
+            { speaker: "UNIC\xC3O", color: "#00ff88", portrait: "assets/images/portrait_dog.jpg", text: "AUF! AUF! (Vou farejar todos os frangos assados escondidos no caminho pra restaurar a nossa vida!)" },
+            { speaker: "TODOS", color: "#ffd700", portrait: "assets/images/portrait_emerson.jpg", text: "HORA DO QUEBRA-QUEBRA! STREET BRAWLERS, AVAN\xC7AR PELOS 9 REINOS!" }
+          ],
+          sfx: "special"
+        }
+      ];
+      this.boundKeyDown = this.handleKeyDown.bind(this);
+    }
+    setupDOM() {
+      let screen = document.getElementById("story-intro-screen");
+      if (!screen) {
+        screen = document.createElement("div");
+        screen.id = "story-intro-screen";
+        screen.className = "screen-layer hidden story-screen";
+        const container = document.getElementById("game-container");
+        if (container) {
+          container.appendChild(screen);
+        } else {
+          document.body.appendChild(screen);
+        }
+      }
+      this.container = screen;
+    }
+    show(onComplete = null, onSkip = null) {
+      if (onComplete) this.onComplete = onComplete;
+      if (onSkip) this.onSkip = onSkip;
+      this.setupDOM();
+      this.currentScene = 0;
+      this.container.classList.remove("hidden");
+      window.addEventListener("keydown", this.boundKeyDown);
+      this.renderCurrentScene();
+    }
+    hide() {
+      this.stopAutoTimer();
+      window.removeEventListener("keydown", this.boundKeyDown);
+      if (this.container) {
+        this.container.classList.add("hidden");
+      }
+    }
+    handleKeyDown(e) {
+      const key = e.key.toLowerCase();
+      if (key === "escape" || key === " ") {
+        e.preventDefault();
+        this.skip();
+      } else if (key === "enter" || key === "j" || key === "z" || key === "arrowright" || key === "d") {
+        e.preventDefault();
+        this.nextScene();
+      } else if (key === "arrowleft" || key === "a") {
+        e.preventDefault();
+        this.prevScene();
+      }
+    }
+    nextScene() {
+      Sound.init();
+      if (this.currentScene < this.scenes.length - 1) {
+        this.currentScene++;
+        Sound.playTone(400, 600, 0.08, "sine", 0.15);
+        this.renderCurrentScene();
+      } else {
+        this.complete();
+      }
+    }
+    prevScene() {
+      if (this.currentScene > 0) {
+        this.currentScene--;
+        Sound.playTone(500, 350, 0.08, "sine", 0.15);
+        this.renderCurrentScene();
+      }
+    }
+    skip() {
+      Sound.init();
+      Sound.playPunch();
+      this.hide();
+      if (this.onSkip) this.onSkip();
+      else if (this.onComplete) this.onComplete();
+    }
+    complete() {
+      Sound.init();
+      Sound.playSpecial();
+      this.hide();
+      if (this.onComplete) this.onComplete();
+    }
+    stopAutoTimer() {
+      if (this.autoTimer) {
+        clearTimeout(this.autoTimer);
+        this.autoTimer = null;
+      }
+      if (this.rafId) {
+        cancelAnimationFrame(this.rafId);
+        this.rafId = null;
+      }
+    }
+    startAutoTimer() {
+      this.stopAutoTimer();
+      this.timerStartTime = performance.now();
+      const barFill = this.container.querySelector(".story-timer-fill");
+      const updateBar = () => {
+        const elapsed = performance.now() - this.timerStartTime;
+        const progress = Math.min(1, elapsed / this.autoDuration);
+        if (barFill) {
+          barFill.style.width = `${progress * 100}%`;
+        }
+        if (progress < 1) {
+          this.rafId = requestAnimationFrame(updateBar);
+        }
+      };
+      this.rafId = requestAnimationFrame(updateBar);
+      this.autoTimer = setTimeout(() => {
+        this.nextScene();
+      }, this.autoDuration);
+    }
+    playSoundForScene(scene) {
+      try {
+        Sound.init();
+        if (scene.sfx === "laser") Sound.playLaserHit();
+        else if (scene.sfx === "heavy") Sound.playHeavyHit();
+        else if (scene.sfx === "kick") Sound.playKick();
+        else if (scene.sfx === "growl") Sound.playTone(320, 480, 0.18, "sawtooth", 0.22);
+        else if (scene.sfx === "special") Sound.playSpecial();
+        else Sound.playTone(300, 520, 0.12, "sine", 0.18);
+      } catch (e) {
+      }
+    }
+    renderCurrentScene() {
+      const scene = this.scenes[this.currentScene];
+      this.playSoundForScene(scene);
+      const isAssembly = scene.type === "assembly";
+      const isPrologue = scene.type === "prologue";
+      let contentHtml = "";
+      let stepsHtml = '<div class="story-steps-row">';
+      this.scenes.forEach((sc, idx) => {
+        const active = idx === this.currentScene ? "active" : "";
+        const passed = idx < this.currentScene ? "passed" : "";
+        const scName = sc.name || (sc.id === "prologue" ? "PR\xD3LOGO" : "BRIEFING");
+        stepsHtml += `
+        <div class="story-step-item ${active} ${passed}" data-idx="${idx}">
+          <span class="step-num">${idx + 1}</span>
+          <span class="step-label">${scName}</span>
+        </div>
+      `;
+      });
+      stepsHtml += "</div>";
+      if (isPrologue) {
+        contentHtml = `
+        <div class="prologue-card-layout">
+          <div class="prologue-banner-glow">
+            <span class="story-badge">${scene.badge}</span>
+            <h1 class="story-hero-title">${scene.title}</h1>
+            <p class="story-hero-sub">${scene.subtitle}</p>
+          </div>
+          <div class="prologue-body-box">
+            <div class="prologue-art-backdrop">
+              <div class="prologue-heroes-lineup">
+                <img src="assets/images/sprites/characters/andrey_idle.png" class="lineup-sprite s-andrey" alt="Andrey">
+                <img src="assets/images/sprites/characters/emerson_idle.png" class="lineup-sprite s-emerson" alt="Emerson">
+                <img src="assets/images/sprites/characters/nata_idle.png" class="lineup-sprite s-nata" alt="Nata">
+                <img src="assets/images/sprites/characters/dog_idle.png" class="lineup-sprite s-unicao" alt="Unic\xE3o">
+              </div>
+            </div>
+            <div class="story-speech-box prologue-speech">
+              <p class="prologue-lead-text">${scene.text}</p>
+            </div>
+          </div>
+        </div>
+      `;
+      } else if (isAssembly) {
+        let dialoguesHtml = "";
+        scene.dialogues.forEach((dlg) => {
+          dialoguesHtml += `
+          <div class="assembly-dialogue-row" style="border-left-color: ${dlg.color}">
+            <img src="${dlg.portrait}" class="dialogue-thumb" alt="${dlg.speaker}">
+            <div class="dialogue-text-wrap">
+              <span class="dialogue-speaker" style="color: ${dlg.color}">${dlg.speaker}</span>
+              <p class="dialogue-quote">${dlg.text}</p>
+            </div>
+          </div>
+        `;
+        });
+        contentHtml = `
+        <div class="assembly-card-layout">
+          <div class="story-header-wrap">
+            <span class="story-badge">${scene.badge}</span>
+            <h1 class="story-hero-title" style="color: ${scene.themeColor}">${scene.title}</h1>
+            <p class="story-hero-sub">${scene.subtitle}</p>
+          </div>
+          <div class="assembly-dialogues-list">
+            ${dialoguesHtml}
+          </div>
+        </div>
+      `;
+      } else {
+        let statsHtml = "";
+        for (const [stKey, stVal] of Object.entries(scene.stats)) {
+          statsHtml += `
+          <div class="hero-stat-pill">
+            <span class="stat-name">${stKey.toUpperCase()}</span>
+            <span class="stat-val" style="color: ${scene.themeColor}">${stVal}</span>
+          </div>
+        `;
+        }
+        contentHtml = `
+        <div class="hero-spotlight-layout">
+          <!-- Left Column: Portrait, Sprites & Aura -->
+          <div class="hero-showcase-visual">
+            <div class="hero-aura-glow" style="background: radial-gradient(circle, ${scene.glowColor} 0%, transparent 70%);"></div>
+            <div class="hero-portrait-frame" style="border-color: ${scene.themeColor}; box-shadow: 0 0 25px ${scene.glowColor};">
+              <img src="${scene.portrait}" class="hero-big-portrait" alt="${scene.name}">
+              <div class="hero-role-badge" style="background: ${scene.themeColor};">${scene.roleBadge}</div>
+            </div>
+            <div class="hero-sprite-showcase">
+              <img src="${scene.sprite}" class="hero-idle-sprite" alt="${scene.name}">
+              ${scene.subSprite ? `<img src="${scene.subSprite}" class="hero-sub-sprite" alt="SubSprite">` : ""}
+            </div>
+          </div>
+
+          <!-- Right Column: Lore, Stats & Character Voice Quote -->
+          <div class="hero-showcase-info">
+            <div class="hero-header-box">
+              <span class="story-badge" style="border-color: ${scene.themeColor}; color: ${scene.themeColor};">${scene.name} &bull; APRESENTA\xC7\xC3O</span>
+              <h1 class="story-hero-title" style="color: ${scene.themeColor}; text-shadow: 0 0 20px ${scene.glowColor};">${scene.name}</h1>
+              <h3 class="story-hero-sub">${scene.title}</h3>
+            </div>
+
+            <div class="hero-lore-box">
+              <h4 class="lore-title">\u{1F4DC} HIST\xD3RICO DE COMBATE</h4>
+              <p class="lore-text">${scene.history}</p>
+            </div>
+
+            <div class="hero-stats-row">
+              ${statsHtml}
+            </div>
+
+            <div class="story-speech-box" style="border-color: ${scene.themeColor}; box-shadow: inset 0 0 20px ${scene.glowColor};">
+              <div class="speech-tag" style="background: ${scene.themeColor};">FALA DE INTRODU\xC7\xC3O</div>
+              <p class="speech-quote">${scene.quote}</p>
+            </div>
+          </div>
+        </div>
+      `;
+      }
+      const isLastScene = this.currentScene === this.scenes.length - 1;
+      const nextBtnText = isLastScene ? "\u{1F94A} ENTRAR NA BATALHA [ENTER]" : "PR\xD3XIMO \u2794 [ENTER / J]";
+      this.container.innerHTML = `
+      <div class="story-screen-backdrop"></div>
+      <div class="arcade-scanlines"></div>
+
+      <!-- Top Navigation Header -->
+      <div class="story-top-nav">
+        <div class="story-brand">
+          <span class="brand-dot"></span>
+          <span class="brand-text">STREET BRAWLERS &bull; MODO HIST\xD3RIA &bull; CENA ${this.currentScene + 1}/${this.scenes.length}</span>
+        </div>
+        ${stepsHtml}
+        <button id="btn-skip-story" class="story-skip-btn" type="button" title="Pular hist\xF3ria e ir direto para o jogo">
+          PULAR HIST\xD3RIA \u2794 [ESC / ESPA\xC7O]
+        </button>
+      </div>
+
+      <!-- Main Stage Content -->
+      <div class="story-main-stage">
+        ${contentHtml}
+      </div>
+
+      <!-- Bottom Interactive Controls Bar -->
+      <div class="story-bottom-bar">
+        <div class="story-timer-bar">
+          <div class="story-timer-fill" style="background: ${scene.themeColor}; box-shadow: 0 0 10px ${scene.themeColor}"></div>
+        </div>
+
+        <div class="story-controls-row">
+          <button id="btn-prev-scene" class="secondary-btn story-nav-btn ${this.currentScene === 0 ? "disabled" : ""}" type="button">
+            \u25C0 ANTERIOR [A]
+          </button>
+
+          <div class="story-hint-keys">
+            <span>[ENTER / J] AVAN\xC7AR</span> &bull; <span>[A] VOLTAR</span> &bull; <span>[ESPA\xC7O / ESC] PULAR</span>
+          </div>
+
+          <button id="btn-next-scene" class="primary-btn story-next-btn" type="button" style="background: ${isLastScene ? "linear-gradient(90deg, #ff0055, #ffd700)" : "linear-gradient(90deg, #00f0ff, #0088ff)"};">
+            <span class="btn-shine"></span>
+            ${nextBtnText}
+          </button>
+        </div>
+      </div>
+    `;
+      const nextBtn = this.container.querySelector("#btn-next-scene");
+      if (nextBtn) {
+        nextBtn.onclick = (e) => {
+          e.stopPropagation();
+          this.nextScene();
+        };
+      }
+      const prevBtn = this.container.querySelector("#btn-prev-scene");
+      if (prevBtn && this.currentScene > 0) {
+        prevBtn.onclick = (e) => {
+          e.stopPropagation();
+          this.prevScene();
+        };
+      }
+      const skipBtn = this.container.querySelector("#btn-skip-story");
+      if (skipBtn) {
+        skipBtn.onclick = (e) => {
+          e.stopPropagation();
+          this.skip();
+        };
+      }
+      this.container.querySelectorAll(".story-step-item").forEach((item) => {
+        item.onclick = (e) => {
+          e.stopPropagation();
+          const targetIdx = parseInt(item.getAttribute("data-idx"), 10);
+          if (!isNaN(targetIdx) && targetIdx !== this.currentScene) {
+            this.currentScene = targetIdx;
+            this.renderCurrentScene();
+          }
+        };
+      });
+      this.startAutoTimer();
     }
   };
 
@@ -5009,10 +6796,20 @@
       this.lastTime = performance.now();
       this.continueTimer = 9.99;
       this.lastCountdownSec = 10;
+      this.storyIntroUI = new StoryIntro();
       this.characterSelectUI = new CharacterSelect(
         (charKey) => {
           this.selectedCharKey = charKey;
-          this.startStage(0);
+          this.state = "story";
+          this.switchScreen("story-intro-screen");
+          this.storyIntroUI.show(
+            () => {
+              this.startStage(0);
+            },
+            () => {
+              this.startStage(0);
+            }
+          );
         },
         () => {
           this.switchScreen("title-screen");
@@ -5087,6 +6884,47 @@
           this.state = "select";
         };
       }
+      const chooseFighterBtn = document.getElementById("btn-choose-fighter");
+      if (chooseFighterBtn) {
+        chooseFighterBtn.onclick = () => {
+          Sound.init();
+          Sound.playPunch();
+          this.switchScreen("char-select-screen");
+          this.state = "select";
+        };
+      }
+      const storyBtn = document.getElementById("btn-story-intro");
+      if (storyBtn) {
+        storyBtn.onclick = () => {
+          Sound.init();
+          Sound.playSpecial();
+          this.state = "story";
+          this.switchScreen("story-intro-screen");
+          this.storyIntroUI.show(
+            () => {
+              this.switchScreen("char-select-screen");
+              this.state = "select";
+            },
+            () => {
+              this.switchScreen("title-screen");
+              this.state = "title";
+            }
+          );
+        };
+      }
+      document.querySelectorAll(".hero-chip").forEach((chip) => {
+        chip.style.cursor = "pointer";
+        chip.onclick = () => {
+          const charKey = chip.getAttribute("data-char");
+          Sound.init();
+          Sound.playSpecial();
+          if (charKey && this.characterSelectUI) {
+            this.characterSelectUI.selectKey(charKey);
+          }
+          this.switchScreen("char-select-screen");
+          this.state = "select";
+        };
+      });
       const btnResume = document.getElementById("pause-opt-resume");
       if (btnResume) btnResume.onclick = () => this.resumeGame();
       const btnRestart = document.getElementById("pause-opt-restart");
@@ -5109,7 +6947,10 @@
         const code = e.code || "";
         const isConfirm = key === "enter" || key === " " || key === "j" || key === "z" || code === "KeyJ" || code === "KeyZ" || code === "Space" || code === "Enter";
         if (this.state === "title") {
-          if (isConfirm || key === "w" || key === "a" || key === "s" || key === "d") {
+          if (key === "h" || code === "KeyH") {
+            const storyBtn2 = document.getElementById("btn-story-intro");
+            if (storyBtn2) storyBtn2.click();
+          } else if (isConfirm || key === "c" || code === "KeyC") {
             if (startBtn) startBtn.click();
           }
         } else if (this.state === "continue") {
@@ -5280,6 +7121,7 @@
       const screens = [
         "loading-screen",
         "title-screen",
+        "story-intro-screen",
         "char-select-screen",
         "hud-overlay",
         "pause-screen",
@@ -5330,7 +7172,7 @@
       }
       if (this.player) {
         this.player.handleInput(Input);
-        this.player.update(dt, this.stageManager.stageLimits, this.camera);
+        this.player.update(dt, this.stageManager.stageLimits, this.camera, this.stageManager.particles);
         if (this.player.isDead && this.player.y === 0) {
           this.player.deathTime = (this.player.deathTime || 0) + dt;
           if (this.player.deathTime > 1) {
@@ -5359,6 +7201,118 @@
     resolveCombatCollisions() {
       const player = this.player;
       if (!player || player.isDead) return;
+      if (player.state === "special" && player.charKey === "emerson") {
+        if (player.specialPhase >= 2 && !player.specialImpactTriggered) {
+          player.specialImpactTriggered = true;
+          this.camera.shake(18, 0.75);
+          Sound.playSeismicImpact();
+          if (this.stageManager && this.stageManager.particles) {
+            this.stageManager.particles.addShockwave(player.x, player.z, 160, "#00e5ff");
+            this.stageManager.particles.addHitSparks(player.x, 15, player.z, "#00e5ff", 30);
+            this.stageManager.particles.addFloatingText("\u{1F4A5} IMPACTO S\xCDSMICO!", player.x, player.y + 110, player.z, "#00ffff");
+          }
+          for (const enemy of this.stageManager.enemies) {
+            if (!enemy.isDead) {
+              const damage = Math.max(1, Math.floor(enemy.maxHp * 0.5));
+              const tookDamage = enemy.takeDamage(
+                damage,
+                (enemy.x >= player.x ? 1 : -1) * 9.5,
+                8.5
+              );
+              if (tookDamage) {
+                this.stageManager.particles.addHitSparks(enemy.x, enemy.y + 40, enemy.z, "#00e5ff", 16);
+                this.stageManager.particles.addFloatingText(`-${damage} (50%)`, enemy.x, enemy.y + 70, enemy.z, "#00ffff");
+                player.addScore(250);
+              }
+            }
+          }
+          const boss2 = this.stageManager.boss;
+          if (boss2 && !boss2.isDead) {
+            const bossDamage = Math.max(1, Math.floor(boss2.maxHp * 0.25));
+            const tookDamage = boss2.takeDamage(
+              bossDamage,
+              (boss2.x >= player.x ? 1 : -1) * 7.5,
+              5
+            );
+            if (tookDamage) {
+              this.stageManager.particles.addHitSparks(boss2.x, boss2.y + 50, boss2.z, "#00e5ff", 24);
+              this.stageManager.particles.addFloatingText(`-${bossDamage} (25%)`, boss2.x, boss2.y + 90, boss2.z, "#00ffff");
+              player.addScore(500);
+              if (boss2.barBroken) {
+                boss2.barBroken = false;
+                this.stageManager.particles.addHitSparks(boss2.x, boss2.y + 60, boss2.z, "#ffff00", 30);
+                this.stageManager.particles.addFloatingText(`\u26A1 BARRA QUEBRADA! [x${boss2.currentBar}] \u26A1`, boss2.x, boss2.y + 115, boss2.z, "#ffd700");
+                Sound.playHeavyHit();
+                this.camera.shake(9, 0.25);
+              }
+            }
+          }
+        }
+        if (player.specialPhase === 3 && this.stageManager && this.stageManager.particles) {
+          if (Math.random() < 0.4) {
+            const rx = player.x + (Math.random() - 0.5) * 120;
+            const rz = player.z + (Math.random() - 0.5) * 40;
+            this.stageManager.particles.addHitSparks(rx, 8, rz, "#00e5ff", 4);
+          }
+        }
+      }
+      if (player.andreyShots && player.andreyShots.length > 0) {
+        for (const shot of player.andreyShots) {
+          if (shot.isDead) continue;
+          for (const enemy of this.stageManager.enemies) {
+            if (!enemy.isDead && !shot.isDead) {
+              const dx = Math.abs(shot.x - enemy.x);
+              const dz = Math.abs(shot.z - enemy.z);
+              const dy = Math.abs(shot.y - enemy.y);
+              if (dx < 38 && dz < 28 && dy < 50) {
+                shot.isDead = true;
+                const damage = Math.max(1, Math.floor(enemy.maxHp * 0.05));
+                const tookDamage = enemy.takeDamage(
+                  damage,
+                  (shot.vx >= 0 ? 1 : -1) * 3.5,
+                  2.5
+                );
+                if (tookDamage) {
+                  this.stageManager.particles.addHitSparks(enemy.x, enemy.y + 35, enemy.z, "#00ff88", 12);
+                  this.stageManager.particles.addFloatingText(`-${damage} (5%)`, enemy.x, enemy.y + 65, enemy.z, "#00ff88");
+                  Sound.playLaserHit();
+                  this.camera.shake(3.5, 0.1);
+                  player.addScore(80);
+                }
+              }
+            }
+          }
+          const boss2 = this.stageManager.boss;
+          if (boss2 && !boss2.isDead && !shot.isDead) {
+            const dx = Math.abs(shot.x - boss2.x);
+            const dz = Math.abs(shot.z - boss2.z);
+            const dy = Math.abs(shot.y - boss2.y);
+            if (dx < 48 && dz < 35 && dy < 60) {
+              shot.isDead = true;
+              const bossDamage = Math.max(1, Math.floor(boss2.maxHp * 0.05));
+              const tookDamage = boss2.takeDamage(
+                bossDamage,
+                (shot.vx >= 0 ? 1 : -1) * 2.5,
+                1.8
+              );
+              if (tookDamage) {
+                this.stageManager.particles.addHitSparks(boss2.x, boss2.y + 45, boss2.z, "#00ff88", 16);
+                this.stageManager.particles.addFloatingText(`-${bossDamage} (5%)`, boss2.x, boss2.y + 85, boss2.z, "#00ff88");
+                Sound.playLaserHit();
+                this.camera.shake(4.5, 0.12);
+                player.addScore(150);
+                if (boss2.barBroken) {
+                  boss2.barBroken = false;
+                  this.stageManager.particles.addHitSparks(boss2.x, boss2.y + 60, boss2.z, "#ffff00", 30);
+                  this.stageManager.particles.addFloatingText(`\u26A1 BARRA QUEBRADA! [x${boss2.currentBar}] \u26A1`, boss2.x, boss2.y + 115, boss2.z, "#ffd700");
+                  Sound.playHeavyHit();
+                  this.camera.shake(9, 0.25);
+                }
+              }
+            }
+          }
+        }
+      }
       const playerHitbox = player.getAttackHitbox();
       if (playerHitbox) {
         for (const enemy of this.stageManager.enemies) {
@@ -5393,6 +7347,13 @@
               this.stageManager.particles.addFloatingText(`-${Math.floor(playerHitbox.damage)}`, boss2.x, boss2.y + 90, boss2.z, "#ff3366");
               player.addScore(250);
               this.camera.shake(7, 0.2);
+              if (boss2.barBroken) {
+                boss2.barBroken = false;
+                this.stageManager.particles.addHitSparks(boss2.x, boss2.y + 60, boss2.z, "#ffff00", 30);
+                this.stageManager.particles.addFloatingText(`\u26A1 BARRA QUEBRADA! [x${boss2.currentBar}] \u26A1`, boss2.x, boss2.y + 115, boss2.z, "#ffd700");
+                Sound.playHeavyHit();
+                this.camera.shake(9, 0.25);
+              }
             }
           }
         }

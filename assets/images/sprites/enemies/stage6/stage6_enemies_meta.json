@@ -1,0 +1,170 @@
+{
+  "enemy_toucan": {
+    "idle": {
+      "w": 240,
+      "h": 228,
+      "ax": 0.4964,
+      "src": "assets/images/sprites/enemies/stage6/enemy_toucan_idle.png"
+    },
+    "walk1": {
+      "w": 255,
+      "h": 227,
+      "ax": 0.4511,
+      "src": "assets/images/sprites/enemies/stage6/enemy_toucan_walk1.png"
+    },
+    "crouch": {
+      "w": 237,
+      "h": 228,
+      "ax": 0.4426,
+      "src": "assets/images/sprites/enemies/stage6/enemy_toucan_crouch.png"
+    },
+    "punch": {
+      "w": 256,
+      "h": 240,
+      "ax": 0.4089,
+      "src": "assets/images/sprites/enemies/stage6/enemy_toucan_punch.png"
+    },
+    "fall": {
+      "w": 274,
+      "h": 209,
+      "ax": 0.5,
+      "src": "assets/images/sprites/enemies/stage6/enemy_toucan_fall.png"
+    },
+    "walk2": {
+      "w": 255,
+      "h": 227,
+      "ax": 0.4511,
+      "src": "assets/images/sprites/enemies/stage6/enemy_toucan_walk1.png"
+    },
+    "knockdown": {
+      "w": 274,
+      "h": 209,
+      "ax": 0.5,
+      "src": "assets/images/sprites/enemies/stage6/enemy_toucan_fall.png"
+    },
+    "idle2": {
+      "w": 240,
+      "h": 228,
+      "ax": 0.4964,
+      "src": "assets/images/sprites/enemies/stage6/enemy_toucan_idle.png"
+    },
+    "kick": {
+      "w": 256,
+      "h": 240,
+      "ax": 0.4089,
+      "src": "assets/images/sprites/enemies/stage6/enemy_toucan_punch.png"
+    }
+  },
+  "enemy_crane": {
+    "idle": {
+      "w": 285,
+      "h": 265,
+      "ax": 0.4691,
+      "src": "assets/images/sprites/enemies/stage6/enemy_crane_idle.png"
+    },
+    "walk1": {
+      "w": 276,
+      "h": 267,
+      "ax": 0.5892,
+      "src": "assets/images/sprites/enemies/stage6/enemy_crane_walk1.png"
+    },
+    "crouch": {
+      "w": 195,
+      "h": 252,
+      "ax": 0.3922,
+      "src": "assets/images/sprites/enemies/stage6/enemy_crane_crouch.png"
+    },
+    "punch": {
+      "w": 260,
+      "h": 239,
+      "ax": 0.3382,
+      "src": "assets/images/sprites/enemies/stage6/enemy_crane_punch.png"
+    },
+    "fall": {
+      "w": 306,
+      "h": 271,
+      "ax": 0.5,
+      "src": "assets/images/sprites/enemies/stage6/enemy_crane_fall.png"
+    },
+    "walk2": {
+      "w": 276,
+      "h": 267,
+      "ax": 0.5892,
+      "src": "assets/images/sprites/enemies/stage6/enemy_crane_walk1.png"
+    },
+    "knockdown": {
+      "w": 306,
+      "h": 271,
+      "ax": 0.5,
+      "src": "assets/images/sprites/enemies/stage6/enemy_crane_fall.png"
+    },
+    "idle2": {
+      "w": 285,
+      "h": 265,
+      "ax": 0.4691,
+      "src": "assets/images/sprites/enemies/stage6/enemy_crane_idle.png"
+    },
+    "kick": {
+      "w": 260,
+      "h": 239,
+      "ax": 0.3382,
+      "src": "assets/images/sprites/enemies/stage6/enemy_crane_punch.png"
+    }
+  },
+  "enemy_swallow": {
+    "idle": {
+      "w": 203,
+      "h": 154,
+      "ax": 0.7455,
+      "src": "assets/images/sprites/enemies/stage6/enemy_swallow_idle.png"
+    },
+    "walk1": {
+      "w": 215,
+      "h": 202,
+      "ax": 0.655,
+      "src": "assets/images/sprites/enemies/stage6/enemy_swallow_walk1.png"
+    },
+    "crouch": {
+      "w": 180,
+      "h": 159,
+      "ax": 0.5344,
+      "src": "assets/images/sprites/enemies/stage6/enemy_swallow_crouch.png"
+    },
+    "punch": {
+      "w": 217,
+      "h": 217,
+      "ax": 0.5073,
+      "src": "assets/images/sprites/enemies/stage6/enemy_swallow_punch.png"
+    },
+    "fall": {
+      "w": 271,
+      "h": 201,
+      "ax": 0.5,
+      "src": "assets/images/sprites/enemies/stage6/enemy_swallow_fall.png"
+    },
+    "walk2": {
+      "w": 215,
+      "h": 202,
+      "ax": 0.655,
+      "src": "assets/images/sprites/enemies/stage6/enemy_swallow_walk1.png"
+    },
+    "knockdown": {
+      "w": 271,
+      "h": 201,
+      "ax": 0.5,
+      "src": "assets/images/sprites/enemies/stage6/enemy_swallow_fall.png"
+    },
+    "idle2": {
+      "w": 203,
+      "h": 154,
+      "ax": 0.7455,
+      "src": "assets/images/sprites/enemies/stage6/enemy_swallow_idle.png"
+    },
+    "kick": {
+      "w": 217,
+      "h": 217,
+      "ax": 0.5073,
+      "src": "assets/images/sprites/enemies/stage6/enemy_swallow_punch.png"
+    }
+  }
+}

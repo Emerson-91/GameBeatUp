@@ -25,6 +25,16 @@ export class StageManager {
     // Spawn control
     this.spawnTimer = 0;
     this.nextChickenIndex = 0;
+    this.defeatedEnemiesCount = 0;
+
+    // Boss fight helpers
+    this.bossBattleTimer = 0;
+    this.bossChickensSpawned = 0;
+    this.bossChickenHpThresh1 = 0.65;
+    this.bossChickenHpThresh2 = 0.35;
+    this.bossChickenTimeThresh1 = 15;
+    this.bossChickenTimeThresh2 = 32;
+    this.bossMinionSpawnTimer = 0;
 
     // Arena bounds
     this.stageLimits = {
@@ -52,17 +62,19 @@ export class StageManager {
     this.nextChickenIndex = 0;
     this.transitionTimer = 0;
     this.clearTimer = 0;
+    this.defeatedEnemiesCount = 0;
 
     // Setup Boss Door at the end of the 1-minute street walk
     this.door = new BossDoor(this.stageConfig.stageLength - 160, 420, this.stageConfig);
 
-    // Initial chicken pickups from stage data
-    if (this.stageConfig.chickenSpawns) {
-      for (const cx of this.stageConfig.chickenSpawns) {
-        const cz = 380 + Math.random() * 100;
-        this.chickens.push(new ChickenItem(cx, cz));
-      }
-    }
+    // Frango aparece no início e no final da fase de forma aleatória
+    const startX = 350 + Math.random() * 450; // Início
+    const startZ = this.stageLimits.minZ + 15 + Math.random() * (this.stageLimits.maxZ - this.stageLimits.minZ - 30);
+    this.chickens.push(new ChickenItem(startX, startZ));
+
+    const endX = Math.max(startX + 800, this.stageConfig.stageLength - 950 + Math.random() * 450); // Final
+    const endZ = this.stageLimits.minZ + 15 + Math.random() * (this.stageLimits.maxZ - this.stageLimits.minZ - 30);
+    this.chickens.push(new ChickenItem(endX, endZ));
 
     // Camera setup
     this.game.camera.x = 0;
@@ -181,10 +193,18 @@ export class StageManager {
         enemy.deathTimer = (enemy.deathTimer !== undefined ? enemy.deathTimer : 0.45) - dt;
         if (enemy.y <= 0 || enemy.deathTimer <= 0) {
           this.particles.addHitSparks(enemy.x, enemy.y || 15, enemy.z, '#ffbb00', 12);
-          // Chance to drop chicken on defeat
-          if (Math.random() < 0.3 || (player && player.hp < 45)) {
-            this.chickens.push(new ChickenItem(enemy.x, enemy.z));
+          
+          this.defeatedEnemiesCount++;
+          // A cada 6 inimigos derrotados, o frango aparece de forma aleatória
+          if (this.defeatedEnemiesCount % 6 === 0) {
+            const dropX = enemy.x + (Math.random() - 0.5) * 35;
+            const dropZ = Math.min(this.stageLimits.maxZ, Math.max(this.stageLimits.minZ, enemy.z + (Math.random() - 0.5) * 25));
+            this.chickens.push(new ChickenItem(dropX, dropZ));
+            this.particles.addHitSparks(dropX, 15, dropZ, '#ffd700', 22);
+            this.particles.addFloatingText('🍗 FRANGO!', dropX, 65, dropZ, '#ffd700');
+            Sound.playChickenHeal();
           }
+
           this.enemies.splice(i, 1);
         }
       }
@@ -223,6 +243,17 @@ export class StageManager {
     // Clear regular street enemies
     this.enemies = [];
 
+    // Boss battle timers and random chicken spawn thresholds
+    this.bossBattleTimer = 0;
+    this.bossChickensSpawned = 0; // Exatamente 2 frangos no boss
+    this.bossChickenHpThresh1 = 0.72 - Math.random() * 0.14; // entre 58% e 72%
+    this.bossChickenHpThresh2 = 0.38 - Math.random() * 0.14; // entre 24% e 38%
+    this.bossChickenTimeThresh1 = 12 + Math.random() * 6;     // fallback ~12-18s
+    this.bossChickenTimeThresh2 = 28 + Math.random() * 8;     // fallback ~28-36s
+
+    // Inimigos da fase no boss: aparecem dois por vez no meio da luta
+    this.bossMinionSpawnTimer = 3.2;
+
     // Trigger Boss Sirens & Boss BGM
     Sound.playBossWarning();
     Sound.setBossIntensity(true);
@@ -233,9 +264,98 @@ export class StageManager {
     const player = this.game.player;
     if (!this.boss || !player) return;
 
+    this.bossBattleTimer += dt;
     this.boss.updateAI(dt, this.stageLimits, this.game.camera);
 
-    // Check Boss defeat
+    // 1. Frango aparece duas vezes de forma aleatória no boss
+    if (this.bossChickensSpawned < 2 && !this.boss.isDead) {
+      const bossHpPct = this.boss.hp / this.boss.maxHp;
+      let shouldSpawn = false;
+
+      if (this.bossChickensSpawned === 0) {
+        if (bossHpPct <= this.bossChickenHpThresh1 || this.bossBattleTimer >= this.bossChickenTimeThresh1) {
+          shouldSpawn = true;
+          this.bossChickensSpawned = 1;
+        }
+      } else if (this.bossChickensSpawned === 1) {
+        if (bossHpPct <= this.bossChickenHpThresh2 || this.bossBattleTimer >= this.bossChickenTimeThresh2) {
+          shouldSpawn = true;
+          this.bossChickensSpawned = 2;
+        }
+      }
+
+      if (shouldSpawn) {
+        const chickenX = 220 + Math.random() * 520;
+        const chickenZ = this.stageLimits.minZ + 15 + Math.random() * (this.stageLimits.maxZ - this.stageLimits.minZ - 30);
+        this.chickens.push(new ChickenItem(chickenX, chickenZ));
+        this.particles.addHitSparks(chickenX, 15, chickenZ, '#ffd700', 24);
+        this.particles.addFloatingText('🍗 FRANGO ASSADO!', chickenX, 65, chickenZ, '#ffd700');
+        Sound.playChickenHeal();
+      }
+    }
+
+    // 2. Atualiza itens de frango na arena do boss
+    for (const chicken of this.chickens) {
+      chicken.update(dt, player);
+    }
+
+    // 3. Os outros inimigos da fase também aparecem para atrapalhar, mas aparecem dois por vez no meio da luta
+    if (!this.boss.isDead) {
+      const livingMinions = this.enemies.filter((e) => !e.isDead);
+
+      // Limite estrito de exatamente 2 por vez
+      if (livingMinions.length < 2) {
+        this.bossMinionSpawnTimer -= dt;
+        if (this.bossMinionSpawnTimer <= 0) {
+          const countNeeded = 2 - livingMinions.length;
+          const pool = this.stageConfig.enemyPool;
+          if (pool && pool.length > 0) {
+            for (let k = 0; k < countNeeded; k++) {
+              const enemyConfig = pool[Math.floor(Math.random() * pool.length)];
+              const spawnLeft = Math.random() < 0.5;
+              const spawnX = spawnLeft ? -25 - Math.random() * 30 : 985 + Math.random() * 30;
+              const spawnZ = this.stageLimits.minZ + Math.random() * (this.stageLimits.maxZ - this.stageLimits.minZ);
+              const minion = new Enemy(spawnX, spawnZ, enemyConfig, player);
+              this.enemies.push(minion);
+            }
+          }
+          this.bossMinionSpawnTimer = 3.5 + Math.random() * 2.5;
+        }
+      }
+    } else {
+      // Quando o boss morre, limpa os capangas com faíscas
+      for (let i = this.enemies.length - 1; i >= 0; i--) {
+        const e = this.enemies[i];
+        this.particles.addHitSparks(e.x, e.y || 20, e.z, '#ffaa00', 8);
+        this.enemies.splice(i, 1);
+      }
+    }
+
+    // 4. Atualiza IA e física dos inimigos comuns na luta do boss
+    for (let i = this.enemies.length - 1; i >= 0; i--) {
+      const enemy = this.enemies[i];
+      enemy.updateAI(dt, this.stageLimits);
+
+      if (enemy.isDead) {
+        enemy.deathTimer = (enemy.deathTimer !== undefined ? enemy.deathTimer : 0.45) - dt;
+        if (enemy.y <= 0 || enemy.deathTimer <= 0) {
+          this.particles.addHitSparks(enemy.x, enemy.y || 15, enemy.z, '#ffbb00', 12);
+          this.defeatedEnemiesCount++;
+          // A cada 6 inimigos derrotados
+          if (this.defeatedEnemiesCount % 6 === 0) {
+            const dropX = enemy.x + (Math.random() - 0.5) * 35;
+            const dropZ = Math.min(this.stageLimits.maxZ, Math.max(this.stageLimits.minZ, enemy.z + (Math.random() - 0.5) * 25));
+            this.chickens.push(new ChickenItem(dropX, dropZ));
+            this.particles.addHitSparks(dropX, 15, dropZ, '#ffd700', 20);
+            this.particles.addFloatingText('🍗 FRANGO!', dropX, 65, dropZ, '#ffd700');
+            Sound.playChickenHeal();
+          }
+          this.enemies.splice(i, 1);
+        }
+      }
+    }
+
+    // 5. Check Boss defeat
     if (this.boss.isDead && this.boss.y === 0) {
       this.clearTimer += dt;
       if (this.clearTimer >= 1.5 && this.phase !== 'stage_cleared') {
@@ -276,12 +396,10 @@ export class StageManager {
       renderList.push({ z: this.door.z - 20, type: 'door', entity: this.door });
     }
 
-    // Add Chickens
-    if (this.phase !== 'boss_battle') {
-      for (const c of this.chickens) {
-        if (!c.isCollected) {
-          renderList.push({ z: c.z, type: 'chicken', entity: c });
-        }
+    // Add Chickens in all active gameplay phases (street and boss battle!)
+    for (const c of this.chickens) {
+      if (!c.isCollected) {
+        renderList.push({ z: c.z, type: 'chicken', entity: c });
       }
     }
 
@@ -327,6 +445,11 @@ export class StageManager {
     // 3. Draw Boss Projectiles (tornados, meteors)
     if (this.boss) {
       this.boss.drawProjectiles(ctx, camera, imageLoader);
+    }
+
+    // Draw AndreyBots and aerial plasma bomb shots
+    if (this.game && this.game.player && this.game.player.drawBots) {
+      this.game.player.drawBots(ctx, camera, imageLoader);
     }
 
     // 4. Draw Hit Sparks & Floating Damage Texts

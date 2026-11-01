@@ -19,10 +19,10 @@ export const PLAYABLE_CHARACTERS = {
       jumpKick: 28,
       special: 56
     },
-    specialCooldown: 6.5,
-    specialDuration: 0.85,
-    specialName: 'PULSO DE PLASMA & DRONE BOT',
-    description: 'Especialista em alta tecnologia com exoesqueleto de combate e disparos de plasma devastadores.'
+    specialCooldown: 8.5,
+    specialDuration: 4.5,
+    specialName: 'ESQUADRÃO ANDREYBOT (BOMBARDEIO AÉREO)',
+    description: 'Gênio da alta tecnologia. Seu especial 100% convoca 3 AndreyBots que cruzam a tela indo e voltando, bombardeando os inimigos com tiros que tiram 5% de vida a cada acerto!'
   },
   emerson: {
     id: 'emerson',
@@ -44,10 +44,10 @@ export const PLAYABLE_CHARACTERS = {
       jumpKick: 34,
       special: 60
     },
-    specialCooldown: 7.5,
-    specialDuration: 0.85,
-    specialName: 'IMPACTO SÍSMICO DEMOLIDOR',
-    description: 'Possui super força colossal e resistência titânica. Seus golpes esmagam tudo pela frente.'
+    specialCooldown: 8.0,
+    specialDuration: 1.25,
+    specialName: 'SOCO SÍSMICO DEMOLIDOR (TERREMOTO TOTAL)',
+    description: 'Possui super força colossal. Seu especial 100% é um estrondoso soco no chão que faz toda a tela tremer e estraçalha todos os inimigos (50% de dano) e o chefe (25% de dano)!'
   },
   nata: {
     id: 'nata',
@@ -108,7 +108,9 @@ export const BOSS_CONFIGS = {
     name: 'KING GATOR',
     title: 'O Flagelo dos Esgotos',
     spriteId: 'alligator',
-    maxHp: 320,
+    bars: 4,
+    hpPerBar: 320,
+    maxHp: 1280, // 4x (4 barras de 320)
     speed: 2.8,
     attackPower: 16,
     specialCooldown: 7,
@@ -122,7 +124,9 @@ export const BOSS_CONFIGS = {
     name: 'URSUS MAGNUS',
     title: 'O Guardião da Floresta',
     spriteId: 'bear',
-    maxHp: 380,
+    bars: 4,
+    hpPerBar: 380,
+    maxHp: 1520, // 4x (4 barras de 380)
     speed: 2.7,
     attackPower: 19,
     specialCooldown: 8,
@@ -136,7 +140,9 @@ export const BOSS_CONFIGS = {
     name: 'CAPY SENSEI',
     title: 'O Monge da Lagoa',
     spriteId: 'capybara',
-    maxHp: 440,
+    bars: 4,
+    hpPerBar: 440,
+    maxHp: 1760, // 4x (4 barras de 440)
     speed: 3.0,
     attackPower: 20,
     specialCooldown: 7,
@@ -150,7 +156,9 @@ export const BOSS_CONFIGS = {
     name: 'SHADOW CLAW',
     title: 'A Ninja das Sombras',
     spriteId: 'cat',
-    maxHp: 500,
+    bars: 4,
+    hpPerBar: 500,
+    maxHp: 2000, // 4x (4 barras de 500)
     speed: 4.2,
     attackPower: 22,
     specialCooldown: 6,
@@ -164,7 +172,9 @@ export const BOSS_CONFIGS = {
     name: 'TITAN KONG',
     title: 'O Esmagador Urbano',
     spriteId: 'gorilla',
-    maxHp: 580,
+    bars: 4,
+    hpPerBar: 580,
+    maxHp: 2320, // 4x (4 barras de 580)
     speed: 3.0,
     attackPower: 25,
     specialCooldown: 8,
@@ -178,7 +188,9 @@ export const BOSS_CONFIGS = {
     name: 'ZEPHYR OWL',
     title: 'O Lorde dos Ventos',
     spriteId: 'owl',
-    maxHp: 650,
+    bars: 4,
+    hpPerBar: 650,
+    maxHp: 2600, // 4x (4 barras de 650)
     speed: 3.6,
     attackPower: 24,
     specialCooldown: 6.5,
@@ -193,7 +205,9 @@ export const BOSS_CONFIGS = {
     name: 'RAIDEN TIGER',
     title: 'A Fera do Trovão',
     spriteId: 'tiger',
-    maxHp: 740,
+    bars: 4,
+    hpPerBar: 740,
+    maxHp: 2960, // 4x (4 barras de 740)
     speed: 4.0,
     attackPower: 27,
     specialCooldown: 6,
@@ -207,7 +221,9 @@ export const BOSS_CONFIGS = {
     name: 'FENRIR LUPUS',
     title: 'O Alfa da Nevasca',
     spriteId: 'wolf',
-    maxHp: 840,
+    bars: 4,
+    hpPerBar: 840,
+    maxHp: 3360, // 4x (4 barras de 840)
     speed: 4.1,
     attackPower: 29,
     specialCooldown: 5.5,
@@ -221,7 +237,9 @@ export const BOSS_CONFIGS = {
     name: 'BAHAMUT DRAGON',
     title: 'O Imperador do Apocalipse',
     spriteId: 'dragon',
-    maxHp: 1100,
+    bars: 10,
+    hpPerBar: 1100,
+    maxHp: 11000, // 10x (10 barras de 1100)
     speed: 3.8,
     attackPower: 35,
     specialCooldown: 5.0,
