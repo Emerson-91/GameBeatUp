@@ -17,8 +17,11 @@ export class ImageLoader {
       essentialUrls.add(PLAYABLE_CHARACTERS[k].portrait);
     }
 
-    // 2. Chicken item
+    // 2. Chicken item & Special Projectiles
     essentialUrls.add('assets/images/sprites/chicken.png');
+    essentialUrls.add('assets/images/sprites/characters/dog_planet1.png');
+    essentialUrls.add('assets/images/sprites/characters/dog_planet2.png');
+    essentialUrls.add('assets/images/sprites/characters/dog_planet3.png');
 
     // 3. Stage 1 Background
     essentialUrls.add('assets/images/backgrounds/stage1_alligator.jpg');
@@ -27,7 +30,7 @@ export class ImageLoader {
     const heroKeys = ['andrey', 'emerson', 'nata', 'dog'];
     for (const hero of heroKeys) {
       if (SPRITE_META[hero]) {
-        ['idle', 'walk1', 'punch', 'punch1', 'punch2', 'punch3', 'kick', 'kick1', 'kick2', 'kick3', 'special', 'special1', 'special2', 'special3', 'bot'].forEach((a) => {
+        ['idle', 'walk1', 'punch', 'punch1', 'punch2', 'punch3', 'kick', 'kick1', 'kick2', 'kick3', 'special', 'special1', 'special2', 'special3', 'special4', 'special5', 'victory1', 'victory2', 'victory3', 'victory4', 'victory5', 'bot'].forEach((a) => {
           if (SPRITE_META[hero][a]) {
             essentialUrls.add(SPRITE_META[hero][a].src);
           }

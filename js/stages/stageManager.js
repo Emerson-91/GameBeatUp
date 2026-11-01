@@ -447,9 +447,17 @@ export class StageManager {
       this.boss.drawProjectiles(ctx, camera, imageLoader);
     }
 
-    // Draw AndreyBots and aerial plasma bomb shots
-    if (this.game && this.game.player && this.game.player.drawBots) {
-      this.game.player.drawBots(ctx, camera, imageLoader);
+    // Draw AndreyBots, aerial plasma bomb shots, Nata lightning storm, and Unicao falling planets
+    if (this.game && this.game.player) {
+      if (this.game.player.drawBots) {
+        this.game.player.drawBots(ctx, camera, imageLoader);
+      }
+      if (this.game.player.drawNataLightnings) {
+        this.game.player.drawNataLightnings(ctx, camera);
+      }
+      if (this.game.player.drawUnicaoPlanets) {
+        this.game.player.drawUnicaoPlanets(ctx, camera, imageLoader);
+      }
     }
 
     // 4. Draw Hit Sparks & Floating Damage Texts

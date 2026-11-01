@@ -337,6 +337,132 @@
       this.playTone(380, 90, 0.14, "square", 0.22);
       this.playNoise(0.12, 0.25, 1400);
     }
+    // Nata Electric Rock Guitar Solo Riff SFX
+    playGuitarRiff() {
+      if (this.isMuted) return;
+      this.init();
+      if (!this.ctx) return;
+      try {
+        const now = this.ctx.currentTime;
+        const makeDistortionCurve = (amount = 28) => {
+          const k = amount;
+          const n_samples = 44100;
+          const curve = new Float32Array(n_samples);
+          const deg = Math.PI / 180;
+          for (let i = 0; i < n_samples; ++i) {
+            const x = i * 2 / n_samples - 1;
+            curve[i] = (3 + k) * x * 20 * deg / (Math.PI + k * Math.abs(x));
+          }
+          return curve;
+        };
+        const distortion = this.ctx.createWaveShaper();
+        distortion.curve = makeDistortionCurve(30);
+        distortion.oversample = "4x";
+        const cabinetFilter = this.ctx.createBiquadFilter();
+        cabinetFilter.type = "lowpass";
+        cabinetFilter.frequency.setValueAtTime(2600, now);
+        const masterGain = this.ctx.createGain();
+        masterGain.gain.setValueAtTime(0.3, now);
+        masterGain.gain.exponentialRampToValueAtTime(1e-3, now + 3.2);
+        distortion.connect(cabinetFilter);
+        cabinetFilter.connect(masterGain);
+        masterGain.connect(this.ctx.destination);
+        const soloNotes = [
+          { t: 0, dur: 0.28, freqs: [164.8, 246.9, 329.6] },
+          // E power chord
+          { t: 0.28, dur: 0.22, freqs: [164.8, 246.9, 329.6] },
+          // E power chord
+          { t: 0.52, dur: 0.35, freqs: [196, 293.7, 392] },
+          // G power chord
+          { t: 0.88, dur: 0.38, freqs: [220, 329.6, 440] },
+          // A power chord
+          { t: 1.28, dur: 0.14, freqs: [329.6, 493.9] },
+          // E4 lick
+          { t: 1.42, dur: 0.14, freqs: [392, 587.3] },
+          // G4 lick
+          { t: 1.56, dur: 0.14, freqs: [440, 659.3] },
+          // A4 lick
+          { t: 1.7, dur: 0.16, freqs: [493.9, 739.9] },
+          // B4 lick
+          { t: 1.86, dur: 0.2, freqs: [587.3, 880] },
+          // D5 lick
+          { t: 2.06, dur: 1.05, freqs: [659.3, 987.8, 1318.5], vibrato: true }
+          // Screaming high E5
+        ];
+        soloNotes.forEach((step) => {
+          const noteStart = now + step.t;
+          const noteDur = step.dur;
+          step.freqs.forEach((freq, idx) => {
+            const osc = this.ctx.createOscillator();
+            const noteGain = this.ctx.createGain();
+            osc.type = idx === 0 ? "sawtooth" : "triangle";
+            osc.frequency.setValueAtTime(freq, noteStart);
+            osc.frequency.exponentialRampToValueAtTime(freq * 1.015, noteStart + noteDur * 0.4);
+            if (step.vibrato) {
+              const lfo = this.ctx.createOscillator();
+              const lfoGain = this.ctx.createGain();
+              lfo.frequency.setValueAtTime(6.5, noteStart);
+              lfoGain.gain.setValueAtTime(freq * 0.035, noteStart);
+              lfo.connect(osc.frequency);
+              lfo.start(noteStart);
+              lfo.stop(noteStart + noteDur);
+            }
+            noteGain.gain.setValueAtTime(0.2 / step.freqs.length, noteStart);
+            noteGain.gain.exponentialRampToValueAtTime(1e-3, noteStart + noteDur);
+            osc.connect(noteGain);
+            noteGain.connect(distortion);
+            osc.start(noteStart);
+            osc.stop(noteStart + noteDur);
+          });
+        });
+      } catch (e) {
+      }
+    }
+    // Thunderous Lightning Strike SFX
+    playLightningStrike() {
+      if (this.isMuted) return;
+      this.init();
+      if (!this.ctx) return;
+      try {
+        this.playTone(880, 50, 0.2, "sawtooth", 0.28);
+        this.playTone(120, 25, 0.45, "sine", 0.4);
+        this.playNoise(0.26, 0.35, 1900);
+      } catch (e) {
+      }
+    }
+    // Unicão Cosmic Howl & Planet Summoning SFX
+    playCosmicSummon() {
+      if (this.isMuted) return;
+      this.init();
+      if (!this.ctx) return;
+      try {
+        this.playTone(60, 480, 0.75, "sawtooth", 0.35);
+        this.playTone(80, 720, 0.9, "sine", 0.4);
+        const celestialPitches = [340, 520, 680, 960, 1280];
+        celestialPitches.forEach((freq, idx) => {
+          setTimeout(() => {
+            this.playTone(freq, freq * 1.1, 0.22, "triangle", 0.25);
+          }, 120 + idx * 80);
+        });
+        setTimeout(() => {
+          this.playTone(420, 260, 0.65, "sawtooth", 0.38);
+          this.playNoise(0.5, 0.28, 900);
+        }, 550);
+      } catch (e) {
+      }
+    }
+    // Planet Cataclysm Ground Impact Explosion SFX
+    playMeteorCrash() {
+      if (this.isMuted) return;
+      this.init();
+      if (!this.ctx) return;
+      try {
+        this.playTone(95, 20, 0.6, "sine", 0.55);
+        this.playTone(280, 45, 0.35, "sawtooth", 0.45);
+        this.playNoise(0.45, 0.5, 800);
+      } catch (e) {
+      }
+    }
     // Chicken Heal SFX (Magic arcade recovery arpeggio)
     playChickenHeal() {
       if (this.isMuted) return;
@@ -481,10 +607,28 @@
         "src": "assets/images/sprites/characters/dog_kick.png"
       },
       "special": {
-        "w": 693,
-        "h": 365,
-        "ax": 0.1512,
-        "src": "assets/images/sprites/characters/dog_special.png"
+        "w": 272,
+        "h": 285,
+        "ax": 0.5,
+        "src": "assets/images/sprites/characters/dog_special2.png"
+      },
+      "special1": {
+        "w": 193,
+        "h": 221,
+        "ax": 0.5,
+        "src": "assets/images/sprites/characters/dog_special1.png"
+      },
+      "special2": {
+        "w": 272,
+        "h": 285,
+        "ax": 0.5,
+        "src": "assets/images/sprites/characters/dog_special2.png"
+      },
+      "special3": {
+        "w": 317,
+        "h": 208,
+        "ax": 0.5,
+        "src": "assets/images/sprites/characters/dog_special3.png"
       },
       "crouch": {
         "w": 161,
@@ -1817,10 +1961,40 @@
         "src": "assets/images/sprites/characters/nata_kick.png"
       },
       "special": {
-        "w": 503,
-        "h": 395,
-        "ax": 0.315,
-        "src": "assets/images/sprites/characters/nata_special.png"
+        "w": 275,
+        "h": 300,
+        "ax": 0.4624,
+        "src": "assets/images/sprites/characters/nata_victory1.png"
+      },
+      "special1": {
+        "w": 275,
+        "h": 300,
+        "ax": 0.4624,
+        "src": "assets/images/sprites/characters/nata_victory1.png"
+      },
+      "special2": {
+        "w": 251,
+        "h": 300,
+        "ax": 0.3889,
+        "src": "assets/images/sprites/characters/nata_victory2.png"
+      },
+      "special3": {
+        "w": 251,
+        "h": 300,
+        "ax": 0.4018,
+        "src": "assets/images/sprites/characters/nata_victory3.png"
+      },
+      "special4": {
+        "w": 328,
+        "h": 333,
+        "ax": 0.3863,
+        "src": "assets/images/sprites/characters/nata_victory4.png"
+      },
+      "special5": {
+        "w": 288,
+        "h": 333,
+        "ax": 0.4299,
+        "src": "assets/images/sprites/characters/nata_victory5.png"
       },
       "crouch": {
         "w": 137,
@@ -3164,6 +3338,24 @@
       "w": 128,
       "h": 128,
       "ax": 0.5
+    },
+    "dog_planet1": {
+      "src": "assets/images/sprites/characters/dog_planet1.png",
+      "w": 202,
+      "h": 220,
+      "ax": 0.5
+    },
+    "dog_planet2": {
+      "src": "assets/images/sprites/characters/dog_planet2.png",
+      "w": 260,
+      "h": 272,
+      "ax": 0.5
+    },
+    "dog_planet3": {
+      "src": "assets/images/sprites/characters/dog_planet3.png",
+      "w": 298,
+      "h": 278,
+      "ax": 0.5
     }
   };
 
@@ -3192,7 +3384,7 @@
       specialCooldown: 8.5,
       specialDuration: 4.5,
       specialName: "ESQUADR\xC3O ANDREYBOT (BOMBARDEIO A\xC9REO)",
-      description: "G\xEAnio da alta tecnologia. Seu especial 100% convoca 3 AndreyBots que cruzam a tela indo e voltando, bombardeando os inimigos com tiros que tiram 5% de vida a cada acerto!"
+      description: "G\xEAnio da alta tecnologia. Seu especial 100% convoca 3 AndreyBots que cruzam a tela indo e voltando com o dobro de tiros, bombardeando os inimigos com disparos r\xE1pidos que tiram 9% de vida a cada acerto!"
     },
     emerson: {
       id: "emerson",
@@ -3239,10 +3431,10 @@
         jumpKick: 28,
         special: 45
       },
-      specialCooldown: 6,
-      specialDuration: 0.9,
-      specialName: "FURAC\xC3O DE CHUTES",
-      description: "Velocidade supers\xF4nica, chutes a\xE9reos acrob\xE1ticos e esquiva fant\xE1stica."
+      specialCooldown: 8.5,
+      specialDuration: 3.2,
+      specialName: "SOLO DE GUITARRA EL\xC9TRICA (TEMPESTADE DE RAIOS)",
+      description: "Toca um solo \xE9pico de guitarra com distor\xE7\xE3o que invoca m\xFAltiplos raios aleat\xF3rios com sinais de choque </> e notas musicais pela fase. Quem for acertado pelo raio toma dano de 50% e o chefe 25%!"
     },
     unicao: {
       id: "unicao",
@@ -3264,10 +3456,10 @@
         jumpKick: 27,
         special: 52
       },
-      specialCooldown: 7,
-      specialDuration: 0.9,
-      specialName: "INVESTIDA DAS QUATRO PATAS",
-      description: "Guerreiro canino lend\xE1rio com mordidas r\xE1pidas e arrancada fulminante."
+      specialCooldown: 8.5,
+      specialDuration: 3.5,
+      specialName: "CATACLISMA C\xD3SMICO (INVOCA\xC7\xC3O DE PLANETAS)",
+      description: "Invoca o poder dos cosmos e faz planetas flamejantes ca\xEDrem do c\xE9u de forma aleat\xF3ria na fase! Cada impacto de planeta causa 50% de dano aos advers\xE1rios e 25% ao chefe!"
     }
   };
   var BOSS_CONFIGS = {
@@ -3442,11 +3634,14 @@
         essentialUrls.add(PLAYABLE_CHARACTERS[k].portrait);
       }
       essentialUrls.add("assets/images/sprites/chicken.png");
+      essentialUrls.add("assets/images/sprites/characters/dog_planet1.png");
+      essentialUrls.add("assets/images/sprites/characters/dog_planet2.png");
+      essentialUrls.add("assets/images/sprites/characters/dog_planet3.png");
       essentialUrls.add("assets/images/backgrounds/stage1_alligator.jpg");
       const heroKeys = ["andrey", "emerson", "nata", "dog"];
       for (const hero of heroKeys) {
         if (SPRITE_META[hero]) {
-          ["idle", "walk1", "punch", "punch1", "punch2", "punch3", "kick", "kick1", "kick2", "kick3", "special", "special1", "special2", "special3", "bot"].forEach((a) => {
+          ["idle", "walk1", "punch", "punch1", "punch2", "punch3", "kick", "kick1", "kick2", "kick3", "special", "special1", "special2", "special3", "special4", "special5", "victory1", "victory2", "victory3", "victory4", "victory5", "bot"].forEach((a) => {
             if (SPRITE_META[hero][a]) {
               essentialUrls.add(SPRITE_META[hero][a].src);
             }
@@ -3774,6 +3969,11 @@
       this.andreyBots = [];
       this.andreyShots = [];
       this.andreyBotsSpawned = false;
+      this.nataLightnings = [];
+      this.nataNotes = [];
+      this.nataLightningTimer = 0;
+      this.unicaoPlanets = [];
+      this.unicaoPlanetTimer = 0;
       this.jumpPower = config.jumpPower || 7;
     }
     isAttacking() {
@@ -3931,16 +4131,34 @@
       if (this.charKey === "emerson") {
         this.vy = 5.5;
         this.vx = this.facing * 1.5;
+        Sound.playSpecial();
       } else if (this.charKey === "andrey") {
         this.vy = 0;
         this.vx = 0;
         this.andreyBots = [];
         this.andreyShots = [];
         this.andreyBotsSpawned = false;
+        Sound.playSpecial();
+      } else if (this.charKey === "nata") {
+        this.vy = 0;
+        this.vx = 0;
+        this.nataLightnings = [];
+        this.nataNotes = [];
+        this.nataLightningTimer = 0.15;
+        Sound.playGuitarRiff();
+      } else if (this.charKey === "dog") {
+        this.vy = 0;
+        this.vx = 0;
+        this.unicaoPlanets = [];
+        this.unicaoPlanetTimer = 0.45;
+        this.specialDuration = this.config.specialDuration || 3.5;
+        this.stateTimer = this.specialDuration;
+        this.invincibleTimer = this.specialDuration + 0.3;
+        Sound.playCosmicSummon();
       } else {
         this.vx = this.facing * 4.5;
+        Sound.playSpecial();
       }
-      Sound.playSpecial();
     }
     takeDamage(amount, knockbackX = 0, knockbackY = 0) {
       if (this.isInvincible || this.isDead) return false;
@@ -4023,6 +4241,39 @@
           this.y = 0;
           this.vy = 0;
           this.vx = 0;
+        } else if (this.charKey === "nata") {
+          const total = this.specialDuration || 3.2;
+          const elapsed = total - this.stateTimer;
+          this.specialPhase = 1 + Math.floor(elapsed * 5) % 5;
+          this.y = 0;
+          this.vy = 0;
+          this.vx = 0;
+          this.nataLightningTimer -= dt;
+          if (this.nataLightningTimer <= 0 && elapsed < total - 0.25) {
+            this.nataLightningTimer = 0.22 + Math.random() * 0.08;
+            this.spawnNataLightning(camera);
+          }
+          if (Math.random() < 0.45) {
+            this.spawnNataAuraNote();
+          }
+        } else if (this.charKey === "dog") {
+          const total = this.specialDuration || 3.5;
+          const elapsed = total - this.stateTimer;
+          if (elapsed < 0.7) {
+            this.specialPhase = 1;
+          } else if (elapsed < 1.8) {
+            this.specialPhase = 2;
+          } else {
+            this.specialPhase = 3;
+          }
+          this.y = 0;
+          this.vy = 0;
+          this.vx = 0;
+          this.unicaoPlanetTimer -= dt;
+          if (this.unicaoPlanetTimer <= 0 && elapsed < total - 0.3) {
+            this.unicaoPlanetTimer = 0.28 + Math.random() * 0.12;
+            this.spawnUnicaoPlanet(camera);
+          }
         } else {
           this.specialPhase = 1;
         }
@@ -4046,6 +4297,12 @@
       }
       if (this.andreyBots.length > 0 || this.andreyShots.length > 0) {
         this.updateAndreyBots(dt, camera, particles);
+      }
+      if (this.nataLightnings.length > 0 || this.nataNotes.length > 0) {
+        this.updateNataLightnings(dt, camera, particles);
+      }
+      if (this.unicaoPlanets.length > 0) {
+        this.updateUnicaoPlanets(dt, camera, particles);
       }
     }
     // Get current attack hitbox based on active state (punch1, punch2, punch3, kick1, kick2, kick3, special)
@@ -4086,7 +4343,7 @@
         knockbackX = this.facing * 10.5;
         knockbackY = 6.5;
       } else if (this.state === "special") {
-        if (this.charKey === "emerson" || this.charKey === "andrey") return null;
+        if (this.charKey === "emerson" || this.charKey === "andrey" || this.charKey === "nata" || this.charKey === "dog") return null;
         damage = this.config.damage.special;
         reach = 100;
         knockbackX = this.facing * 11;
@@ -4120,10 +4377,11 @@
           vx: 6.2,
           facing: 1,
           hoverTimer: 0,
-          dropTimer: 0.2,
+          dropTimer: 0.1,
+          // Dobro da frequência de tiros
           scale: 0.36,
           color: "#00ff88",
-          life: 3.8
+          life: 4
         },
         {
           id: 2,
@@ -4134,10 +4392,11 @@
           vx: -5.6,
           facing: -1,
           hoverTimer: 1.5,
-          dropTimer: 0.45,
+          dropTimer: 0.22,
+          // Dobro da frequência de tiros
           scale: 0.34,
           color: "#00e5ff",
-          life: 3.8
+          life: 4
         },
         {
           id: 3,
@@ -4148,10 +4407,11 @@
           vx: 6.8,
           facing: 1,
           hoverTimer: 3,
-          dropTimer: 0.35,
+          dropTimer: 0.16,
+          // Dobro da frequência de tiros
           scale: 0.38,
           color: "#39ff14",
-          life: 3.8
+          life: 4
         }
       ];
     }
@@ -4176,17 +4436,17 @@
           particles.addHitSparks(bot.x - bot.facing * 10, bot.y - 12, bot.z, bot.color, 1);
         }
         bot.dropTimer -= dt;
-        if (bot.dropTimer <= 0 && bot.life > 0.4) {
-          bot.dropTimer = 0.38 + Math.random() * 0.12;
+        if (bot.dropTimer <= 0 && bot.life > 0.3) {
+          bot.dropTimer = 0.18 + Math.random() * 0.06;
           Sound.playLaserDrop();
           this.andreyShots.push({
             x: bot.x,
-            z: bot.z + (Math.random() - 0.5) * 16,
+            z: bot.z + (Math.random() - 0.5) * 20,
             y: bot.y - 15,
             vx: bot.vx * 0.22,
             vy: -7.5,
             color: bot.color,
-            radius: 11,
+            radius: 12,
             isDead: false
           });
         }
@@ -4286,6 +4546,435 @@
         ctx.restore();
       }
     }
+    // Spawn musical aura note or </> shock around Nata while playing guitar
+    spawnNataAuraNote() {
+      const chars = ["\u266A", "\u266B", "\u266C", "\u2669"];
+      const colors = ["#ffd700", "#00ffff", "#ff007f", "#a855f7", "#ffffff", "#39ff14"];
+      const isShock = Math.random() < 0.42;
+      this.nataNotes.push({
+        text: isShock ? "</>" : chars[Math.floor(Math.random() * chars.length)],
+        isShock,
+        x: this.x + (Math.random() - 0.5) * 55,
+        z: this.z + (Math.random() - 0.5) * 20,
+        y: 40 + Math.random() * 60,
+        vx: (Math.random() - 0.5) * 3,
+        vy: 2.2 + Math.random() * 2.5,
+        alpha: 1,
+        scale: isShock ? 0.95 : 1.25,
+        color: isShock ? "#00e5ff" : colors[Math.floor(Math.random() * colors.length)],
+        life: 0.9,
+        maxLife: 0.9,
+        sway: Math.random() * Math.PI * 2
+      });
+    }
+    // Spawn a random lightning bolt strike across the stage
+    spawnNataLightning(camera) {
+      const camLeft = camera ? camera.x + 60 : this.x - 300;
+      const camW = camera ? camera.width - 120 : 720;
+      const targetX = camLeft + Math.random() * camW;
+      const targetZ = 370 + Math.random() * 140;
+      const segments = [];
+      let curX = targetX + (Math.random() - 0.5) * 70;
+      let curY = 520;
+      segments.push({ x: curX, y: curY });
+      while (curY > 0) {
+        curY -= 32 + Math.random() * 28;
+        if (curY < 0) curY = 0;
+        curX += (Math.random() - 0.5) * 38;
+        if (curY === 0) curX = targetX;
+        segments.push({ x: curX, y: curY });
+      }
+      this.nataLightnings.push({
+        x: targetX,
+        z: targetZ,
+        stage: "warning",
+        // 'warning' -> 'strike' -> 'fading'
+        warningTimer: 0.22,
+        strikeTimer: 0.18,
+        fadeTimer: 0.45,
+        hasDamaged: false,
+        hasSoundPlayed: false,
+        segments,
+        burstElements: []
+      });
+    }
+    // Update active lightning strikes, shock signs </>, and music notes
+    updateNataLightnings(dt, camera, particles) {
+      for (let i = this.nataLightnings.length - 1; i >= 0; i--) {
+        const strike = this.nataLightnings[i];
+        if (strike.stage === "warning") {
+          strike.warningTimer -= dt;
+          if (strike.warningTimer <= 0) {
+            strike.stage = "strike";
+            if (!strike.hasSoundPlayed) {
+              strike.hasSoundPlayed = true;
+              Sound.playLightningStrike();
+            }
+            const noteChars = ["\u266A", "\u266B", "\u266C", "\u2669"];
+            const noteColors = ["#ffd700", "#00ffff", "#ff007f", "#a855f7", "#ffffff"];
+            for (let s = 0; s < 5; s++) {
+              const angle = Math.PI * 2 * s / 5 + (Math.random() - 0.5) * 0.4;
+              const speed = 2.5 + Math.random() * 4;
+              strike.burstElements.push({
+                text: "</>",
+                isShock: true,
+                x: strike.x,
+                z: strike.z,
+                y: 10 + Math.random() * 25,
+                vx: Math.cos(angle) * speed,
+                vy: 3.5 + Math.random() * 4,
+                vz: Math.sin(angle) * (speed * 0.5),
+                alpha: 1,
+                scale: 1.1 + Math.random() * 0.4,
+                color: ["#00e5ff", "#ffd700", "#ffffff", "#00ff88"][Math.floor(Math.random() * 4)],
+                life: 0.65,
+                maxLife: 0.65,
+                sway: Math.random() * 6
+              });
+            }
+            for (let n = 0; n < 5; n++) {
+              const angle = Math.PI * 2 * n / 5 + (Math.random() - 0.5) * 0.5;
+              const speed = 2 + Math.random() * 3.5;
+              strike.burstElements.push({
+                text: noteChars[Math.floor(Math.random() * noteChars.length)],
+                isShock: false,
+                x: strike.x,
+                z: strike.z,
+                y: 15 + Math.random() * 25,
+                vx: Math.cos(angle) * speed,
+                vy: 4 + Math.random() * 3.5,
+                vz: Math.sin(angle) * (speed * 0.5),
+                alpha: 1,
+                scale: 1.35 + Math.random() * 0.4,
+                color: noteColors[Math.floor(Math.random() * noteColors.length)],
+                life: 0.75,
+                maxLife: 0.75,
+                sway: Math.random() * 6
+              });
+            }
+            if (particles) {
+              particles.addShockwave(strike.x, strike.z, 75, "#00e5ff");
+              particles.addHitSparks(strike.x, 20, strike.z, "#ffd700", 16);
+            }
+          }
+        } else if (strike.stage === "strike") {
+          strike.strikeTimer -= dt;
+          if (strike.strikeTimer <= 0) {
+            strike.stage = "fading";
+          }
+        } else if (strike.stage === "fading") {
+          strike.fadeTimer -= dt;
+        }
+        for (let j = strike.burstElements.length - 1; j >= 0; j--) {
+          const el = strike.burstElements[j];
+          el.life -= dt;
+          el.x += el.vx * dt * 60;
+          el.y += el.vy * dt * 60;
+          el.z += el.vz * dt * 60;
+          el.vy -= 8 * dt;
+          el.sway += dt * 5;
+          el.alpha = Math.max(0, el.life / el.maxLife);
+          if (el.life <= 0) {
+            strike.burstElements.splice(j, 1);
+          }
+        }
+        if (strike.stage === "fading" && strike.fadeTimer <= 0 && strike.burstElements.length === 0) {
+          this.nataLightnings.splice(i, 1);
+        }
+      }
+      for (let i = this.nataNotes.length - 1; i >= 0; i--) {
+        const note = this.nataNotes[i];
+        note.life -= dt;
+        note.x += note.vx * dt * 60;
+        note.y += note.vy * dt * 60;
+        note.sway += dt * 4;
+        note.alpha = Math.max(0, note.life / note.maxLife);
+        if (note.life <= 0) {
+          this.nataNotes.splice(i, 1);
+        }
+      }
+    }
+    // Draw Nata's lightning storm, </> shock signs, and musical notes in world space
+    drawNataLightnings(ctx, camera) {
+      if (this.nataLightnings.length === 0 && this.nataNotes.length === 0) return;
+      for (const strike of this.nataLightnings) {
+        const sx = camera.toScreenX(strike.x);
+        const groundY = camera.toScreenY(strike.z);
+        if (strike.stage === "warning") {
+          const progress = 1 - strike.warningTimer / 0.22;
+          const radius = 32 + progress * 14;
+          ctx.save();
+          ctx.strokeStyle = `rgba(0, 229, 255, ${0.4 + progress * 0.5})`;
+          ctx.lineWidth = 2.5;
+          ctx.shadowBlur = 12;
+          ctx.shadowColor = "#00e5ff";
+          ctx.beginPath();
+          ctx.ellipse(sx, groundY, radius, radius * 0.38, 0, 0, Math.PI * 2);
+          ctx.stroke();
+          ctx.font = 'bold 16px "Courier New", monospace, sans-serif';
+          ctx.textAlign = "center";
+          ctx.textBaseline = "middle";
+          ctx.fillStyle = `rgba(255, 215, 0, ${0.6 + progress * 0.4})`;
+          ctx.shadowColor = "#ffd700";
+          ctx.fillText("</>", sx, groundY);
+          ctx.restore();
+        } else if (strike.stage === "strike" || strike.stage === "fading" && strike.fadeTimer > 0.3) {
+          const alpha = strike.stage === "strike" ? 1 : strike.fadeTimer / 0.45;
+          const segs = strike.segments;
+          if (segs && segs.length > 1) {
+            ctx.save();
+            ctx.strokeStyle = `rgba(0, 229, 255, ${0.85 * alpha})`;
+            ctx.lineWidth = 14;
+            ctx.lineCap = "round";
+            ctx.lineJoin = "miter";
+            ctx.shadowBlur = 24;
+            ctx.shadowColor = "#00e5ff";
+            ctx.beginPath();
+            ctx.moveTo(camera.toScreenX(segs[0].x), camera.toScreenY(strike.z - segs[0].y));
+            for (let k = 1; k < segs.length; k++) {
+              ctx.lineTo(camera.toScreenX(segs[k].x), camera.toScreenY(strike.z - segs[k].y));
+            }
+            ctx.stroke();
+            ctx.strokeStyle = `rgba(255, 0, 180, ${0.9 * alpha})`;
+            ctx.lineWidth = 7;
+            ctx.shadowBlur = 14;
+            ctx.shadowColor = "#ff00aa";
+            ctx.stroke();
+            ctx.strokeStyle = `rgba(255, 255, 255, ${alpha})`;
+            ctx.lineWidth = 3.2;
+            ctx.shadowBlur = 8;
+            ctx.shadowColor = "#ffffff";
+            ctx.stroke();
+            const flashGrad = ctx.createRadialGradient(sx, groundY, 4, sx, groundY, 55);
+            flashGrad.addColorStop(0, `rgba(255, 255, 255, ${0.95 * alpha})`);
+            flashGrad.addColorStop(0.35, `rgba(0, 229, 255, ${0.75 * alpha})`);
+            flashGrad.addColorStop(0.8, `rgba(189, 0, 255, ${0.35 * alpha})`);
+            flashGrad.addColorStop(1, "rgba(0, 229, 255, 0)");
+            ctx.fillStyle = flashGrad;
+            ctx.beginPath();
+            ctx.ellipse(sx, groundY, 55, 22, 0, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.restore();
+          }
+        }
+        for (const el of strike.burstElements) {
+          const elSx = camera.toScreenX(el.x);
+          const elSy = camera.toScreenY(el.z - el.y);
+          ctx.save();
+          ctx.globalAlpha = el.alpha;
+          ctx.translate(elSx, elSy);
+          ctx.scale(el.scale, el.scale);
+          if (el.isShock) {
+            ctx.font = '900 18px "Courier New", monospace, sans-serif';
+            ctx.textAlign = "center";
+            ctx.textBaseline = "middle";
+            ctx.shadowBlur = 12;
+            ctx.shadowColor = el.color;
+            ctx.fillStyle = el.color;
+            ctx.fillText(el.text, 0, 0);
+            ctx.lineWidth = 1.5;
+            ctx.strokeStyle = "#ffffff";
+            ctx.strokeText(el.text, 0, 0);
+          } else {
+            ctx.font = "bold 24px sans-serif";
+            ctx.textAlign = "center";
+            ctx.textBaseline = "middle";
+            ctx.shadowBlur = 14;
+            ctx.shadowColor = el.color;
+            ctx.fillStyle = el.color;
+            ctx.fillText(el.text, Math.sin(el.sway) * 4, 0);
+          }
+          ctx.restore();
+        }
+      }
+      for (const note of this.nataNotes) {
+        const nsx = camera.toScreenX(note.x);
+        const nsy = camera.toScreenY(note.z - note.y);
+        ctx.save();
+        ctx.globalAlpha = note.alpha;
+        ctx.translate(nsx, nsy);
+        ctx.scale(note.scale, note.scale);
+        if (note.isShock) {
+          ctx.font = '900 17px "Courier New", monospace, sans-serif';
+          ctx.textAlign = "center";
+          ctx.textBaseline = "middle";
+          ctx.shadowBlur = 10;
+          ctx.shadowColor = note.color;
+          ctx.fillStyle = note.color;
+          ctx.fillText(note.text, 0, 0);
+        } else {
+          ctx.font = "bold 22px sans-serif";
+          ctx.textAlign = "center";
+          ctx.textBaseline = "middle";
+          ctx.shadowBlur = 12;
+          ctx.shadowColor = note.color;
+          ctx.fillStyle = note.color;
+          ctx.fillText(note.text, Math.sin(note.sway) * 5, 0);
+        }
+        ctx.restore();
+      }
+    }
+    // Spawn a random fiery falling planet across the stage
+    spawnUnicaoPlanet(camera) {
+      const camLeft = camera ? camera.x + 50 : this.x - 250;
+      const camW = camera ? camera.width - 100 : 760;
+      const targetX = camLeft + Math.random() * camW;
+      const targetZ = 365 + Math.random() * 145;
+      const planetType = Math.floor(Math.random() * 3) + 1;
+      const scales = { 1: 0.68, 2: 0.78, 3: 0.88 };
+      const baseRadii = { 1: 45, 2: 55, 3: 72 };
+      const startAltitude = 480 + Math.random() * 80;
+      const fallDistanceX = 220 + Math.random() * 60;
+      const startX = targetX - fallDistanceX;
+      this.unicaoPlanets.push({
+        type: planetType,
+        targetX,
+        targetZ,
+        x: startX,
+        y: startAltitude,
+        startY: startAltitude,
+        z: targetZ,
+        vx: (targetX - startX) / 0.52,
+        vy: -startAltitude / 0.52,
+        scale: scales[planetType],
+        hitRadius: baseRadii[planetType],
+        stage: "falling",
+        // 'falling' -> 'impact' -> 'dead'
+        impactTimer: 0.35,
+        hasHitTarget: false,
+        debris: []
+      });
+    }
+    // Update active falling planets, trail particles, and explosive impact crater
+    updateUnicaoPlanets(dt, camera, particles) {
+      for (let i = this.unicaoPlanets.length - 1; i >= 0; i--) {
+        const p = this.unicaoPlanets[i];
+        if (p.stage === "falling") {
+          p.x += p.vx * dt;
+          p.y += p.vy * dt;
+          if (particles && Math.random() < 0.6) {
+            const sparkColor = p.type === 3 ? "#ff2200" : p.type === 2 ? "#ffaa00" : "#ff5500";
+            particles.addHitSparks(p.x, p.y * 0.5, p.z, sparkColor, 2);
+          }
+          if (p.y <= 0) {
+            p.y = 0;
+            p.stage = "impact";
+            Sound.playMeteorCrash();
+            if (particles) {
+              const shockColor = p.type === 3 ? "#ff1100" : "#ff7700";
+              particles.addShockwave(p.targetX, p.targetZ, 125 * p.scale, shockColor);
+              particles.addHitSparks(p.targetX, 30, p.targetZ, "#ffcc00", 25);
+              particles.addHitSparks(p.targetX, 15, p.targetZ, "#ff3300", 20);
+            }
+            for (let d = 0; d < 8; d++) {
+              const angle = Math.random() * Math.PI * 2;
+              const spd = 3.5 + Math.random() * 6;
+              p.debris.push({
+                x: p.targetX,
+                y: 10 + Math.random() * 20,
+                z: p.targetZ,
+                vx: Math.cos(angle) * spd,
+                vy: 4 + Math.random() * 5,
+                vz: Math.sin(angle) * (spd * 0.45),
+                color: ["#ffdd00", "#ff5500", "#ff0000", "#441100"][Math.floor(Math.random() * 4)],
+                size: 4 + Math.random() * 6,
+                alpha: 1,
+                life: 0.45
+              });
+            }
+          }
+        } else if (p.stage === "impact") {
+          p.impactTimer -= dt;
+          for (let d = p.debris.length - 1; d >= 0; d--) {
+            const deb = p.debris[d];
+            deb.life -= dt;
+            deb.x += deb.vx * dt * 60;
+            deb.y += deb.vy * dt * 60;
+            deb.z += deb.vz * dt * 60;
+            deb.vy -= 10 * dt;
+            deb.alpha = Math.max(0, deb.life / 0.45);
+            if (deb.life <= 0) p.debris.splice(d, 1);
+          }
+          if (p.impactTimer <= 0 && p.debris.length === 0) {
+            p.stage = "dead";
+            this.unicaoPlanets.splice(i, 1);
+          }
+        }
+      }
+    }
+    // Draw falling planets, impact reticles, and explosive fire craters in world space
+    drawUnicaoPlanets(ctx, camera, imageLoader) {
+      if (this.unicaoPlanets.length === 0) return;
+      for (const p of this.unicaoPlanets) {
+        const groundSx = camera.toScreenX(p.targetX);
+        const groundSy = camera.toScreenY(p.targetZ);
+        if (p.stage === "falling") {
+          const fallProgress = Math.min(1, Math.max(0, 1 - p.y / p.startY));
+          const craterRadius = (35 + fallProgress * 45) * p.scale;
+          ctx.save();
+          ctx.fillStyle = `rgba(255, 68, 0, ${0.15 + fallProgress * 0.45})`;
+          ctx.shadowBlur = 18;
+          ctx.shadowColor = "#ff3300";
+          ctx.beginPath();
+          ctx.ellipse(groundSx, groundSy, craterRadius, craterRadius * 0.38, 0, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.strokeStyle = `rgba(255, 204, 0, ${0.4 + fallProgress * 0.6})`;
+          ctx.lineWidth = 2.5;
+          ctx.stroke();
+          ctx.font = "bold 16px sans-serif";
+          ctx.textAlign = "center";
+          ctx.textBaseline = "middle";
+          ctx.fillStyle = "#ffcc00";
+          ctx.fillText("\u{1FA90}", groundSx, groundSy);
+          ctx.restore();
+        }
+        if (p.stage === "falling") {
+          const sx = camera.toScreenX(p.x);
+          const sy = camera.toScreenY(p.z - p.y);
+          const imgKey = `assets/images/sprites/characters/dog_planet${p.type}.png`;
+          const planetImg = imageLoader.getImage(imgKey);
+          ctx.save();
+          ctx.translate(sx, sy);
+          ctx.scale(p.scale, p.scale);
+          ctx.shadowBlur = 28;
+          ctx.shadowColor = p.type === 3 ? "#ff2200" : "#ff9900";
+          if (planetImg) {
+            const pw = planetImg.width || 260;
+            const ph = planetImg.height || 260;
+            ctx.drawImage(planetImg, -pw / 2, -ph / 2, pw, ph);
+          } else {
+            ctx.fillStyle = "#ff5500";
+            ctx.beginPath();
+            ctx.arc(0, 0, 50, 0, Math.PI * 2);
+            ctx.fill();
+          }
+          ctx.restore();
+        }
+        if (p.stage === "impact") {
+          const progress = Math.max(0, p.impactTimer / 0.35);
+          ctx.save();
+          const flashGrad = ctx.createRadialGradient(groundSx, groundSy, 5, groundSx, groundSy, 95 * p.scale);
+          flashGrad.addColorStop(0, `rgba(255, 255, 255, ${0.9 * progress})`);
+          flashGrad.addColorStop(0.35, `rgba(255, 170, 0, ${0.8 * progress})`);
+          flashGrad.addColorStop(0.7, `rgba(255, 34, 0, ${0.5 * progress})`);
+          flashGrad.addColorStop(1, "rgba(255, 34, 0, 0)");
+          ctx.fillStyle = flashGrad;
+          ctx.beginPath();
+          ctx.ellipse(groundSx, groundSy, 95 * p.scale, 38 * p.scale, 0, 0, Math.PI * 2);
+          ctx.fill();
+          for (const deb of p.debris) {
+            const dsx = camera.toScreenX(deb.x);
+            const dsy = camera.toScreenY(deb.z - deb.y);
+            ctx.fillStyle = deb.color;
+            ctx.globalAlpha = deb.alpha;
+            ctx.beginPath();
+            ctx.arc(dsx, dsy, deb.size, 0, Math.PI * 2);
+            ctx.fill();
+          }
+          ctx.restore();
+        }
+      }
+    }
     respawn(spawnX, spawnZ) {
       this.hp = this.maxHp;
       this.isDead = false;
@@ -4303,6 +4992,9 @@
       this.invincibleTimer = 2;
       this.andreyBots = [];
       this.andreyShots = [];
+      this.nataLightnings = [];
+      this.nataNotes = [];
+      this.unicaoPlanets = [];
     }
   };
 
@@ -5785,8 +6477,16 @@
       if (this.boss) {
         this.boss.drawProjectiles(ctx, camera, imageLoader);
       }
-      if (this.game && this.game.player && this.game.player.drawBots) {
-        this.game.player.drawBots(ctx, camera, imageLoader);
+      if (this.game && this.game.player) {
+        if (this.game.player.drawBots) {
+          this.game.player.drawBots(ctx, camera, imageLoader);
+        }
+        if (this.game.player.drawNataLightnings) {
+          this.game.player.drawNataLightnings(ctx, camera);
+        }
+        if (this.game.player.drawUnicaoPlanets) {
+          this.game.player.drawUnicaoPlanets(ctx, camera, imageLoader);
+        }
       }
       this.particles.draw(ctx, camera);
     }
@@ -7266,7 +7966,7 @@
               const dy = Math.abs(shot.y - enemy.y);
               if (dx < 38 && dz < 28 && dy < 50) {
                 shot.isDead = true;
-                const damage = Math.max(1, Math.floor(enemy.maxHp * 0.05));
+                const damage = Math.max(1, Math.floor(enemy.maxHp * 0.09));
                 const tookDamage = enemy.takeDamage(
                   damage,
                   (shot.vx >= 0 ? 1 : -1) * 3.5,
@@ -7274,7 +7974,7 @@
                 );
                 if (tookDamage) {
                   this.stageManager.particles.addHitSparks(enemy.x, enemy.y + 35, enemy.z, "#00ff88", 12);
-                  this.stageManager.particles.addFloatingText(`-${damage} (5%)`, enemy.x, enemy.y + 65, enemy.z, "#00ff88");
+                  this.stageManager.particles.addFloatingText(`-${damage} (9%)`, enemy.x, enemy.y + 65, enemy.z, "#00ff88");
                   Sound.playLaserHit();
                   this.camera.shake(3.5, 0.1);
                   player.addScore(80);
@@ -7289,7 +7989,7 @@
             const dy = Math.abs(shot.y - boss2.y);
             if (dx < 48 && dz < 35 && dy < 60) {
               shot.isDead = true;
-              const bossDamage = Math.max(1, Math.floor(boss2.maxHp * 0.05));
+              const bossDamage = Math.max(1, Math.floor(boss2.maxHp * 0.09));
               const tookDamage = boss2.takeDamage(
                 bossDamage,
                 (shot.vx >= 0 ? 1 : -1) * 2.5,
@@ -7297,7 +7997,7 @@
               );
               if (tookDamage) {
                 this.stageManager.particles.addHitSparks(boss2.x, boss2.y + 45, boss2.z, "#00ff88", 16);
-                this.stageManager.particles.addFloatingText(`-${bossDamage} (5%)`, boss2.x, boss2.y + 85, boss2.z, "#00ff88");
+                this.stageManager.particles.addFloatingText(`-${bossDamage} (9%)`, boss2.x, boss2.y + 85, boss2.z, "#00ff88");
                 Sound.playLaserHit();
                 this.camera.shake(4.5, 0.12);
                 player.addScore(150);
@@ -7307,6 +8007,115 @@
                   this.stageManager.particles.addFloatingText(`\u26A1 BARRA QUEBRADA! [x${boss2.currentBar}] \u26A1`, boss2.x, boss2.y + 115, boss2.z, "#ffd700");
                   Sound.playHeavyHit();
                   this.camera.shake(9, 0.25);
+                }
+              }
+            }
+          }
+        }
+      }
+      if (player.nataLightnings && player.nataLightnings.length > 0) {
+        for (const strike of player.nataLightnings) {
+          if (strike.stage === "strike" && !strike.hasDamaged) {
+            strike.hasDamaged = true;
+            this.camera.shake(8, 0.2);
+            for (const enemy of this.stageManager.enemies) {
+              if (!enemy.isDead) {
+                const dx = Math.abs(strike.x - enemy.x);
+                const dz = Math.abs(strike.z - enemy.z);
+                if (dx < 65 && dz < 42) {
+                  const damage = Math.max(1, Math.floor(enemy.maxHp * 0.5));
+                  const tookDamage = enemy.takeDamage(
+                    damage,
+                    (enemy.x >= strike.x ? 1 : -1) * 8,
+                    7
+                  );
+                  if (tookDamage) {
+                    this.stageManager.particles.addHitSparks(enemy.x, enemy.y + 40, enemy.z, "#00e5ff", 20);
+                    this.stageManager.particles.addHitSparks(enemy.x, enemy.y + 20, enemy.z, "#ffd700", 14);
+                    this.stageManager.particles.addFloatingText(`-${damage} (50%) \u26A1\u266A`, enemy.x, enemy.y + 70, enemy.z, "#00ffff");
+                    player.addScore(300);
+                  }
+                }
+              }
+            }
+            const boss2 = this.stageManager.boss;
+            if (boss2 && !boss2.isDead) {
+              const dx = Math.abs(strike.x - boss2.x);
+              const dz = Math.abs(strike.z - boss2.z);
+              if (dx < 78 && dz < 52) {
+                const bossDamage = Math.max(1, Math.floor(boss2.maxHp * 0.25));
+                const tookDamage = boss2.takeDamage(
+                  bossDamage,
+                  (boss2.x >= strike.x ? 1 : -1) * 6.5,
+                  5
+                );
+                if (tookDamage) {
+                  this.stageManager.particles.addHitSparks(boss2.x, boss2.y + 50, boss2.z, "#00e5ff", 25);
+                  this.stageManager.particles.addHitSparks(boss2.x, boss2.y + 30, boss2.z, "#ffd700", 20);
+                  this.stageManager.particles.addFloatingText(`-${bossDamage} (25%) \u26A1\u266A`, boss2.x, boss2.y + 90, boss2.z, "#ffd700");
+                  player.addScore(600);
+                  if (boss2.barBroken) {
+                    boss2.barBroken = false;
+                    this.stageManager.particles.addHitSparks(boss2.x, boss2.y + 60, boss2.z, "#ffff00", 30);
+                    this.stageManager.particles.addFloatingText(`\u26A1 BARRA QUEBRADA! [x${boss2.currentBar}] \u26A1`, boss2.x, boss2.y + 115, boss2.z, "#ffd700");
+                    Sound.playHeavyHit();
+                    this.camera.shake(9, 0.25);
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+      if (player.unicaoPlanets && player.unicaoPlanets.length > 0) {
+        for (const planet of player.unicaoPlanets) {
+          if (planet.stage === "impact" && !planet.hasHitTarget) {
+            planet.hasHitTarget = true;
+            this.camera.shake(11, 0.28);
+            for (const enemy of this.stageManager.enemies) {
+              if (!enemy.isDead) {
+                const dx = Math.abs(planet.targetX - enemy.x);
+                const dz = Math.abs(planet.targetZ - enemy.z);
+                if (dx < 75 * planet.scale + 35 && dz < 50 * planet.scale + 25) {
+                  const damage = Math.max(1, Math.floor(enemy.maxHp * 0.5));
+                  const tookDamage = enemy.takeDamage(
+                    damage,
+                    (enemy.x >= planet.targetX ? 1 : -1) * 9,
+                    8
+                    // Massive Knockdown launch!
+                  );
+                  if (tookDamage) {
+                    this.stageManager.particles.addHitSparks(enemy.x, enemy.y + 40, enemy.z, "#ff4400", 22);
+                    this.stageManager.particles.addHitSparks(enemy.x, enemy.y + 20, enemy.z, "#ffbb00", 16);
+                    this.stageManager.particles.addFloatingText(`-${damage} (50%) \u{1FA90}\u{1F4A5}`, enemy.x, enemy.y + 70, enemy.z, "#ff5500");
+                    player.addScore(350);
+                  }
+                }
+              }
+            }
+            const boss2 = this.stageManager.boss;
+            if (boss2 && !boss2.isDead) {
+              const dx = Math.abs(planet.targetX - boss2.x);
+              const dz = Math.abs(planet.targetZ - boss2.z);
+              if (dx < 90 * planet.scale + 45 && dz < 60 * planet.scale + 30) {
+                const bossDamage = Math.max(1, Math.floor(boss2.maxHp * 0.25));
+                const tookDamage = boss2.takeDamage(
+                  bossDamage,
+                  (boss2.x >= planet.targetX ? 1 : -1) * 7.5,
+                  6
+                );
+                if (tookDamage) {
+                  this.stageManager.particles.addHitSparks(boss2.x, boss2.y + 50, boss2.z, "#ff3300", 30);
+                  this.stageManager.particles.addHitSparks(boss2.x, boss2.y + 30, boss2.z, "#ffcc00", 25);
+                  this.stageManager.particles.addFloatingText(`-${bossDamage} (25%) \u{1FA90}\u{1F4A5}`, boss2.x, boss2.y + 90, boss2.z, "#ff9900");
+                  player.addScore(700);
+                  if (boss2.barBroken) {
+                    boss2.barBroken = false;
+                    this.stageManager.particles.addHitSparks(boss2.x, boss2.y + 60, boss2.z, "#ffff00", 30);
+                    this.stageManager.particles.addFloatingText(`\u26A1 BARRA QUEBRADA! [x${boss2.currentBar}] \u26A1`, boss2.x, boss2.y + 115, boss2.z, "#ffd700");
+                    Sound.playHeavyHit();
+                    this.camera.shake(12, 0.3);
+                  }
                 }
               }
             }

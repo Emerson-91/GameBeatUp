@@ -159,6 +159,153 @@ class SoundSystem {
     this.playNoise(0.12, 0.25, 1400);
   }
 
+  // Nata Electric Rock Guitar Solo Riff SFX
+  playGuitarRiff() {
+    if (this.isMuted) return;
+    this.init();
+    if (!this.ctx) return;
+
+    try {
+      const now = this.ctx.currentTime;
+
+      // Distortion waveshaper curve for overdriven rock guitar tone
+      const makeDistortionCurve = (amount = 28) => {
+        const k = amount;
+        const n_samples = 44100;
+        const curve = new Float32Array(n_samples);
+        const deg = Math.PI / 180;
+        for (let i = 0; i < n_samples; ++i) {
+          const x = (i * 2) / n_samples - 1;
+          curve[i] = ((3 + k) * x * 20 * deg) / (Math.PI + k * Math.abs(x));
+        }
+        return curve;
+      };
+
+      const distortion = this.ctx.createWaveShaper();
+      distortion.curve = makeDistortionCurve(30);
+      distortion.oversample = '4x';
+
+      // Cabinet Lowpass filter for smooth crunchy rock amplifier tone
+      const cabinetFilter = this.ctx.createBiquadFilter();
+      cabinetFilter.type = 'lowpass';
+      cabinetFilter.frequency.setValueAtTime(2600, now);
+
+      const masterGain = this.ctx.createGain();
+      masterGain.gain.setValueAtTime(0.3, now);
+      masterGain.gain.exponentialRampToValueAtTime(0.001, now + 3.2);
+
+      distortion.connect(cabinetFilter);
+      cabinetFilter.connect(masterGain);
+      masterGain.connect(this.ctx.destination);
+
+      // Play rock guitar solo riff:
+      // Heavy opening power chords -> fast ascending metal licks -> screaming high E note with vibrato
+      const soloNotes = [
+        { t: 0.00, dur: 0.28, freqs: [164.8, 246.9, 329.6] }, // E power chord
+        { t: 0.28, dur: 0.22, freqs: [164.8, 246.9, 329.6] }, // E power chord
+        { t: 0.52, dur: 0.35, freqs: [196.0, 293.7, 392.0] }, // G power chord
+        { t: 0.88, dur: 0.38, freqs: [220.0, 329.6, 440.0] }, // A power chord
+        { t: 1.28, dur: 0.14, freqs: [329.6, 493.9] },        // E4 lick
+        { t: 1.42, dur: 0.14, freqs: [392.0, 587.3] },        // G4 lick
+        { t: 1.56, dur: 0.14, freqs: [440.0, 659.3] },        // A4 lick
+        { t: 1.70, dur: 0.16, freqs: [493.9, 739.9] },        // B4 lick
+        { t: 1.86, dur: 0.20, freqs: [587.3, 880.0] },        // D5 lick
+        { t: 2.06, dur: 1.05, freqs: [659.3, 987.8, 1318.5], vibrato: true } // Screaming high E5
+      ];
+
+      soloNotes.forEach((step) => {
+        const noteStart = now + step.t;
+        const noteDur = step.dur;
+
+        step.freqs.forEach((freq, idx) => {
+          const osc = this.ctx.createOscillator();
+          const noteGain = this.ctx.createGain();
+
+          osc.type = idx === 0 ? 'sawtooth' : 'triangle';
+          osc.frequency.setValueAtTime(freq, noteStart);
+          osc.frequency.exponentialRampToValueAtTime(freq * 1.015, noteStart + noteDur * 0.4);
+
+          if (step.vibrato) {
+            const lfo = this.ctx.createOscillator();
+            const lfoGain = this.ctx.createGain();
+            lfo.frequency.setValueAtTime(6.5, noteStart);
+            lfoGain.gain.setValueAtTime(freq * 0.035, noteStart);
+            lfo.connect(osc.frequency);
+            lfo.start(noteStart);
+            lfo.stop(noteStart + noteDur);
+          }
+
+          noteGain.gain.setValueAtTime(0.2 / step.freqs.length, noteStart);
+          noteGain.gain.exponentialRampToValueAtTime(0.001, noteStart + noteDur);
+
+          osc.connect(noteGain);
+          noteGain.connect(distortion);
+
+          osc.start(noteStart);
+          osc.stop(noteStart + noteDur);
+        });
+      });
+    } catch (e) {
+      // Audio fallback protection
+    }
+  }
+
+  // Thunderous Lightning Strike SFX
+  playLightningStrike() {
+    if (this.isMuted) return;
+    this.init();
+    if (!this.ctx) return;
+
+    try {
+      this.playTone(880, 50, 0.2, 'sawtooth', 0.28);
+      this.playTone(120, 25, 0.45, 'sine', 0.4);
+      this.playNoise(0.26, 0.35, 1900);
+    } catch (e) {}
+  }
+
+  // Unicão Cosmic Howl & Planet Summoning SFX
+  playCosmicSummon() {
+    if (this.isMuted) return;
+    this.init();
+    if (!this.ctx) return;
+
+    try {
+      // 1. Deep space energy charge (low frequency ascending sweep)
+      this.playTone(60, 480, 0.75, 'sawtooth', 0.35);
+      this.playTone(80, 720, 0.9, 'sine', 0.4);
+
+      // 2. Cosmic celestial harmonics arpeggio
+      const celestialPitches = [340, 520, 680, 960, 1280];
+      celestialPitches.forEach((freq, idx) => {
+        setTimeout(() => {
+          this.playTone(freq, freq * 1.1, 0.22, 'triangle', 0.25);
+        }, 120 + idx * 80);
+      });
+
+      // 3. Resonant cosmic howl (vibrato power sweep)
+      setTimeout(() => {
+        this.playTone(420, 260, 0.65, 'sawtooth', 0.38);
+        this.playNoise(0.5, 0.28, 900);
+      }, 550);
+    } catch (e) {}
+  }
+
+  // Planet Cataclysm Ground Impact Explosion SFX
+  playMeteorCrash() {
+    if (this.isMuted) return;
+    this.init();
+    if (!this.ctx) return;
+
+    try {
+      // Ground-shaking sub-bass thud
+      this.playTone(95, 20, 0.6, 'sine', 0.55);
+      // High-energy detonation burst
+      this.playTone(280, 45, 0.35, 'sawtooth', 0.45);
+      // Fiery explosion noise
+      this.playNoise(0.45, 0.5, 800);
+    } catch (e) {}
+  }
+
   // Chicken Heal SFX (Magic arcade recovery arpeggio)
   playChickenHeal() {
     if (this.isMuted) return;

@@ -25,10 +25,28 @@ export const SPRITE_META = {
       "src": "assets/images/sprites/characters/dog_kick.png"
     },
     "special": {
-      "w": 693,
-      "h": 365,
-      "ax": 0.1512,
-      "src": "assets/images/sprites/characters/dog_special.png"
+      "w": 272,
+      "h": 285,
+      "ax": 0.5,
+      "src": "assets/images/sprites/characters/dog_special2.png"
+    },
+    "special1": {
+      "w": 193,
+      "h": 221,
+      "ax": 0.5,
+      "src": "assets/images/sprites/characters/dog_special1.png"
+    },
+    "special2": {
+      "w": 272,
+      "h": 285,
+      "ax": 0.5,
+      "src": "assets/images/sprites/characters/dog_special2.png"
+    },
+    "special3": {
+      "w": 317,
+      "h": 208,
+      "ax": 0.5,
+      "src": "assets/images/sprites/characters/dog_special3.png"
     },
     "crouch": {
       "w": 161,
@@ -1361,10 +1379,40 @@ export const SPRITE_META = {
       "src": "assets/images/sprites/characters/nata_kick.png"
     },
     "special": {
-      "w": 503,
-      "h": 395,
-      "ax": 0.315,
-      "src": "assets/images/sprites/characters/nata_special.png"
+      "w": 275,
+      "h": 300,
+      "ax": 0.4624,
+      "src": "assets/images/sprites/characters/nata_victory1.png"
+    },
+    "special1": {
+      "w": 275,
+      "h": 300,
+      "ax": 0.4624,
+      "src": "assets/images/sprites/characters/nata_victory1.png"
+    },
+    "special2": {
+      "w": 251,
+      "h": 300,
+      "ax": 0.3889,
+      "src": "assets/images/sprites/characters/nata_victory2.png"
+    },
+    "special3": {
+      "w": 251,
+      "h": 300,
+      "ax": 0.4018,
+      "src": "assets/images/sprites/characters/nata_victory3.png"
+    },
+    "special4": {
+      "w": 328,
+      "h": 333,
+      "ax": 0.3863,
+      "src": "assets/images/sprites/characters/nata_victory4.png"
+    },
+    "special5": {
+      "w": 288,
+      "h": 333,
+      "ax": 0.4299,
+      "src": "assets/images/sprites/characters/nata_victory5.png"
     },
     "crouch": {
       "w": 137,
@@ -2708,6 +2756,24 @@ export const EXTRA_SPRITES = {
     "src": "assets/images/sprites/chicken.png",
     "w": 128,
     "h": 128,
+    "ax": 0.5
+  },
+  "dog_planet1": {
+    "src": "assets/images/sprites/characters/dog_planet1.png",
+    "w": 202,
+    "h": 220,
+    "ax": 0.5
+  },
+  "dog_planet2": {
+    "src": "assets/images/sprites/characters/dog_planet2.png",
+    "w": 260,
+    "h": 272,
+    "ax": 0.5
+  },
+  "dog_planet3": {
+    "src": "assets/images/sprites/characters/dog_planet3.png",
+    "w": 298,
+    "h": 278,
     "ax": 0.5
   }
 };

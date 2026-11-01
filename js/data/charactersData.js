@@ -22,7 +22,7 @@ export const PLAYABLE_CHARACTERS = {
     specialCooldown: 8.5,
     specialDuration: 4.5,
     specialName: 'ESQUADRÃO ANDREYBOT (BOMBARDEIO AÉREO)',
-    description: 'Gênio da alta tecnologia. Seu especial 100% convoca 3 AndreyBots que cruzam a tela indo e voltando, bombardeando os inimigos com tiros que tiram 5% de vida a cada acerto!'
+    description: 'Gênio da alta tecnologia. Seu especial 100% convoca 3 AndreyBots que cruzam a tela indo e voltando com o dobro de tiros, bombardeando os inimigos com disparos rápidos que tiram 9% de vida a cada acerto!'
   },
   emerson: {
     id: 'emerson',
@@ -69,10 +69,10 @@ export const PLAYABLE_CHARACTERS = {
       jumpKick: 28,
       special: 45
     },
-    specialCooldown: 6,
-    specialDuration: 0.9,
-    specialName: 'FURACÃO DE CHUTES',
-    description: 'Velocidade supersônica, chutes aéreos acrobáticos e esquiva fantástica.'
+    specialCooldown: 8.5,
+    specialDuration: 3.2,
+    specialName: 'SOLO DE GUITARRA ELÉTRICA (TEMPESTADE DE RAIOS)',
+    description: 'Toca um solo épico de guitarra com distorção que invoca múltiplos raios aleatórios com sinais de choque </> e notas musicais pela fase. Quem for acertado pelo raio toma dano de 50% e o chefe 25%!'
   },
   unicao: {
     id: 'unicao',
@@ -94,10 +94,10 @@ export const PLAYABLE_CHARACTERS = {
       jumpKick: 27,
       special: 52
     },
-    specialCooldown: 7,
-    specialDuration: 0.9,
-    specialName: 'INVESTIDA DAS QUATRO PATAS',
-    description: 'Guerreiro canino lendário com mordidas rápidas e arrancada fulminante.'
+    specialCooldown: 8.5,
+    specialDuration: 3.5,
+    specialName: 'CATACLISMA CÓSMICO (INVOCAÇÃO DE PLANETAS)',
+    description: 'Invoca o poder dos cosmos e faz planetas flamejantes caírem do céu de forma aleatória na fase! Cada impacto de planeta causa 50% de dano aos adversários e 25% ao chefe!'
   }
 };
 

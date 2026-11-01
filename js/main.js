@@ -595,8 +595,8 @@ class Game {
             const dy = Math.abs(shot.y - enemy.y);
             if (dx < 38 && dz < 28 && dy < 50) {
               shot.isDead = true;
-              // Cada tiro tira 5% de vida
-              const damage = Math.max(1, Math.floor(enemy.maxHp * 0.05));
+              // Cada tiro tira 9% de vida (aumentado em +4%)
+              const damage = Math.max(1, Math.floor(enemy.maxHp * 0.09));
               const tookDamage = enemy.takeDamage(
                 damage,
                 (shot.vx >= 0 ? 1 : -1) * 3.5,
@@ -604,7 +604,7 @@ class Game {
               );
               if (tookDamage) {
                 this.stageManager.particles.addHitSparks(enemy.x, enemy.y + 35, enemy.z, '#00ff88', 12);
-                this.stageManager.particles.addFloatingText(`-${damage} (5%)`, enemy.x, enemy.y + 65, enemy.z, '#00ff88');
+                this.stageManager.particles.addFloatingText(`-${damage} (9%)`, enemy.x, enemy.y + 65, enemy.z, '#00ff88');
                 Sound.playLaserHit();
                 this.camera.shake(3.5, 0.1);
                 player.addScore(80);
@@ -621,8 +621,8 @@ class Game {
           const dy = Math.abs(shot.y - boss.y);
           if (dx < 48 && dz < 35 && dy < 60) {
             shot.isDead = true;
-            // Cada tiro tira 5% de vida do chefe
-            const bossDamage = Math.max(1, Math.floor(boss.maxHp * 0.05));
+            // Cada tiro tira 9% de vida do chefe (aumentado em +4%)
+            const bossDamage = Math.max(1, Math.floor(boss.maxHp * 0.09));
             const tookDamage = boss.takeDamage(
               bossDamage,
               (shot.vx >= 0 ? 1 : -1) * 2.5,
@@ -630,7 +630,7 @@ class Game {
             );
             if (tookDamage) {
               this.stageManager.particles.addHitSparks(boss.x, boss.y + 45, boss.z, '#00ff88', 16);
-              this.stageManager.particles.addFloatingText(`-${bossDamage} (5%)`, boss.x, boss.y + 85, boss.z, '#00ff88');
+              this.stageManager.particles.addFloatingText(`-${bossDamage} (9%)`, boss.x, boss.y + 85, boss.z, '#00ff88');
               Sound.playLaserHit();
               this.camera.shake(4.5, 0.12);
               player.addScore(150);
@@ -640,6 +640,132 @@ class Game {
                 this.stageManager.particles.addFloatingText(`⚡ BARRA QUEBRADA! [x${boss.currentBar}] ⚡`, boss.x, boss.y + 115, boss.z, '#ffd700');
                 Sound.playHeavyHit();
                 this.camera.shake(9, 0.25);
+              }
+            }
+          }
+        }
+      }
+    }
+
+    // --- Nata Electric Guitar Solo: Random Lightning Storm Collisions ---
+    // Inimigos atingidos pelo raio tomam 50% de dano; o chefe toma 25% de dano
+    if (player.nataLightnings && player.nataLightnings.length > 0) {
+      for (const strike of player.nataLightnings) {
+        if (strike.stage === 'strike' && !strike.hasDamaged) {
+          strike.hasDamaged = true;
+
+          // Camera shake on each lightning impact
+          this.camera.shake(8.0, 0.2);
+
+          // Check Regular Enemies in strike radius: 50% HP damage!
+          for (const enemy of this.stageManager.enemies) {
+            if (!enemy.isDead) {
+              const dx = Math.abs(strike.x - enemy.x);
+              const dz = Math.abs(strike.z - enemy.z);
+              if (dx < 65 && dz < 42) {
+                const damage = Math.max(1, Math.floor(enemy.maxHp * 0.50));
+                const tookDamage = enemy.takeDamage(
+                  damage,
+                  (enemy.x >= strike.x ? 1 : -1) * 8.0,
+                  7.0
+                );
+                if (tookDamage) {
+                  this.stageManager.particles.addHitSparks(enemy.x, enemy.y + 40, enemy.z, '#00e5ff', 20);
+                  this.stageManager.particles.addHitSparks(enemy.x, enemy.y + 20, enemy.z, '#ffd700', 14);
+                  this.stageManager.particles.addFloatingText(`-${damage} (50%) ⚡♪`, enemy.x, enemy.y + 70, enemy.z, '#00ffff');
+                  player.addScore(300);
+                }
+              }
+            }
+          }
+
+          // Check Boss in strike radius: 25% HP damage!
+          const boss = this.stageManager.boss;
+          if (boss && !boss.isDead) {
+            const dx = Math.abs(strike.x - boss.x);
+            const dz = Math.abs(strike.z - boss.z);
+            if (dx < 78 && dz < 52) {
+              const bossDamage = Math.max(1, Math.floor(boss.maxHp * 0.25));
+              const tookDamage = boss.takeDamage(
+                bossDamage,
+                (boss.x >= strike.x ? 1 : -1) * 6.5,
+                5.0
+              );
+              if (tookDamage) {
+                this.stageManager.particles.addHitSparks(boss.x, boss.y + 50, boss.z, '#00e5ff', 25);
+                this.stageManager.particles.addHitSparks(boss.x, boss.y + 30, boss.z, '#ffd700', 20);
+                this.stageManager.particles.addFloatingText(`-${bossDamage} (25%) ⚡♪`, boss.x, boss.y + 90, boss.z, '#ffd700');
+                player.addScore(600);
+                if (boss.barBroken) {
+                  boss.barBroken = false;
+                  this.stageManager.particles.addHitSparks(boss.x, boss.y + 60, boss.z, '#ffff00', 30);
+                  this.stageManager.particles.addFloatingText(`⚡ BARRA QUEBRADA! [x${boss.currentBar}] ⚡`, boss.x, boss.y + 115, boss.z, '#ffd700');
+                  Sound.playHeavyHit();
+                  this.camera.shake(9, 0.25);
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    // --- Unicão Cosmic Cataclysm: Falling Planets vs Enemies & Boss ---
+    // Cada hit de planeta causa 50% de dano aos adversários e 25% ao chefe!
+    if (player.unicaoPlanets && player.unicaoPlanets.length > 0) {
+      for (const planet of player.unicaoPlanets) {
+        if (planet.stage === 'impact' && !planet.hasHitTarget) {
+          planet.hasHitTarget = true;
+
+          // Camera shake on each planet impact
+          this.camera.shake(11.0, 0.28);
+
+          // Check Regular Enemies in planet impact radius: 50% HP damage!
+          for (const enemy of this.stageManager.enemies) {
+            if (!enemy.isDead) {
+              const dx = Math.abs(planet.targetX - enemy.x);
+              const dz = Math.abs(planet.targetZ - enemy.z);
+              if (dx < 75 * planet.scale + 35 && dz < 50 * planet.scale + 25) {
+                const damage = Math.max(1, Math.floor(enemy.maxHp * 0.50));
+                const tookDamage = enemy.takeDamage(
+                  damage,
+                  (enemy.x >= planet.targetX ? 1 : -1) * 9.0,
+                  8.0 // Massive Knockdown launch!
+                );
+                if (tookDamage) {
+                  this.stageManager.particles.addHitSparks(enemy.x, enemy.y + 40, enemy.z, '#ff4400', 22);
+                  this.stageManager.particles.addHitSparks(enemy.x, enemy.y + 20, enemy.z, '#ffbb00', 16);
+                  this.stageManager.particles.addFloatingText(`-${damage} (50%) 🪐💥`, enemy.x, enemy.y + 70, enemy.z, '#ff5500');
+                  player.addScore(350);
+                }
+              }
+            }
+          }
+
+          // Check Boss in planet impact radius: 25% HP damage!
+          const boss = this.stageManager.boss;
+          if (boss && !boss.isDead) {
+            const dx = Math.abs(planet.targetX - boss.x);
+            const dz = Math.abs(planet.targetZ - boss.z);
+            if (dx < 90 * planet.scale + 45 && dz < 60 * planet.scale + 30) {
+              const bossDamage = Math.max(1, Math.floor(boss.maxHp * 0.25));
+              const tookDamage = boss.takeDamage(
+                bossDamage,
+                (boss.x >= planet.targetX ? 1 : -1) * 7.5,
+                6.0
+              );
+              if (tookDamage) {
+                this.stageManager.particles.addHitSparks(boss.x, boss.y + 50, boss.z, '#ff3300', 30);
+                this.stageManager.particles.addHitSparks(boss.x, boss.y + 30, boss.z, '#ffcc00', 25);
+                this.stageManager.particles.addFloatingText(`-${bossDamage} (25%) 🪐💥`, boss.x, boss.y + 90, boss.z, '#ff9900');
+                player.addScore(700);
+                if (boss.barBroken) {
+                  boss.barBroken = false;
+                  this.stageManager.particles.addHitSparks(boss.x, boss.y + 60, boss.z, '#ffff00', 30);
+                  this.stageManager.particles.addFloatingText(`⚡ BARRA QUEBRADA! [x${boss.currentBar}] ⚡`, boss.x, boss.y + 115, boss.z, '#ffd700');
+                  Sound.playHeavyHit();
+                  this.camera.shake(12, 0.3);
+                }
               }
             }
           }
