@@ -27,7 +27,7 @@ export class ImageLoader {
     essentialUrls.add('assets/images/backgrounds/stage1_alligator.jpg');
 
     // 4. Hero core sprites (idle & walk)
-    const heroKeys = ['andrey', 'emerson', 'nata', 'dog'];
+    const heroKeys = ['andrey', 'emerson', 'nata', 'dog', 'unicao'];
     for (const hero of heroKeys) {
       if (SPRITE_META[hero]) {
         ['idle', 'walk1', 'punch', 'punch1', 'punch2', 'punch3', 'kick', 'kick1', 'kick2', 'kick3', 'special', 'special1', 'special2', 'special3', 'special4', 'special5', 'victory1', 'victory2', 'victory3', 'victory4', 'victory5', 'bot'].forEach((a) => {

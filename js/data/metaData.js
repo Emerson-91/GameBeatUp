@@ -2721,6 +2721,8 @@ export const SPRITE_META = {
   },
 };
 
+SPRITE_META.unicao = SPRITE_META.dog;
+
 export const EXTRA_SPRITES = {
   "owl_tornado": {
     "src": "assets/images/sprites/boss6/tornado.png",

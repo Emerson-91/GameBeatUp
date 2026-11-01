@@ -252,7 +252,7 @@ export class Player extends Entity {
       this.nataNotes = [];
       this.nataLightningTimer = 0.15;
       Sound.playGuitarRiff();
-    } else if (this.charKey === 'dog') {
+    } else if (this.charKey === 'unicao' || this.charKey === 'dog') {
       this.vy = 0;
       this.vx = 0;
       this.unicaoPlanets = [];
@@ -385,7 +385,7 @@ export class Player extends Entity {
         if (Math.random() < 0.45) {
           this.spawnNataAuraNote();
         }
-      } else if (this.charKey === 'dog') {
+      } else if (this.charKey === 'unicao' || this.charKey === 'dog') {
         const total = this.specialDuration || 3.5;
         const elapsed = total - this.stateTimer;
         // Poses:
@@ -496,8 +496,8 @@ export class Player extends Entity {
     }
     // SPECIAL
     else if (this.state === 'special') {
-      // Emerson, Andrey, Nata, and Dog specials are handled via custom area/drone/lightning/planet mechanics
-      if (this.charKey === 'emerson' || this.charKey === 'andrey' || this.charKey === 'nata' || this.charKey === 'dog') return null;
+      // Emerson, Andrey, Nata, and Unicao specials are handled via custom area/drone/lightning/planet mechanics
+      if (this.charKey === 'emerson' || this.charKey === 'andrey' || this.charKey === 'nata' || this.charKey === 'unicao' || this.charKey === 'dog') return null;
 
       damage = this.config.damage.special;
       reach = 100;
@@ -1205,7 +1205,7 @@ export class Player extends Entity {
         const sx = camera.toScreenX(p.x);
         const sy = camera.toScreenY(p.z - p.y);
         const imgKey = `assets/images/sprites/characters/dog_planet${p.type}.png`;
-        const planetImg = imageLoader.getImage(imgKey);
+        const planetImg = imageLoader ? imageLoader.getImage(imgKey) : null;
 
         ctx.save();
         ctx.translate(sx, sy);

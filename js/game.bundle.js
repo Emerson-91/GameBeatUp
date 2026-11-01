@@ -3302,6 +3302,7 @@
       }
     }
   };
+  SPRITE_META.unicao = SPRITE_META.dog;
   var EXTRA_SPRITES = {
     "owl_tornado": {
       "src": "assets/images/sprites/boss6/tornado.png",
@@ -3638,7 +3639,7 @@
       essentialUrls.add("assets/images/sprites/characters/dog_planet2.png");
       essentialUrls.add("assets/images/sprites/characters/dog_planet3.png");
       essentialUrls.add("assets/images/backgrounds/stage1_alligator.jpg");
-      const heroKeys = ["andrey", "emerson", "nata", "dog"];
+      const heroKeys = ["andrey", "emerson", "nata", "dog", "unicao"];
       for (const hero of heroKeys) {
         if (SPRITE_META[hero]) {
           ["idle", "walk1", "punch", "punch1", "punch2", "punch3", "kick", "kick1", "kick2", "kick3", "special", "special1", "special2", "special3", "special4", "special5", "victory1", "victory2", "victory3", "victory4", "victory5", "bot"].forEach((a) => {
@@ -4146,7 +4147,7 @@
         this.nataNotes = [];
         this.nataLightningTimer = 0.15;
         Sound.playGuitarRiff();
-      } else if (this.charKey === "dog") {
+      } else if (this.charKey === "unicao" || this.charKey === "dog") {
         this.vy = 0;
         this.vx = 0;
         this.unicaoPlanets = [];
@@ -4256,7 +4257,7 @@
           if (Math.random() < 0.45) {
             this.spawnNataAuraNote();
           }
-        } else if (this.charKey === "dog") {
+        } else if (this.charKey === "unicao" || this.charKey === "dog") {
           const total = this.specialDuration || 3.5;
           const elapsed = total - this.stateTimer;
           if (elapsed < 0.7) {
@@ -4343,7 +4344,7 @@
         knockbackX = this.facing * 10.5;
         knockbackY = 6.5;
       } else if (this.state === "special") {
-        if (this.charKey === "emerson" || this.charKey === "andrey" || this.charKey === "nata" || this.charKey === "dog") return null;
+        if (this.charKey === "emerson" || this.charKey === "andrey" || this.charKey === "nata" || this.charKey === "unicao" || this.charKey === "dog") return null;
         damage = this.config.damage.special;
         reach = 100;
         knockbackX = this.facing * 11;
@@ -4932,7 +4933,7 @@
           const sx = camera.toScreenX(p.x);
           const sy = camera.toScreenY(p.z - p.y);
           const imgKey = `assets/images/sprites/characters/dog_planet${p.type}.png`;
-          const planetImg = imageLoader.getImage(imgKey);
+          const planetImg = imageLoader ? imageLoader.getImage(imgKey) : null;
           ctx.save();
           ctx.translate(sx, sy);
           ctx.scale(p.scale, p.scale);
