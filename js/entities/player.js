@@ -67,7 +67,11 @@ export class Player extends Entity {
     }
 
     // Jump
-    if (input.isActionPressed('jump') && this.y === 0 && !this.isAttacking() && this.state !== 'jump') {
+    const canAndreyAct = this.charKey === 'andrey' && this.state === 'special';
+    if (input.isActionPressed('jump') && this.y === 0 && (!this.isAttacking() || canAndreyAct) && this.state !== 'jump') {
+      if (this.state === 'special') {
+        this.specialPhase = 0;
+      }
       this.state = 'jump';
       this.vy = this.jumpPower;
       this.punchComboStep = 0;
@@ -98,23 +102,36 @@ export class Player extends Entity {
       return;
     }
 
-    // Ground Combo Attacks: 3 Punches & 3 Kicks Chain
-    if (this.state !== 'special') {
+    // Ground Combo Attacks: 3 Punches & 3 Kicks Chain (Andrey is free to attack even right after special!)
+    if (this.state !== 'special' || this.charKey === 'andrey') {
       // PUNCH CHAIN: 1st press -> punch1, 2nd press -> punch2, 3rd press -> punch3
       if (input.isActionPressed('punch') && this.attackCooldown <= 0) {
+        if (this.state === 'special') {
+          this.state = 'idle';
+          this.specialPhase = 0;
+        }
         this.triggerPunchChain();
         return;
       }
 
       // KICK CHAIN: 1st press -> kick1, 2nd press -> kick2, 3rd press -> kick3
       if (input.isActionPressed('kick') && this.attackCooldown <= 0) {
+        if (this.state === 'special') {
+          this.state = 'idle';
+          this.specialPhase = 0;
+        }
         this.triggerKickChain();
         return;
       }
     }
 
-    // Movement if not locked in attack
-    if (!this.isAttacking()) {
+    // Movement if not locked in attack (or canceling Andrey's quick summon after 0.15s)
+    const isAndreySpecialCancel = this.charKey === 'andrey' && this.state === 'special' && (this.specialDuration - this.stateTimer >= 0.15);
+    if (!this.isAttacking() || isAndreySpecialCancel) {
+      if (isAndreySpecialCancel) {
+        this.state = 'idle';
+        this.specialPhase = 0;
+      }
       let dx = 0;
       let dz = 0;
 
@@ -243,7 +260,11 @@ export class Player extends Entity {
       this.vx = 0;
       this.andreyBots = [];
       this.andreyShots = [];
-      this.andreyBotsSpawned = false;
+      this.andreyBotsSpawned = true;
+      this.specialDuration = 0.35; // Rápida animação de convocação (0.35s) e depois livre pra bater!
+      this.stateTimer = this.specialDuration;
+      this.invincibleTimer = 0.8;
+      this.spawnAndreyBots(this.lastCamera);
       Sound.playSpecial();
     } else if (this.charKey === 'nata') {
       this.vy = 0;
@@ -310,6 +331,7 @@ export class Player extends Entity {
   }
 
   update(dt, stageLimits, camera, particles = null) {
+    this.lastCamera = camera;
     if (this.attackCooldown > 0) {
       this.attackCooldown -= dt;
     }
@@ -349,18 +371,11 @@ export class Player extends Entity {
           this.vx = 0;
         }
       } else if (this.charKey === 'andrey') {
-        const total = this.specialDuration || 4.5;
-        const elapsed = total - this.stateTimer;
-        if (elapsed < 0.5) {
-          this.specialPhase = 1; // Powering up remote with green flame
-        } else if (elapsed < 1.1) {
-          this.specialPhase = 2; // Transmitting wifi / radio wave call
-          if (!this.andreyBotsSpawned) {
-            this.andreyBotsSpawned = true;
-            this.spawnAndreyBots(camera);
-          }
-        } else {
-          this.specialPhase = 3; // Commanding 3 bots with forward pointing green flame
+        const total = this.specialDuration || 0.35;
+        this.specialPhase = 2; // Transmitting wifi / radio wave call
+        if (!this.andreyBotsSpawned) {
+          this.andreyBotsSpawned = true;
+          this.spawnAndreyBots(camera);
         }
         this.y = 0;
         this.vy = 0;
@@ -540,7 +555,7 @@ export class Player extends Entity {
         dropTimer: 0.1, // Dobro da frequência de tiros
         scale: 0.36,
         color: '#00ff88',
-        life: 4.0
+        life: 4.5
       },
       {
         id: 2,
@@ -554,7 +569,7 @@ export class Player extends Entity {
         dropTimer: 0.22, // Dobro da frequência de tiros
         scale: 0.34,
         color: '#00e5ff',
-        life: 4.0
+        life: 4.5
       },
       {
         id: 3,
@@ -568,7 +583,7 @@ export class Player extends Entity {
         dropTimer: 0.16, // Dobro da frequência de tiros
         scale: 0.38,
         color: '#39ff14',
-        life: 4.0
+        life: 4.5
       }
     ];
   }

@@ -231,9 +231,9 @@ export const STAGES_DATA = [
       glowColor: '#fff159'
     },
     enemyPool: [
-      { type: 'thug_quick', name: 'Motoqueiro Relâmpago', hp: 62, speed: 4.0, damage: 14, spriteMod: 'emerson_mod' },
-      { type: 'thug_heavy', name: 'Lutador Clandestino', hp: 84, speed: 2.8, damage: 17, spriteMod: 'andrey_mod' },
-      { type: 'thug_medium', name: 'Assaltante do Asfalto', hp: 72, speed: 3.3, damage: 15, spriteMod: 'dog_mod' }
+      { type: 'enemy_panther', name: 'Pantera Shinobi', hp: 65, speed: 4.2, damage: 14, spriteKey: 'enemy_panther', scale: 0.95, shadowWidth: 44, width: 38 },
+      { type: 'enemy_chameleon', name: 'Camaleão da Zarabatana', hp: 76, speed: 3.5, damage: 15, spriteKey: 'enemy_chameleon', scale: 1.0, shadowWidth: 48, width: 40 },
+      { type: 'enemy_moss_gorilla', name: 'Gorila Brutamontes', hp: 98, speed: 2.8, damage: 18, spriteKey: 'enemy_moss_gorilla', scale: 1.15, shadowWidth: 70, width: 56 }
     ],
     chickenSpawns: [800, 1700, 2600, 3300]
   },

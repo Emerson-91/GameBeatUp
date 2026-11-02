@@ -17,12 +17,12 @@ export const PLAYABLE_CHARACTERS = {
       punch: 20,
       kick: 24,
       jumpKick: 28,
-      special: 56
+      special: 75
     },
     specialCooldown: 8.5,
-    specialDuration: 4.5,
+    specialDuration: 0.35,
     specialName: 'ESQUADRÃO ANDREYBOT (BOMBARDEIO AÉREO)',
-    description: 'Gênio da alta tecnologia. Seu especial 100% convoca 3 AndreyBots que cruzam a tela indo e voltando com o dobro de tiros, bombardeando os inimigos com disparos rápidos que tiram 9% de vida a cada acerto!'
+    description: 'Gênio da alta tecnologia. Seu especial 100% convoca 3 AndreyBots que bombardeiam a arena com disparos de plasma devastadores (20% de vida por acerto e 15% no chefe), enquanto Andrey fica 100% livre para se mover, socar e chutar em conjunto!'
   },
   emerson: {
     id: 'emerson',

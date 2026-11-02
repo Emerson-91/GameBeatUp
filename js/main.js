@@ -130,6 +130,46 @@ class Game {
 
   bindDomEvents() {
     const startBtn = document.getElementById('btn-play-game');
+    const chooseFighterBtn = document.getElementById('btn-choose-fighter');
+    const storyBtn = document.getElementById('btn-story-intro');
+    const howToPlayBtn = document.getElementById('btn-how-to-play');
+    const howToPlayModal = document.getElementById('how-to-play-modal');
+    const btnCloseInst = document.getElementById('btn-close-instructions');
+    const btnInstPlay = document.getElementById('btn-inst-play');
+
+    const toggleHowToPlay = (show) => {
+      if (!howToPlayModal) return;
+      if (show) {
+        howToPlayModal.classList.remove('hidden');
+      } else {
+        howToPlayModal.classList.add('hidden');
+      }
+    };
+
+    if (btnCloseInst) btnCloseInst.onclick = () => {
+      Sound.init();
+      Sound.playKick();
+      toggleHowToPlay(false);
+    };
+
+    if (btnInstPlay) {
+      btnInstPlay.onclick = () => {
+        toggleHowToPlay(false);
+        Sound.init();
+        Sound.playKick();
+        this.switchScreen('char-select-screen');
+        this.state = 'select';
+      };
+    }
+
+    if (howToPlayBtn) {
+      howToPlayBtn.onclick = () => {
+        Sound.init();
+        Sound.playPunch();
+        toggleHowToPlay(true);
+      };
+    }
+
     if (startBtn) {
       startBtn.onclick = () => {
         Sound.init();
@@ -139,7 +179,6 @@ class Game {
       };
     }
 
-    const chooseFighterBtn = document.getElementById('btn-choose-fighter');
     if (chooseFighterBtn) {
       chooseFighterBtn.onclick = () => {
         Sound.init();
@@ -149,7 +188,6 @@ class Game {
       };
     }
 
-    const storyBtn = document.getElementById('btn-story-intro');
     if (storyBtn) {
       storyBtn.onclick = () => {
         Sound.init();
@@ -168,6 +206,30 @@ class Game {
         );
       };
     }
+
+    // 90s Arcade Menu Cursor Selection
+    const menuItems = Array.from(document.querySelectorAll('.arcade-menu-item'));
+    let activeMenuIdx = 0;
+
+    const setActiveMenuItem = (index, playSfx = true) => {
+      if (!menuItems.length) return;
+      activeMenuIdx = (index + menuItems.length) % menuItems.length;
+      menuItems.forEach((item, i) => {
+        item.classList.toggle('active', i === activeMenuIdx);
+      });
+      if (playSfx) {
+        Sound.init();
+        Sound.playJump();
+      }
+    };
+
+    menuItems.forEach((item, i) => {
+      item.addEventListener('mouseenter', () => {
+        if (activeMenuIdx !== i) {
+          setActiveMenuItem(i, false);
+        }
+      });
+    });
 
     // Hero chips interactive selection
     document.querySelectorAll('.hero-chip').forEach((chip) => {
@@ -215,11 +277,41 @@ class Game {
       const isConfirm = key === 'enter' || key === ' ' || key === 'j' || key === 'z' || code === 'KeyJ' || code === 'KeyZ' || code === 'Space' || code === 'Enter';
 
       if (this.state === 'title') {
-        if (key === 'h' || code === 'KeyH') {
-          const storyBtn = document.getElementById('btn-story-intro');
+        const isModalOpen = howToPlayModal && !howToPlayModal.classList.contains('hidden');
+        if (isModalOpen) {
+          if (key === 'escape' || key === 't' || code === 'KeyT' || code === 'Escape') {
+            toggleHowToPlay(false);
+            Sound.playKick();
+            e.preventDefault();
+            return;
+          } else if (isConfirm) {
+            toggleHowToPlay(false);
+            if (btnInstPlay) btnInstPlay.click();
+            e.preventDefault();
+            return;
+          }
+        }
+
+        // Navigate menu items with W / S or Arrow Keys
+        if (key === 'w' || key === 'arrowup' || code === 'KeyW' || code === 'ArrowUp') {
+          setActiveMenuItem(activeMenuIdx - 1);
+          e.preventDefault();
+        } else if (key === 's' || key === 'arrowdown' || code === 'KeyS' || code === 'ArrowDown') {
+          setActiveMenuItem(activeMenuIdx + 1);
+          e.preventDefault();
+        } else if (isConfirm) {
+          if (menuItems[activeMenuIdx]) {
+            menuItems[activeMenuIdx].click();
+          } else if (startBtn) {
+            startBtn.click();
+          }
+          e.preventDefault();
+        } else if (key === 'h' || code === 'KeyH') {
           if (storyBtn) storyBtn.click();
-        } else if (isConfirm || key === 'c' || code === 'KeyC') {
-          if (startBtn) startBtn.click();
+        } else if (key === 'c' || code === 'KeyC') {
+          if (chooseFighterBtn) chooseFighterBtn.click();
+        } else if (key === 't' || code === 'KeyT') {
+          toggleHowToPlay(true);
         }
       } else if (this.state === 'continue') {
         if (isConfirm || key === 'w' || key === 'a' || key === 's' || key === 'd') {
@@ -582,7 +674,7 @@ class Game {
       }
     }
 
-    // --- AndreyBot Plasma Bomb Shots vs Enemies & Boss (5% HP damage per hit) ---
+    // --- AndreyBot Plasma Bomb Shots vs Enemies & Boss (Devastating Plasma Bombs) ---
     if (player.andreyShots && player.andreyShots.length > 0) {
       for (const shot of player.andreyShots) {
         if (shot.isDead) continue;
@@ -593,21 +685,21 @@ class Game {
             const dx = Math.abs(shot.x - enemy.x);
             const dz = Math.abs(shot.z - enemy.z);
             const dy = Math.abs(shot.y - enemy.y);
-            if (dx < 38 && dz < 28 && dy < 50) {
+            if (dx < 48 && dz < 34 && dy < 55) {
               shot.isDead = true;
-              // Cada tiro tira 9% de vida (aumentado em +4%)
-              const damage = Math.max(1, Math.floor(enemy.maxHp * 0.09));
+              // Cada tiro tira 20% de vida (aumentado de 9% para 20%!)
+              const damage = Math.max(1, Math.floor(enemy.maxHp * 0.20));
               const tookDamage = enemy.takeDamage(
                 damage,
-                (shot.vx >= 0 ? 1 : -1) * 3.5,
-                2.5
+                (shot.vx >= 0 ? 1 : -1) * 4.5,
+                3.0
               );
               if (tookDamage) {
-                this.stageManager.particles.addHitSparks(enemy.x, enemy.y + 35, enemy.z, '#00ff88', 12);
-                this.stageManager.particles.addFloatingText(`-${damage} (9%)`, enemy.x, enemy.y + 65, enemy.z, '#00ff88');
+                this.stageManager.particles.addHitSparks(enemy.x, enemy.y + 35, enemy.z, '#00ff88', 16);
+                this.stageManager.particles.addFloatingText(`-${damage} (20%) 💥`, enemy.x, enemy.y + 65, enemy.z, '#00ff88');
                 Sound.playLaserHit();
-                this.camera.shake(3.5, 0.1);
-                player.addScore(80);
+                this.camera.shake(4.5, 0.12);
+                player.addScore(120);
               }
             }
           }
@@ -619,21 +711,21 @@ class Game {
           const dx = Math.abs(shot.x - boss.x);
           const dz = Math.abs(shot.z - boss.z);
           const dy = Math.abs(shot.y - boss.y);
-          if (dx < 48 && dz < 35 && dy < 60) {
+          if (dx < 56 && dz < 40 && dy < 65) {
             shot.isDead = true;
-            // Cada tiro tira 9% de vida do chefe (aumentado em +4%)
-            const bossDamage = Math.max(1, Math.floor(boss.maxHp * 0.09));
+            // Cada tiro tira 15% de vida do chefe (aumentado de 9% para 15%!)
+            const bossDamage = Math.max(1, Math.floor(boss.maxHp * 0.15));
             const tookDamage = boss.takeDamage(
               bossDamage,
-              (shot.vx >= 0 ? 1 : -1) * 2.5,
-              1.8
+              (shot.vx >= 0 ? 1 : -1) * 3.5,
+              2.2
             );
             if (tookDamage) {
-              this.stageManager.particles.addHitSparks(boss.x, boss.y + 45, boss.z, '#00ff88', 16);
-              this.stageManager.particles.addFloatingText(`-${bossDamage} (9%)`, boss.x, boss.y + 85, boss.z, '#00ff88');
+              this.stageManager.particles.addHitSparks(boss.x, boss.y + 45, boss.z, '#00ff88', 22);
+              this.stageManager.particles.addFloatingText(`-${bossDamage} (15%) 💥`, boss.x, boss.y + 85, boss.z, '#00ff88');
               Sound.playLaserHit();
-              this.camera.shake(4.5, 0.12);
-              player.addScore(150);
+              this.camera.shake(5.5, 0.15);
+              player.addScore(250);
               if (boss.barBroken) {
                 boss.barBroken = false;
                 this.stageManager.particles.addHitSparks(boss.x, boss.y + 60, boss.z, '#ffff00', 30);

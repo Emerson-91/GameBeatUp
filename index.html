@@ -31,70 +31,127 @@
       <p style="font-size: 11px; color: #6b79a8; margin-top: 10px;">CARREGANDO SPRITES & FASES...</p>
     </div>
 
-    <!-- Title Screen Layer -->
+    <!-- Title Screen Layer (Clean 1990s Arcade Aesthetic) -->
     <div id="title-screen" class="screen-layer hidden">
       <div class="title-arcade-backdrop"></div>
       <div class="arcade-scanlines"></div>
+      <div class="arcade-vignette"></div>
+
+      <!-- Top Arcade Cabinet Marquee Status Bar -->
+      <div class="arcade-top-bar">
+        <div class="arcade-stat"><span class="stat-blink">1P</span> FREE PLAY</div>
+        <div class="arcade-stat"><span class="stat-gold">HIGH SCORE</span> 999990</div>
+        <div class="arcade-stat">CREDIT <span class="stat-green">01</span></div>
+      </div>
+
       <div class="title-card">
+        <!-- 90s Arcade Badge -->
         <div class="arcade-pill-badge">
           <span class="badge-dot"></span>
-          <span>FLIPERAMA ARCADE &bull; OS 9 REINOS &bull; 4 HERÓIS</span>
+          <span>ARCADE CLASSIC &bull; OS 9 REINOS &bull; 4 HERÓIS</span>
           <span class="badge-dot"></span>
         </div>
 
-        <h1 class="game-main-title">STREET BRAWLERS</h1>
-        <p class="game-sub-title">A BATALHA PELOS 9 REINOS &bull; BEAT 'EM UP</p>
+        <!-- 90s Iconic Beat 'Em Up Arcade Logo -->
+        <div class="arcade-logo-wrap">
+          <h1 class="game-main-title arcade-retro-title">STREET BRAWLERS</h1>
+          <div class="game-sub-title arcade-retro-sub">
+            <span class="sub-star">★</span> OS 9 REINOS &bull; 1990s ARCADE EDITION <span class="sub-star">★</span>
+          </div>
+        </div>
 
-        <!-- Dynamic Interactive Fighter Teaser Showcase -->
+        <!-- 4 Fighters Arcade Roster Tags -->
         <div class="title-heroes-showcase">
-          <div class="hero-chip chip-andrey" data-char="andrey" title="Ver Andrey na Seleção"><span class="chip-avatar"></span> ANDREY <span class="chip-sub">PLASMA</span></div>
-          <div class="hero-chip chip-emerson" data-char="emerson" title="Ver Emerson na Seleção"><span class="chip-avatar"></span> EMERSON <span class="chip-sub">FORÇA</span></div>
-          <div class="hero-chip chip-nata" data-char="nata" title="Ver Nata na Seleção"><span class="chip-avatar"></span> NATA <span class="chip-sub">VELOZ</span></div>
-          <div class="hero-chip chip-unicao" data-char="unicao" title="Ver Unicão na Seleção"><span class="chip-avatar"></span> UNICÃO <span class="chip-sub">CANINO</span></div>
-        </div>
-
-        <div class="title-dual-panel">
-          <!-- Mission Panel -->
-          <div class="title-panel-box mission-panel">
-            <h3 class="panel-heading">🎯 MISSÃO NAS RUAS</h3>
-            <p class="panel-text">Avance combatendo ondas de inimigos durante <strong>1 minuto</strong>. Colete <strong>🍗 Frango Assado</strong> para restaurar 100% da vida e alcance a <strong>🚪 Porta do Covil</strong> para o Chefe de cada Reino!</p>
-            <div class="mission-tips-row">
-              <span class="mini-tip">⚡ Combo 1-2-3</span>
-              <span class="mini-tip">🍗 Frango (Início, Fim & 6 Kills)</span>
-              <span class="mini-tip">🍗 2x Frango no Boss</span>
-              <span class="mini-tip">🚪 Porta = Chefe</span>
-            </div>
+          <div class="hero-chip chip-andrey" data-char="andrey" title="Ver Andrey na Seleção">
+            <span class="chip-avatar"></span> ANDREY <span class="chip-sub">PLASMA</span>
           </div>
-
-          <!-- Controls Panel -->
-          <div class="title-panel-box controls-panel">
-            <h3 class="panel-heading">🎮 COMANDOS DE COMBATE</h3>
-            <div class="arcade-keys-grid">
-              <div class="key-item"><span class="key-cap">W A S D / SETAS</span> Mover & Navegar</div>
-              <div class="key-item"><span class="key-cap key-act">J / Z</span> Soco (Combo 1-2-3) & OK</div>
-              <div class="key-item"><span class="key-cap key-act">K / X</span> Chute (Combo 1-2-3)</div>
-              <div class="key-item"><span class="key-cap key-jump">ESPAÇO</span> Pulo / Voadora</div>
-              <div class="key-item"><span class="key-cap key-sp">L / C</span> Golpe Especial</div>
-              <div class="key-item"><span class="key-cap">P / ESC</span> Pausar Jogo</div>
-            </div>
+          <div class="hero-chip chip-emerson" data-char="emerson" title="Ver Emerson na Seleção">
+            <span class="chip-avatar"></span> EMERSON <span class="chip-sub">FORÇA</span>
+          </div>
+          <div class="hero-chip chip-nata" data-char="nata" title="Ver Nata na Seleção">
+            <span class="chip-avatar"></span> NATA <span class="chip-sub">VELOZ</span>
+          </div>
+          <div class="hero-chip chip-unicao" data-char="unicao" title="Ver Unicão na Seleção">
+            <span class="chip-avatar"></span> UNICÃO <span class="chip-sub">CANINO</span>
           </div>
         </div>
 
-        <div class="title-action-wrap">
-          <div class="title-buttons-row">
-            <button id="btn-play-game" class="primary-btn title-start-btn" style="cursor: pointer;" type="button">
-              <span class="btn-shine"></span>
-              <span class="btn-icon">🥊</span> INICIAR JOGO &bull; PRESS ENTER
-            </button>
-            <button id="btn-story-intro" class="secondary-btn title-story-btn" style="cursor: pointer;" type="button">
-              <span class="btn-icon">🎬</span> HISTÓRIA & INTRO [H]
-            </button>
-            <button id="btn-choose-fighter" class="secondary-btn title-roster-btn" style="cursor: pointer;" type="button">
-              <span class="btn-icon">👥</span> ESCOLHER LUTADOR [C]
-            </button>
+        <!-- 90s Classic Clean Arcade Menu List -->
+        <div class="arcade-menu-list" id="arcade-main-menu">
+          <button class="arcade-menu-item active" id="btn-play-game" data-action="play" type="button">
+            <span class="menu-cursor">▶</span>
+            <span class="menu-text">1 PLAYER GAME</span>
+            <span class="menu-shortcut">[ENTER / J]</span>
+          </button>
+          <button class="arcade-menu-item" id="btn-choose-fighter" data-action="roster" type="button">
+            <span class="menu-cursor">▶</span>
+            <span class="menu-text">SELECT FIGHTER</span>
+            <span class="menu-shortcut">[C]</span>
+          </button>
+          <button class="arcade-menu-item" id="btn-how-to-play" data-action="how-to-play" type="button">
+            <span class="menu-cursor">▶</span>
+            <span class="menu-text">HOW TO PLAY / COMANDOS</span>
+            <span class="menu-shortcut">[T / K]</span>
+          </button>
+          <button class="arcade-menu-item" id="btn-story-intro" data-action="story" type="button">
+            <span class="menu-cursor">▶</span>
+            <span class="menu-text">STORY & PROLOGUE</span>
+            <span class="menu-shortcut">[H]</span>
+          </button>
+        </div>
+
+        <!-- Classic Blinking Press Start Prompt -->
+        <div class="arcade-press-start" id="press-start-prompt">
+          ★ PRESS START BUTTON ★
+        </div>
+
+        <!-- Clean 90s Bottom Arcade Button Legend -->
+        <div class="arcade-quick-legend">
+          <span class="legend-chip"><strong class="key-pill">W A S D</strong> MOVER</span>
+          <span class="legend-chip"><strong class="key-pill act-punch">J</strong> SOCO</span>
+          <span class="legend-chip"><strong class="key-pill act-kick">K</strong> CHUTE</span>
+          <span class="legend-chip"><strong class="key-pill act-jump">ESPAÇO</strong> PULO</span>
+          <span class="legend-chip"><strong class="key-pill act-sp">L</strong> ESPECIAL</span>
+          <span class="legend-chip"><strong class="key-pill">P</strong> PAUSA</span>
+        </div>
+
+        <!-- Arcade Footer Meta -->
+        <div class="arcade-footer-meta">
+          &copy; 1993 STREET BRAWLERS &bull; 60 FPS ARCADE ENGINE &bull; 9 CHEFES &bull; FREE PLAY
+        </div>
+      </div>
+
+      <!-- Clean 90s How To Play Modal (Arcade Cabinet Instruction Card) -->
+      <div id="how-to-play-modal" class="arcade-instructions-modal hidden">
+        <div class="arcade-instructions-card">
+          <div class="inst-header">
+            <div class="inst-pill">★ ARCADE INSTRUCTION MANUAL ★</div>
+            <h2 class="inst-title">COMANDOS & REGRAS DE COMBATE</h2>
+            <button id="btn-close-instructions" class="inst-close-btn" type="button" title="Fechar">&times;</button>
           </div>
-          <div class="press-start-label">▶ PRESSIONE [ENTER], [ESPAÇO] OU [J] PARA JOGAR ◀</div>
-          <div class="arcade-footer-meta">FREE PLAY &bull; 60 FPS ENGINE &bull; 9 CHEFES &bull; STREET BRAWLERS 1990s</div>
+          <div class="inst-body">
+            <div class="inst-section">
+              <h3 class="inst-subheading">🎮 CONTROLES DO FLIPERAMA</h3>
+              <div class="inst-grid">
+                <div class="inst-row"><span class="key-cap">W A S D / SETAS</span><span>Mover & Andar no cenário</span></div>
+                <div class="inst-row"><span class="key-cap key-act">J / Z</span><span>Soco & Sequência Combo (1-2-3)</span></div>
+                <div class="inst-row"><span class="key-cap key-act">K / X</span><span>Chute & Sequência Combo (1-2-3)</span></div>
+                <div class="inst-row"><span class="key-cap key-jump">ESPAÇO</span><span>Pulo & Golpe Aéreo (Voadora)</span></div>
+                <div class="inst-row"><span class="key-cap key-sp">L / C</span><span>Golpe Especial Devastador (100% SP)</span></div>
+                <div class="inst-row"><span class="key-cap">P / ESC</span><span>Pausar o jogo</span></div>
+              </div>
+            </div>
+            <div class="inst-section">
+              <h3 class="inst-subheading">🍗 ITENS & MECÂNICAS DA BATALHA</h3>
+              <p class="inst-tip-text">&bull; <strong>Frango Assado:</strong> Restaura 100% da vida! Surge no início da fase, ao nocautear 6 inimigos, antes do covil e 2x no Chefe.</p>
+              <p class="inst-tip-text">&bull; <strong>Porta do Covil:</strong> Enfrente as hordas por 1 minuto e chegue à porta para desafiar o Grande Chefe do Reino!</p>
+              <p class="inst-tip-text">&bull; <strong>Barra Especial:</strong> Encha a barra até 100% atacando ou esperando recarregar para acionar o Golpe Especial supremo!</p>
+            </div>
+          </div>
+          <div class="inst-footer">
+            <button id="btn-inst-play" class="primary-btn inst-play-btn" type="button">INICIAR JOGO AGORA ➔ [ENTER]</button>
+            <span class="inst-esc-tip">[ESC / T] FECHAR MANUAL</span>
+          </div>
         </div>
       </div>
     </div>
@@ -202,6 +259,6 @@
   </div>
 
   <!-- Main Game Script Entry (Compatible with direct file:// double-click and http:// servers) -->
-  <script src="js/game.bundle.js?v=7"></script>
+  <script src="js/game.bundle.js?v=8"></script>
 </body>
 </html>

@@ -3300,6 +3300,174 @@
         "ax": 0.5073,
         "src": "assets/images/sprites/enemies/stage6/enemy_swallow_punch.png"
       }
+    },
+    "enemy_panther": {
+      "walk1": {
+        "w": 274,
+        "h": 239,
+        "ax": 0.1879,
+        "src": "assets/images/sprites/enemies/stage7/enemy_panther_walk1.png"
+      },
+      "walk2": {
+        "w": 262,
+        "h": 240,
+        "ax": 0.2016,
+        "src": "assets/images/sprites/enemies/stage7/enemy_panther_walk2.png"
+      },
+      "idle": {
+        "w": 254,
+        "h": 233,
+        "ax": 0.3627,
+        "src": "assets/images/sprites/enemies/stage7/enemy_panther_idle.png"
+      },
+      "punch": {
+        "w": 288,
+        "h": 223,
+        "ax": 0.229,
+        "src": "assets/images/sprites/enemies/stage7/enemy_panther_punch.png"
+      },
+      "fall": {
+        "w": 259,
+        "h": 221,
+        "ax": 0.5,
+        "src": "assets/images/sprites/enemies/stage7/enemy_panther_fall.png"
+      },
+      "crouch": {
+        "w": 254,
+        "h": 233,
+        "ax": 0.3627,
+        "src": "assets/images/sprites/enemies/stage7/enemy_panther_idle.png"
+      },
+      "idle2": {
+        "w": 254,
+        "h": 233,
+        "ax": 0.3627,
+        "src": "assets/images/sprites/enemies/stage7/enemy_panther_idle.png"
+      },
+      "kick": {
+        "w": 288,
+        "h": 223,
+        "ax": 0.229,
+        "src": "assets/images/sprites/enemies/stage7/enemy_panther_punch.png"
+      },
+      "knockdown": {
+        "w": 259,
+        "h": 221,
+        "ax": 0.5,
+        "src": "assets/images/sprites/enemies/stage7/enemy_panther_fall.png"
+      }
+    },
+    "enemy_chameleon": {
+      "walk1": {
+        "w": 282,
+        "h": 209,
+        "ax": 0.336,
+        "src": "assets/images/sprites/enemies/stage7/enemy_chameleon_walk1.png"
+      },
+      "walk2": {
+        "w": 263,
+        "h": 205,
+        "ax": 0.369,
+        "src": "assets/images/sprites/enemies/stage7/enemy_chameleon_walk2.png"
+      },
+      "idle": {
+        "w": 215,
+        "h": 210,
+        "ax": 0.5219,
+        "src": "assets/images/sprites/enemies/stage7/enemy_chameleon_idle.png"
+      },
+      "punch": {
+        "w": 308,
+        "h": 207,
+        "ax": 0.4368,
+        "src": "assets/images/sprites/enemies/stage7/enemy_chameleon_punch.png"
+      },
+      "fall": {
+        "w": 239,
+        "h": 209,
+        "ax": 0.5,
+        "src": "assets/images/sprites/enemies/stage7/enemy_chameleon_fall.png"
+      },
+      "crouch": {
+        "w": 215,
+        "h": 210,
+        "ax": 0.5219,
+        "src": "assets/images/sprites/enemies/stage7/enemy_chameleon_idle.png"
+      },
+      "idle2": {
+        "w": 215,
+        "h": 210,
+        "ax": 0.5219,
+        "src": "assets/images/sprites/enemies/stage7/enemy_chameleon_idle.png"
+      },
+      "kick": {
+        "w": 308,
+        "h": 207,
+        "ax": 0.4368,
+        "src": "assets/images/sprites/enemies/stage7/enemy_chameleon_punch.png"
+      },
+      "knockdown": {
+        "w": 239,
+        "h": 209,
+        "ax": 0.5,
+        "src": "assets/images/sprites/enemies/stage7/enemy_chameleon_fall.png"
+      }
+    },
+    "enemy_moss_gorilla": {
+      "walk1": {
+        "w": 248,
+        "h": 253,
+        "ax": 0.3929,
+        "src": "assets/images/sprites/enemies/stage7/enemy_moss_gorilla_walk1.png"
+      },
+      "walk2": {
+        "w": 249,
+        "h": 246,
+        "ax": 0.225,
+        "src": "assets/images/sprites/enemies/stage7/enemy_moss_gorilla_walk2.png"
+      },
+      "idle": {
+        "w": 223,
+        "h": 269,
+        "ax": 0.3667,
+        "src": "assets/images/sprites/enemies/stage7/enemy_moss_gorilla_idle.png"
+      },
+      "punch": {
+        "w": 248,
+        "h": 240,
+        "ax": 0.334,
+        "src": "assets/images/sprites/enemies/stage7/enemy_moss_gorilla_punch.png"
+      },
+      "fall": {
+        "w": 294,
+        "h": 206,
+        "ax": 0.5,
+        "src": "assets/images/sprites/enemies/stage7/enemy_moss_gorilla_fall.png"
+      },
+      "crouch": {
+        "w": 223,
+        "h": 269,
+        "ax": 0.3667,
+        "src": "assets/images/sprites/enemies/stage7/enemy_moss_gorilla_idle.png"
+      },
+      "idle2": {
+        "w": 223,
+        "h": 269,
+        "ax": 0.3667,
+        "src": "assets/images/sprites/enemies/stage7/enemy_moss_gorilla_idle.png"
+      },
+      "kick": {
+        "w": 248,
+        "h": 240,
+        "ax": 0.334,
+        "src": "assets/images/sprites/enemies/stage7/enemy_moss_gorilla_punch.png"
+      },
+      "knockdown": {
+        "w": 294,
+        "h": 206,
+        "ax": 0.5,
+        "src": "assets/images/sprites/enemies/stage7/enemy_moss_gorilla_fall.png"
+      }
     }
   };
   SPRITE_META.unicao = SPRITE_META.dog;
@@ -3380,12 +3548,12 @@
         punch: 20,
         kick: 24,
         jumpKick: 28,
-        special: 56
+        special: 75
       },
       specialCooldown: 8.5,
-      specialDuration: 4.5,
+      specialDuration: 0.35,
       specialName: "ESQUADR\xC3O ANDREYBOT (BOMBARDEIO A\xC9REO)",
-      description: "G\xEAnio da alta tecnologia. Seu especial 100% convoca 3 AndreyBots que cruzam a tela indo e voltando com o dobro de tiros, bombardeando os inimigos com disparos r\xE1pidos que tiram 9% de vida a cada acerto!"
+      description: "G\xEAnio da alta tecnologia. Seu especial 100% convoca 3 AndreyBots que bombardeiam a arena com disparos de plasma devastadores (20% de vida por acerto e 15% no chefe), enquanto Andrey fica 100% livre para se mover, socar e chutar em conjunto!"
     },
     emerson: {
       id: "emerson",
@@ -3667,18 +3835,21 @@
         "enemy_mecha_gorilla",
         "enemy_swallow",
         "enemy_toucan",
-        "enemy_crane"
+        "enemy_crane",
+        "enemy_panther",
+        "enemy_chameleon",
+        "enemy_moss_gorilla"
       ];
       for (const ek of stageEnemies) {
         if (SPRITE_META[ek]) {
-          ["idle", "walk1", "punch", "fall"].forEach((a) => {
+          ["idle", "walk1", "walk2", "punch", "fall"].forEach((a) => {
             if (SPRITE_META[ek][a]) {
               essentialUrls.add(SPRITE_META[ek][a].src);
             }
           });
         }
       }
-      for (const bk of ["alligator", "bear", "capybara", "cat", "gorilla", "owl"]) {
+      for (const bk of ["alligator", "bear", "capybara", "cat", "gorilla", "owl", "tiger"]) {
         if (SPRITE_META[bk]) {
           ["idle", "walk1", "punch", "fall"].forEach((a) => {
             if (SPRITE_META[bk][a]) {
@@ -3991,7 +4162,11 @@
           return;
         }
       }
-      if (input.isActionPressed("jump") && this.y === 0 && !this.isAttacking() && this.state !== "jump") {
+      const canAndreyAct = this.charKey === "andrey" && this.state === "special";
+      if (input.isActionPressed("jump") && this.y === 0 && (!this.isAttacking() || canAndreyAct) && this.state !== "jump") {
+        if (this.state === "special") {
+          this.specialPhase = 0;
+        }
         this.state = "jump";
         this.vy = this.jumpPower;
         this.punchComboStep = 0;
@@ -4018,17 +4193,30 @@
         }
         return;
       }
-      if (this.state !== "special") {
+      if (this.state !== "special" || this.charKey === "andrey") {
         if (input.isActionPressed("punch") && this.attackCooldown <= 0) {
+          if (this.state === "special") {
+            this.state = "idle";
+            this.specialPhase = 0;
+          }
           this.triggerPunchChain();
           return;
         }
         if (input.isActionPressed("kick") && this.attackCooldown <= 0) {
+          if (this.state === "special") {
+            this.state = "idle";
+            this.specialPhase = 0;
+          }
           this.triggerKickChain();
           return;
         }
       }
-      if (!this.isAttacking()) {
+      const isAndreySpecialCancel = this.charKey === "andrey" && this.state === "special" && this.specialDuration - this.stateTimer >= 0.15;
+      if (!this.isAttacking() || isAndreySpecialCancel) {
+        if (isAndreySpecialCancel) {
+          this.state = "idle";
+          this.specialPhase = 0;
+        }
         let dx = 0;
         let dz = 0;
         if (input.keys.left) dx -= 1;
@@ -4138,7 +4326,11 @@
         this.vx = 0;
         this.andreyBots = [];
         this.andreyShots = [];
-        this.andreyBotsSpawned = false;
+        this.andreyBotsSpawned = true;
+        this.specialDuration = 0.35;
+        this.stateTimer = this.specialDuration;
+        this.invincibleTimer = 0.8;
+        this.spawnAndreyBots(this.lastCamera);
         Sound.playSpecial();
       } else if (this.charKey === "nata") {
         this.vy = 0;
@@ -4194,6 +4386,7 @@
       this.specialMeter = Math.min(100, this.specialMeter + points * 0.08);
     }
     update(dt, stageLimits, camera, particles = null) {
+      this.lastCamera = camera;
       if (this.attackCooldown > 0) {
         this.attackCooldown -= dt;
       }
@@ -4226,18 +4419,11 @@
             this.vx = 0;
           }
         } else if (this.charKey === "andrey") {
-          const total = this.specialDuration || 4.5;
-          const elapsed = total - this.stateTimer;
-          if (elapsed < 0.5) {
-            this.specialPhase = 1;
-          } else if (elapsed < 1.1) {
-            this.specialPhase = 2;
-            if (!this.andreyBotsSpawned) {
-              this.andreyBotsSpawned = true;
-              this.spawnAndreyBots(camera);
-            }
-          } else {
-            this.specialPhase = 3;
+          const total = this.specialDuration || 0.35;
+          this.specialPhase = 2;
+          if (!this.andreyBotsSpawned) {
+            this.andreyBotsSpawned = true;
+            this.spawnAndreyBots(camera);
           }
           this.y = 0;
           this.vy = 0;
@@ -4382,7 +4568,7 @@
           // Dobro da frequência de tiros
           scale: 0.36,
           color: "#00ff88",
-          life: 4
+          life: 4.5
         },
         {
           id: 2,
@@ -4397,7 +4583,7 @@
           // Dobro da frequência de tiros
           scale: 0.34,
           color: "#00e5ff",
-          life: 4
+          life: 4.5
         },
         {
           id: 3,
@@ -4412,7 +4598,7 @@
           // Dobro da frequência de tiros
           scale: 0.38,
           color: "#39ff14",
-          life: 4
+          life: 4.5
         }
       ];
     }
@@ -5401,9 +5587,9 @@
         glowColor: "#fff159"
       },
       enemyPool: [
-        { type: "thug_quick", name: "Motoqueiro Rel\xE2mpago", hp: 62, speed: 4, damage: 14, spriteMod: "emerson_mod" },
-        { type: "thug_heavy", name: "Lutador Clandestino", hp: 84, speed: 2.8, damage: 17, spriteMod: "andrey_mod" },
-        { type: "thug_medium", name: "Assaltante do Asfalto", hp: 72, speed: 3.3, damage: 15, spriteMod: "dog_mod" }
+        { type: "enemy_panther", name: "Pantera Shinobi", hp: 65, speed: 4.2, damage: 14, spriteKey: "enemy_panther", scale: 0.95, shadowWidth: 44, width: 38 },
+        { type: "enemy_chameleon", name: "Camale\xE3o da Zarabatana", hp: 76, speed: 3.5, damage: 15, spriteKey: "enemy_chameleon", scale: 1, shadowWidth: 48, width: 40 },
+        { type: "enemy_moss_gorilla", name: "Gorila Brutamontes", hp: 98, speed: 2.8, damage: 18, spriteKey: "enemy_moss_gorilla", scale: 1.15, shadowWidth: 70, width: 56 }
       ],
       chickenSpawns: [800, 1700, 2600, 3300]
     },
@@ -7577,6 +7763,41 @@
     }
     bindDomEvents() {
       const startBtn = document.getElementById("btn-play-game");
+      const chooseFighterBtn = document.getElementById("btn-choose-fighter");
+      const storyBtn = document.getElementById("btn-story-intro");
+      const howToPlayBtn = document.getElementById("btn-how-to-play");
+      const howToPlayModal = document.getElementById("how-to-play-modal");
+      const btnCloseInst = document.getElementById("btn-close-instructions");
+      const btnInstPlay = document.getElementById("btn-inst-play");
+      const toggleHowToPlay = (show) => {
+        if (!howToPlayModal) return;
+        if (show) {
+          howToPlayModal.classList.remove("hidden");
+        } else {
+          howToPlayModal.classList.add("hidden");
+        }
+      };
+      if (btnCloseInst) btnCloseInst.onclick = () => {
+        Sound.init();
+        Sound.playKick();
+        toggleHowToPlay(false);
+      };
+      if (btnInstPlay) {
+        btnInstPlay.onclick = () => {
+          toggleHowToPlay(false);
+          Sound.init();
+          Sound.playKick();
+          this.switchScreen("char-select-screen");
+          this.state = "select";
+        };
+      }
+      if (howToPlayBtn) {
+        howToPlayBtn.onclick = () => {
+          Sound.init();
+          Sound.playPunch();
+          toggleHowToPlay(true);
+        };
+      }
       if (startBtn) {
         startBtn.onclick = () => {
           Sound.init();
@@ -7585,7 +7806,6 @@
           this.state = "select";
         };
       }
-      const chooseFighterBtn = document.getElementById("btn-choose-fighter");
       if (chooseFighterBtn) {
         chooseFighterBtn.onclick = () => {
           Sound.init();
@@ -7594,7 +7814,6 @@
           this.state = "select";
         };
       }
-      const storyBtn = document.getElementById("btn-story-intro");
       if (storyBtn) {
         storyBtn.onclick = () => {
           Sound.init();
@@ -7613,6 +7832,26 @@
           );
         };
       }
+      const menuItems = Array.from(document.querySelectorAll(".arcade-menu-item"));
+      let activeMenuIdx = 0;
+      const setActiveMenuItem = (index, playSfx = true) => {
+        if (!menuItems.length) return;
+        activeMenuIdx = (index + menuItems.length) % menuItems.length;
+        menuItems.forEach((item, i) => {
+          item.classList.toggle("active", i === activeMenuIdx);
+        });
+        if (playSfx) {
+          Sound.init();
+          Sound.playJump();
+        }
+      };
+      menuItems.forEach((item, i) => {
+        item.addEventListener("mouseenter", () => {
+          if (activeMenuIdx !== i) {
+            setActiveMenuItem(i, false);
+          }
+        });
+      });
       document.querySelectorAll(".hero-chip").forEach((chip) => {
         chip.style.cursor = "pointer";
         chip.onclick = () => {
@@ -7648,11 +7887,39 @@
         const code = e.code || "";
         const isConfirm = key === "enter" || key === " " || key === "j" || key === "z" || code === "KeyJ" || code === "KeyZ" || code === "Space" || code === "Enter";
         if (this.state === "title") {
-          if (key === "h" || code === "KeyH") {
-            const storyBtn2 = document.getElementById("btn-story-intro");
-            if (storyBtn2) storyBtn2.click();
-          } else if (isConfirm || key === "c" || code === "KeyC") {
-            if (startBtn) startBtn.click();
+          const isModalOpen = howToPlayModal && !howToPlayModal.classList.contains("hidden");
+          if (isModalOpen) {
+            if (key === "escape" || key === "t" || code === "KeyT" || code === "Escape") {
+              toggleHowToPlay(false);
+              Sound.playKick();
+              e.preventDefault();
+              return;
+            } else if (isConfirm) {
+              toggleHowToPlay(false);
+              if (btnInstPlay) btnInstPlay.click();
+              e.preventDefault();
+              return;
+            }
+          }
+          if (key === "w" || key === "arrowup" || code === "KeyW" || code === "ArrowUp") {
+            setActiveMenuItem(activeMenuIdx - 1);
+            e.preventDefault();
+          } else if (key === "s" || key === "arrowdown" || code === "KeyS" || code === "ArrowDown") {
+            setActiveMenuItem(activeMenuIdx + 1);
+            e.preventDefault();
+          } else if (isConfirm) {
+            if (menuItems[activeMenuIdx]) {
+              menuItems[activeMenuIdx].click();
+            } else if (startBtn) {
+              startBtn.click();
+            }
+            e.preventDefault();
+          } else if (key === "h" || code === "KeyH") {
+            if (storyBtn) storyBtn.click();
+          } else if (key === "c" || code === "KeyC") {
+            if (chooseFighterBtn) chooseFighterBtn.click();
+          } else if (key === "t" || code === "KeyT") {
+            toggleHowToPlay(true);
           }
         } else if (this.state === "continue") {
           if (isConfirm || key === "w" || key === "a" || key === "s" || key === "d") {
@@ -7965,20 +8232,20 @@
               const dx = Math.abs(shot.x - enemy.x);
               const dz = Math.abs(shot.z - enemy.z);
               const dy = Math.abs(shot.y - enemy.y);
-              if (dx < 38 && dz < 28 && dy < 50) {
+              if (dx < 48 && dz < 34 && dy < 55) {
                 shot.isDead = true;
-                const damage = Math.max(1, Math.floor(enemy.maxHp * 0.09));
+                const damage = Math.max(1, Math.floor(enemy.maxHp * 0.2));
                 const tookDamage = enemy.takeDamage(
                   damage,
-                  (shot.vx >= 0 ? 1 : -1) * 3.5,
-                  2.5
+                  (shot.vx >= 0 ? 1 : -1) * 4.5,
+                  3
                 );
                 if (tookDamage) {
-                  this.stageManager.particles.addHitSparks(enemy.x, enemy.y + 35, enemy.z, "#00ff88", 12);
-                  this.stageManager.particles.addFloatingText(`-${damage} (9%)`, enemy.x, enemy.y + 65, enemy.z, "#00ff88");
+                  this.stageManager.particles.addHitSparks(enemy.x, enemy.y + 35, enemy.z, "#00ff88", 16);
+                  this.stageManager.particles.addFloatingText(`-${damage} (20%) \u{1F4A5}`, enemy.x, enemy.y + 65, enemy.z, "#00ff88");
                   Sound.playLaserHit();
-                  this.camera.shake(3.5, 0.1);
-                  player.addScore(80);
+                  this.camera.shake(4.5, 0.12);
+                  player.addScore(120);
                 }
               }
             }
@@ -7988,20 +8255,20 @@
             const dx = Math.abs(shot.x - boss2.x);
             const dz = Math.abs(shot.z - boss2.z);
             const dy = Math.abs(shot.y - boss2.y);
-            if (dx < 48 && dz < 35 && dy < 60) {
+            if (dx < 56 && dz < 40 && dy < 65) {
               shot.isDead = true;
-              const bossDamage = Math.max(1, Math.floor(boss2.maxHp * 0.09));
+              const bossDamage = Math.max(1, Math.floor(boss2.maxHp * 0.15));
               const tookDamage = boss2.takeDamage(
                 bossDamage,
-                (shot.vx >= 0 ? 1 : -1) * 2.5,
-                1.8
+                (shot.vx >= 0 ? 1 : -1) * 3.5,
+                2.2
               );
               if (tookDamage) {
-                this.stageManager.particles.addHitSparks(boss2.x, boss2.y + 45, boss2.z, "#00ff88", 16);
-                this.stageManager.particles.addFloatingText(`-${bossDamage} (9%)`, boss2.x, boss2.y + 85, boss2.z, "#00ff88");
+                this.stageManager.particles.addHitSparks(boss2.x, boss2.y + 45, boss2.z, "#00ff88", 22);
+                this.stageManager.particles.addFloatingText(`-${bossDamage} (15%) \u{1F4A5}`, boss2.x, boss2.y + 85, boss2.z, "#00ff88");
                 Sound.playLaserHit();
-                this.camera.shake(4.5, 0.12);
-                player.addScore(150);
+                this.camera.shake(5.5, 0.15);
+                player.addScore(250);
                 if (boss2.barBroken) {
                   boss2.barBroken = false;
                   this.stageManager.particles.addHitSparks(boss2.x, boss2.y + 60, boss2.z, "#ffff00", 30);

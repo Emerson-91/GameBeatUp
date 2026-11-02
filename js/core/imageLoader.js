@@ -38,18 +38,19 @@ export class ImageLoader {
       }
     }
 
-    // 5. Stage 1 to 6 Enemies
+    // 5. Stage 1 to 7 Enemies
     const stageEnemies = [
       'enemy_swamp', 'enemy_spear', 'enemy_fish',
       'enemy_goblin', 'enemy_elf', 'enemy_walrus',
       'enemy_reptile', 'enemy_oni', 'enemy_kitsune',
       'enemy_rat', 'enemy_ninja', 'enemy_brute',
       'enemy_cyber_wolf', 'enemy_cyber_elf', 'enemy_mecha_gorilla',
-      'enemy_swallow', 'enemy_toucan', 'enemy_crane'
+      'enemy_swallow', 'enemy_toucan', 'enemy_crane',
+      'enemy_panther', 'enemy_chameleon', 'enemy_moss_gorilla'
     ];
     for (const ek of stageEnemies) {
       if (SPRITE_META[ek]) {
-        ['idle', 'walk1', 'punch', 'fall'].forEach((a) => {
+        ['idle', 'walk1', 'walk2', 'punch', 'fall'].forEach((a) => {
           if (SPRITE_META[ek][a]) {
             essentialUrls.add(SPRITE_META[ek][a].src);
           }
@@ -57,8 +58,8 @@ export class ImageLoader {
       }
     }
 
-    // 6. Bosses 1-6 (Alligator, Bear, Capybara, Cat, Gorilla, Owl)
-    for (const bk of ['alligator', 'bear', 'capybara', 'cat', 'gorilla', 'owl']) {
+    // 6. Bosses 1-7 (Alligator, Bear, Capybara, Cat, Gorilla, Owl, Tiger)
+    for (const bk of ['alligator', 'bear', 'capybara', 'cat', 'gorilla', 'owl', 'tiger']) {
       if (SPRITE_META[bk]) {
         ['idle', 'walk1', 'punch', 'fall'].forEach((a) => {
           if (SPRITE_META[bk][a]) {

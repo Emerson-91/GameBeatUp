@@ -1,0 +1,170 @@
+{
+  "enemy_panther": {
+    "walk1": {
+      "w": 274,
+      "h": 239,
+      "ax": 0.1879,
+      "src": "assets/images/sprites/enemies/stage7/enemy_panther_walk1.png"
+    },
+    "walk2": {
+      "w": 262,
+      "h": 240,
+      "ax": 0.2016,
+      "src": "assets/images/sprites/enemies/stage7/enemy_panther_walk2.png"
+    },
+    "idle": {
+      "w": 254,
+      "h": 233,
+      "ax": 0.3627,
+      "src": "assets/images/sprites/enemies/stage7/enemy_panther_idle.png"
+    },
+    "punch": {
+      "w": 288,
+      "h": 223,
+      "ax": 0.229,
+      "src": "assets/images/sprites/enemies/stage7/enemy_panther_punch.png"
+    },
+    "fall": {
+      "w": 259,
+      "h": 221,
+      "ax": 0.5,
+      "src": "assets/images/sprites/enemies/stage7/enemy_panther_fall.png"
+    },
+    "crouch": {
+      "w": 254,
+      "h": 233,
+      "ax": 0.3627,
+      "src": "assets/images/sprites/enemies/stage7/enemy_panther_idle.png"
+    },
+    "idle2": {
+      "w": 254,
+      "h": 233,
+      "ax": 0.3627,
+      "src": "assets/images/sprites/enemies/stage7/enemy_panther_idle.png"
+    },
+    "kick": {
+      "w": 288,
+      "h": 223,
+      "ax": 0.229,
+      "src": "assets/images/sprites/enemies/stage7/enemy_panther_punch.png"
+    },
+    "knockdown": {
+      "w": 259,
+      "h": 221,
+      "ax": 0.5,
+      "src": "assets/images/sprites/enemies/stage7/enemy_panther_fall.png"
+    }
+  },
+  "enemy_chameleon": {
+    "walk1": {
+      "w": 282,
+      "h": 209,
+      "ax": 0.336,
+      "src": "assets/images/sprites/enemies/stage7/enemy_chameleon_walk1.png"
+    },
+    "walk2": {
+      "w": 263,
+      "h": 205,
+      "ax": 0.369,
+      "src": "assets/images/sprites/enemies/stage7/enemy_chameleon_walk2.png"
+    },
+    "idle": {
+      "w": 215,
+      "h": 210,
+      "ax": 0.5219,
+      "src": "assets/images/sprites/enemies/stage7/enemy_chameleon_idle.png"
+    },
+    "punch": {
+      "w": 308,
+      "h": 207,
+      "ax": 0.4368,
+      "src": "assets/images/sprites/enemies/stage7/enemy_chameleon_punch.png"
+    },
+    "fall": {
+      "w": 239,
+      "h": 209,
+      "ax": 0.5,
+      "src": "assets/images/sprites/enemies/stage7/enemy_chameleon_fall.png"
+    },
+    "crouch": {
+      "w": 215,
+      "h": 210,
+      "ax": 0.5219,
+      "src": "assets/images/sprites/enemies/stage7/enemy_chameleon_idle.png"
+    },
+    "idle2": {
+      "w": 215,
+      "h": 210,
+      "ax": 0.5219,
+      "src": "assets/images/sprites/enemies/stage7/enemy_chameleon_idle.png"
+    },
+    "kick": {
+      "w": 308,
+      "h": 207,
+      "ax": 0.4368,
+      "src": "assets/images/sprites/enemies/stage7/enemy_chameleon_punch.png"
+    },
+    "knockdown": {
+      "w": 239,
+      "h": 209,
+      "ax": 0.5,
+      "src": "assets/images/sprites/enemies/stage7/enemy_chameleon_fall.png"
+    }
+  },
+  "enemy_moss_gorilla": {
+    "walk1": {
+      "w": 248,
+      "h": 253,
+      "ax": 0.3929,
+      "src": "assets/images/sprites/enemies/stage7/enemy_moss_gorilla_walk1.png"
+    },
+    "walk2": {
+      "w": 249,
+      "h": 246,
+      "ax": 0.225,
+      "src": "assets/images/sprites/enemies/stage7/enemy_moss_gorilla_walk2.png"
+    },
+    "idle": {
+      "w": 223,
+      "h": 269,
+      "ax": 0.3667,
+      "src": "assets/images/sprites/enemies/stage7/enemy_moss_gorilla_idle.png"
+    },
+    "punch": {
+      "w": 248,
+      "h": 240,
+      "ax": 0.334,
+      "src": "assets/images/sprites/enemies/stage7/enemy_moss_gorilla_punch.png"
+    },
+    "fall": {
+      "w": 294,
+      "h": 206,
+      "ax": 0.5,
+      "src": "assets/images/sprites/enemies/stage7/enemy_moss_gorilla_fall.png"
+    },
+    "crouch": {
+      "w": 223,
+      "h": 269,
+      "ax": 0.3667,
+      "src": "assets/images/sprites/enemies/stage7/enemy_moss_gorilla_idle.png"
+    },
+    "idle2": {
+      "w": 223,
+      "h": 269,
+      "ax": 0.3667,
+      "src": "assets/images/sprites/enemies/stage7/enemy_moss_gorilla_idle.png"
+    },
+    "kick": {
+      "w": 248,
+      "h": 240,
+      "ax": 0.334,
+      "src": "assets/images/sprites/enemies/stage7/enemy_moss_gorilla_punch.png"
+    },
+    "knockdown": {
+      "w": 294,
+      "h": 206,
+      "ax": 0.5,
+      "src": "assets/images/sprites/enemies/stage7/enemy_moss_gorilla_fall.png"
+    }
+  }
+}
